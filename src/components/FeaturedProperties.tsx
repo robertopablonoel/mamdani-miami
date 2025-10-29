@@ -1,6 +1,6 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { MapPin, Bed, Bath, Square } from "lucide-react";
+import { MapPin, Bed, Bath, Square, ArrowRight } from "lucide-react";
 import palmBeachImage from "@/assets/property-palm-beach.jpg";
 import miamiPenthouseImage from "@/assets/property-miami-penthouse.jpg";
 import bocaRatonImage from "@/assets/property-boca-raton.jpg";
@@ -9,113 +9,104 @@ const properties = [
   {
     id: 1,
     image: palmBeachImage,
-    title: "The Liberation Villa",
-    location: "Palm Beach, FL",
+    title: "Oceanfront Estate",
+    location: "Palm Beach, Florida",
     price: "$12,950,000",
     beds: 6,
     baths: 7,
     sqft: "8,500",
-    description: "Oceanfront sanctuary with zero state income tax and 300 days of sunshine. Your former NYC apartment could fit in the master closet.",
-    badge: "Tax-Free Living"
+    description: "Sophisticated beachfront residence featuring modern architecture, panoramic ocean views, and resort-style amenities.",
   },
   {
     id: 2,
     image: miamiPenthouseImage,
-    title: "The Exodus Penthouse",
-    location: "Miami Beach, FL",
+    title: "Luxury Penthouse",
+    location: "Miami Beach, Florida",
     price: "$8,750,000",
     beds: 4,
     baths: 5,
     sqft: "5,200",
-    description: "Floor-to-ceiling views of your new life. No more subway rats, just yacht clubs and endless ocean horizons.",
-    badge: "Freedom Floors"
+    description: "Exclusive penthouse with floor-to-ceiling windows, private terrace, and unobstructed Biscayne Bay vistas.",
   },
   {
     id: 3,
     image: bocaRatonImage,
-    title: "The Defector's Dream",
-    location: "Boca Raton, FL",
+    title: "Waterfront Villa",
+    location: "Boca Raton, Florida",
     price: "$6,500,000",
     beds: 5,
     baths: 6,
     sqft: "7,000",
-    description: "Mediterranean masterpiece with private yacht dock. Finally, a place to park something bigger than a CitiBike.",
-    badge: "Yacht Included"
+    description: "Mediterranean-inspired estate with private yacht dock, lush landscaping, and championship golf course access.",
   }
 ];
 
 const FeaturedProperties = () => {
   return (
-    <section className="py-24 bg-background">
+    <section className="py-32 bg-background" id="properties">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-            Your Freedom Awaits
+        <div className="max-w-4xl mx-auto text-center mb-20">
+          <h2 className="text-4xl md:text-5xl font-serif text-foreground mb-6">
+            Featured Listings
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Handpicked estates for discerning New Yorkers who've had enough. 
-            Each property comes with guaranteed sunshine and zero progressive policies.
+          <p className="text-lg text-muted-foreground leading-relaxed">
+            Curated selection of South Florida's finest coastal properties, 
+            each representing the pinnacle of luxury living and architectural excellence.
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {properties.map((property) => (
-            <Card key={property.id} className="overflow-hidden shadow-elegant hover:shadow-hover transition-smooth group">
-              <div className="relative overflow-hidden">
+            <Card key={property.id} className="overflow-hidden shadow-elegant hover:shadow-hover transition-smooth group border-0">
+              <div className="relative overflow-hidden aspect-[4/3]">
                 <img 
                   src={property.image} 
                   alt={property.title}
-                  className="w-full h-64 object-cover group-hover:scale-110 transition-smooth"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-smooth duration-700"
                 />
-                <div className="absolute top-4 right-4 bg-secondary text-secondary-foreground px-4 py-2 rounded-full text-sm font-semibold shadow-elegant">
-                  {property.badge}
-                </div>
               </div>
               
-              <CardHeader>
-                <div className="flex items-start justify-between mb-2">
-                  <div>
-                    <CardTitle className="text-2xl mb-2">{property.title}</CardTitle>
-                    <CardDescription className="flex items-center gap-2 text-base">
-                      <MapPin className="w-4 h-4" />
-                      {property.location}
-                    </CardDescription>
+              <CardContent className="p-8 space-y-4">
+                <div>
+                  <h3 className="text-2xl font-serif mb-2">{property.title}</h3>
+                  <div className="flex items-center gap-2 text-muted-foreground mb-3">
+                    <MapPin className="w-4 h-4" />
+                    <span className="text-sm">{property.location}</span>
                   </div>
+                  <p className="text-3xl font-serif text-primary mb-4">{property.price}</p>
                 </div>
-                <p className="text-3xl font-bold text-primary">{property.price}</p>
-              </CardHeader>
 
-              <CardContent className="space-y-4">
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="text-muted-foreground leading-relaxed text-sm">
                   {property.description}
                 </p>
 
-                <div className="flex items-center justify-between text-sm text-muted-foreground pt-4 border-t">
-                  <div className="flex items-center gap-2">
+                <div className="flex items-center justify-between text-sm text-muted-foreground pt-4 border-t border-border">
+                  <div className="flex items-center gap-1.5">
                     <Bed className="w-4 h-4" />
-                    <span>{property.beds} beds</span>
+                    <span>{property.beds}</span>
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-1.5">
                     <Bath className="w-4 h-4" />
-                    <span>{property.baths} baths</span>
+                    <span>{property.baths}</span>
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-1.5">
                     <Square className="w-4 h-4" />
-                    <span>{property.sqft} sqft</span>
+                    <span>{property.sqft} SF</span>
                   </div>
                 </div>
 
-                <Button variant="default" className="w-full">
-                  Schedule Liberation Tour
+                <Button variant="outline" className="w-full mt-4">
+                  View Details
+                  <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </CardContent>
             </Card>
           ))}
         </div>
 
-        <div className="text-center mt-12">
-          <Button variant="luxury" size="lg" className="text-lg">
-            View All Escape Routes
+        <div className="text-center mt-16">
+          <Button variant="default" size="lg">
+            View All Properties
           </Button>
         </div>
       </div>

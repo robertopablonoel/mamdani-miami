@@ -1,3 +1,4 @@
+import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
 import FreedomIndex from "@/components/FreedomIndex";
 import FeaturedProperties from "@/components/FeaturedProperties";
@@ -7,6 +8,7 @@ import ContactSection from "@/components/ContactSection";
 const Index = () => {
   return (
     <main className="min-h-screen">
+      <Navigation />
       <HeroSection />
       <FreedomIndex />
       <FeaturedProperties />
@@ -14,31 +16,54 @@ const Index = () => {
       <ContactSection />
       
       {/* Footer */}
-      <footer className="gradient-sunset py-12">
+      <footer className="bg-primary text-primary-foreground py-16">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center space-y-6">
-            <h3 className="text-3xl font-bold text-white">
-              Freedom Coast Realty
-            </h3>
-            <p className="text-white/90 text-lg max-w-2xl mx-auto">
-              Helping New Yorkers escape to paradise since November 2024. 
-              Licensed real estate professionals with a sense of humor and a passion for low taxes.
-            </p>
-            <div className="flex flex-wrap justify-center gap-6 text-white/80 text-sm">
-              <a href="#" className="hover:text-white transition-colors">Properties</a>
-              <a href="#" className="hover:text-white transition-colors">About Us</a>
-              <a href="#" className="hover:text-white transition-colors">Tax Calculator</a>
-              <a href="#" className="hover:text-white transition-colors">Relocation Guide</a>
-              <a href="#" className="hover:text-white transition-colors">Contact</a>
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+              {/* Brand */}
+              <div className="md:col-span-2">
+                <div className="text-2xl font-serif font-bold mb-4">
+                  FREEDOM COAST
+                  <span className="block text-xs font-sans font-normal tracking-widest opacity-80 mt-1">
+                    LUXURY REALTY
+                  </span>
+                </div>
+                <p className="text-primary-foreground/80 text-sm leading-relaxed max-w-md">
+                  South Florida's premier luxury real estate firm, specializing in coastal properties 
+                  for discerning clients seeking exceptional lifestyle and investment opportunities.
+                </p>
+              </div>
+
+              {/* Quick Links */}
+              <div>
+                <h4 className="font-semibold mb-4 text-sm uppercase tracking-wider">Navigation</h4>
+                <ul className="space-y-3 text-sm text-primary-foreground/80">
+                  <li><a href="#properties" className="hover:text-primary-foreground transition-colors">Properties</a></li>
+                  <li><a href="#markets" className="hover:text-primary-foreground transition-colors">Markets</a></li>
+                  <li><a href="#about" className="hover:text-primary-foreground transition-colors">About</a></li>
+                  <li><a href="#contact" className="hover:text-primary-foreground transition-colors">Contact</a></li>
+                </ul>
+              </div>
+
+              {/* Contact */}
+              <div>
+                <h4 className="font-semibold mb-4 text-sm uppercase tracking-wider">Contact</h4>
+                <ul className="space-y-3 text-sm text-primary-foreground/80">
+                  <li>888-555-0123</li>
+                  <li>info@freedomcoastrealty.com</li>
+                  <li className="pt-2">Miami · Palm Beach · Boca Raton</li>
+                </ul>
+              </div>
             </div>
-            <div className="pt-6 border-t border-white/20">
-              <p className="text-white/70 text-sm">
-                © 2025 Freedom Coast Realty. Not affiliated with any political campaigns, we just really love Florida.
-              </p>
-              <p className="text-white/60 text-xs mt-2 italic">
-                This is a satirical website. All properties are fictional. Tax advice should come from actual accountants, 
-                not websites with sunset gradients. But the beaches? Those are real.
-              </p>
+
+            <div className="pt-8 border-t border-primary-foreground/20">
+              <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-primary-foreground/60">
+                <p>© 2025 Freedom Coast Luxury Realty. All rights reserved.</p>
+                <div className="flex gap-6">
+                  <a href="#" className="hover:text-primary-foreground transition-colors">Privacy Policy</a>
+                  <a href="#" className="hover:text-primary-foreground transition-colors">Terms of Service</a>
+                </div>
+              </div>
             </div>
           </div>
         </div>

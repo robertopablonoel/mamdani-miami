@@ -8,52 +8,51 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Beach Luxury Palette */
+    /* Professional Real Estate Palette */
     --background: 0 0% 100%;
-    --foreground: 220 20% 20%;
+    --foreground: 215 25% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 220 20% 20%;
+    --card-foreground: 215 25% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 20% 20%;
+    --popover-foreground: 215 25% 15%;
 
-    /* Teal Ocean Primary */
-    --primary: 174 50% 40%;
+    /* Navy Professional Primary */
+    --primary: 215 45% 25%;
     --primary-foreground: 0 0% 100%;
 
-    /* Coral Sunset Secondary */
-    --secondary: 16 100% 66%;
-    --secondary-foreground: 0 0% 100%;
+    /* Gold Luxury Accent */
+    --secondary: 38 90% 50%;
+    --secondary-foreground: 215 45% 25%;
 
-    /* Champagne Luxury */
-    --muted: 42 78% 92%;
-    --muted-foreground: 220 15% 40%;
+    /* Sophisticated Neutrals */
+    --muted: 210 20% 96%;
+    --muted-foreground: 215 15% 45%;
 
-    /* Accent Teal Light */
-    --accent: 174 50% 85%;
-    --accent-foreground: 174 50% 20%;
+    /* Accent Cream */
+    --accent: 40 40% 95%;
+    --accent-foreground: 215 45% 25%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 174 20% 90%;
-    --input: 174 20% 90%;
-    --ring: 174 50% 40%;
+    --border: 215 15% 88%;
+    --input: 215 15% 92%;
+    --ring: 215 45% 25%;
 
-    --radius: 0.75rem;
+    --radius: 0.25rem;
     
-    /* Custom Gradients */
-    --gradient-sunset: linear-gradient(135deg, hsl(174 50% 40%), hsl(16 100% 66%));
-    --gradient-ocean: linear-gradient(180deg, hsl(174 50% 95%), hsl(174 50% 85%));
-    --gradient-luxury: linear-gradient(135deg, hsl(42 78% 92%), hsl(0 0% 100%));
+    /* Custom Design Elements */
+    --gradient-hero: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.7) 100%);
+    --gradient-subtle: linear-gradient(180deg, hsl(0 0% 100%), hsl(210 20% 98%));
     
-    /* Shadows */
-    --shadow-elegant: 0 10px 40px -10px hsl(174 50% 40% / 0.15);
-    --shadow-hover: 0 20px 60px -15px hsl(174 50% 40% / 0.25);
+    /* Professional Shadows */
+    --shadow-elegant: 0 2px 20px -5px rgba(0, 0, 0, 0.08);
+    --shadow-hover: 0 8px 30px -8px rgba(0, 0, 0, 0.12);
     
     /* Transitions */
-    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-smooth: all 0.3s ease;
 
     --sidebar-background: 0 0% 98%;
 
@@ -73,33 +72,33 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 220 25% 10%;
+    --background: 215 30% 12%;
     --foreground: 0 0% 95%;
 
-    --card: 220 25% 12%;
+    --card: 215 30% 15%;
     --card-foreground: 0 0% 95%;
 
-    --popover: 220 25% 12%;
+    --popover: 215 30% 15%;
     --popover-foreground: 0 0% 95%;
 
-    --primary: 174 50% 50%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 38 90% 55%;
+    --primary-foreground: 215 45% 15%;
 
-    --secondary: 16 100% 70%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 38 90% 50%;
+    --secondary-foreground: 215 45% 15%;
 
-    --muted: 220 20% 20%;
-    --muted-foreground: 220 10% 60%;
+    --muted: 215 20% 20%;
+    --muted-foreground: 215 10% 60%;
 
-    --accent: 174 50% 30%;
+    --accent: 215 20% 25%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 62.8% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 20% 20%;
-    --input: 220 20% 20%;
-    --ring: 174 50% 50%;
+    --border: 215 20% 20%;
+    --input: 215 20% 22%;
+    --ring: 38 90% 50%;
   }
 }
 
@@ -118,16 +117,12 @@ All colors MUST be HSL.
 }
 
 @layer utilities {
-  .gradient-sunset {
-    background: var(--gradient-sunset);
+  .gradient-hero {
+    background: var(--gradient-hero);
   }
   
-  .gradient-ocean {
-    background: var(--gradient-ocean);
-  }
-  
-  .gradient-luxury {
-    background: var(--gradient-luxury);
+  .gradient-subtle {
+    background: var(--gradient-subtle);
   }
   
   .shadow-elegant {
@@ -140,5 +135,9 @@ All colors MUST be HSL.
   
   .transition-smooth {
     transition: var(--transition-smooth);
+  }
+  
+  .text-balance {
+    text-wrap: balance;
   }
 }
