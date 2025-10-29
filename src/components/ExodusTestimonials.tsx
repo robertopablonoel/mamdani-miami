@@ -6,21 +6,21 @@ const testimonials = [
     name: "Jennifer K.",
     title: "Former Manhattan Resident",
     location: "Now residing in Miami Beach",
-    quote: "The team at Freedom Coast made our relocation seamless. Their market expertise and understanding of our needs resulted in finding the perfect waterfront property. The lifestyle change has exceeded our expectations.",
+    quote: "I traded my Brooklyn brownstone for ocean views and no property board drama.",
     year: "2024"
   },
   {
     name: "Michael R.",
     title: "Entrepreneur & Family Man",
     location: "Relocated to Palm Beach",
-    quote: "After extensive research, we chose Florida for its business climate and quality of life. Our agent provided invaluable guidance throughout the entire process. Couldn't be happier with our decision.",
+    quote: "Now my biggest problem is sunscreen, not socialism.",
     year: "2024"
   },
   {
     name: "David & Sarah L.",
     title: "Investment Professionals",
     location: "New home in Boca Raton",
-    quote: "The financial advantages combined with the superior lifestyle made this an easy choice. Freedom Coast's professionalism and deep market knowledge were instrumental in our successful transition.",
+    quote: "Best financial decision we ever made. And the weather doesn't hurt either.",
     year: "2024"
   }
 ];
@@ -31,11 +31,10 @@ const ExodusTestimonials = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center mb-20">
           <h2 className="text-4xl md:text-5xl font-serif text-foreground mb-6">
-            Client Testimonials
+            Freedom Stories from Former New Yorkers
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed">
-            Trusted by discerning clients who value expertise, discretion, and exceptional results 
-            in their South Florida real estate journey.
+            Real people. Real escapes. Real estate that makes sense.
           </p>
         </div>
 

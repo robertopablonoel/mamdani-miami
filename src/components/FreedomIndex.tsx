@@ -1,12 +1,13 @@
-import { Card } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { CheckCircle2, TrendingUp } from "lucide-react";
 
 const FreedomIndex = () => {
-  const comparisons = [
-    { metric: "State Income Tax", ny: "Up to 10.9%", fl: "0%", savings: "$54,500/year*" },
-    { metric: "Property Tax (Luxury)", ny: "$45,000/year", fl: "$32,000/year", savings: "$13,000/year" },
-    { metric: "Cost of Living Index", ny: "187.2", fl: "102.8", savings: "45% lower" },
-    { metric: "Annual Sunshine", ny: "224 days", fl: "320 days", savings: "+96 days" },
+  const benefits = [
+    "0% state income tax",
+    "Year-round summer",
+    "Predictable regulations",
+    "Luxury properties that appreciate faster than NYC rent boards"
   ];
 
   return (
@@ -18,62 +19,30 @@ const FreedomIndex = () => {
             <span>Market Intelligence</span>
           </div>
           <h2 className="text-4xl md:text-5xl font-serif text-foreground mb-6">
-            The Florida Advantage
+            Low Taxes, High Sunshine, No Committees on Economic Justice.
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-            A comprehensive analysis for New York residents considering relocation to South Florida's 
-            luxury real estate market.
+            Why Florida? The answer writes itself:
           </p>
         </div>
 
-        <Card className="max-w-5xl mx-auto overflow-hidden shadow-elegant">
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead className="bg-primary text-primary-foreground">
-                <tr>
-                  <th className="text-left p-6 text-base font-semibold">Category</th>
-                  <th className="text-center p-6 text-base font-semibold">New York</th>
-                  <th className="text-center p-6 text-base font-semibold">Florida</th>
-                  <th className="text-center p-6 text-base font-semibold">Benefit</th>
-                </tr>
-              </thead>
-              <tbody className="bg-card">
-                {comparisons.map((item, idx) => (
-                  <tr 
-                    key={idx}
-                    className={`border-b border-border last:border-0 ${idx % 2 === 0 ? 'bg-card' : 'bg-muted/20'}`}
-                  >
-                    <td className="p-6 font-medium text-foreground">{item.metric}</td>
-                    <td className="p-6 text-center text-muted-foreground">{item.ny}</td>
-                    <td className="p-6 text-center font-medium text-foreground">
-                      <div className="flex items-center justify-center gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-primary" />
-                        <span>{item.fl}</span>
-                      </div>
-                    </td>
-                    <td className="p-6 text-center">
-                      <span className="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-semibold">
-                        {item.savings}
-                      </span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+        <div className="max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {benefits.map((benefit, idx) => (
+              <Card key={idx} className="shadow-elegant border-0">
+                <CardContent className="p-8 flex items-start gap-4">
+                  <CheckCircle2 className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
+                  <p className="text-lg text-foreground">{benefit}</p>
+                </CardContent>
+              </Card>
+            ))}
           </div>
+        </div>
 
-          <div className="bg-accent p-6 border-t border-border">
-            <p className="text-sm text-muted-foreground text-center">
-              *Based on $500K annual income. Individual results vary. Consult with tax professionals for personalized guidance.
-            </p>
-          </div>
-        </Card>
-
-        <div className="text-center mt-12">
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Our team provides comprehensive relocation support, including tax planning consultation, 
-            market analysis, and personalized property recommendations tailored to your lifestyle and financial objectives.
-          </p>
+        <div className="text-center mt-16">
+          <Button size="lg" variant="default">
+            See Available Homes
+          </Button>
         </div>
       </div>
     </section>

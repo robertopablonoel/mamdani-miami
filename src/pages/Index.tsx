@@ -2,7 +2,9 @@ import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
 import FreedomIndex from "@/components/FreedomIndex";
 import FeaturedProperties from "@/components/FeaturedProperties";
+import BrokerSection from "@/components/BrokerSection";
 import ExodusTestimonials from "@/components/ExodusTestimonials";
+import LeadMagnet from "@/components/LeadMagnet";
 import ContactSection from "@/components/ContactSection";
 
 const Index = () => {
@@ -12,7 +14,9 @@ const Index = () => {
       <HeroSection />
       <FreedomIndex />
       <FeaturedProperties />
+      <BrokerSection />
       <ExodusTestimonials />
+      <LeadMagnet />
       <ContactSection />
       
       {/* Footer */}

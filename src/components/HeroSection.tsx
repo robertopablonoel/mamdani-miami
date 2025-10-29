@@ -18,13 +18,12 @@ const HeroSection = () => {
         <div className="max-w-5xl mx-auto space-y-8">
           {/* Headline */}
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif font-normal text-white leading-tight text-balance">
-            Discover Your Florida Sanctuary
+            Millions Are Fleeing. Beat the Traffic.
           </h1>
 
           {/* Subheadline */}
           <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto font-light leading-relaxed">
-            Exclusive South Florida estates for discerning clients seeking coastal elegance, 
-            refined living, and exceptional value in Miami, Palm Beach, and Boca Raton.
+            When rent freezes meet grocery socialism, it's time to head south. We help New Yorkers relocate before the next wealth tax proposal drops.
           </p>
 
           {/* Stats Bar */}
@@ -44,7 +43,7 @@ const HeroSection = () => {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
             <Button size="lg" variant="default" className="text-base px-10 py-6">
-              View Properties
+              Explore Refuge Properties
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
             <Button size="lg" variant="outline" className="text-base px-10 py-6 border-white text-white hover:bg-white hover:text-primary">
