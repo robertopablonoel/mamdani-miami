@@ -11,13 +11,12 @@ const PoliticianMeme = () => {
   return (
     <motion.div
       className="fixed top-0 right-0 z-50 pointer-events-none"
-      initial={{ x: "100%", y: "-50%" }}
+      initial={{ x: "100%", y: "-100%" }}
       animate={{ x: "0%", y: "0%" }}
       transition={{ 
-        delay: 2,
-        duration: 0.6,
-        type: "spring",
-        bounce: 0.4
+        delay: 3,
+        duration: 2.5,
+        ease: [0.22, 0.61, 0.36, 1]
       }}
     >
       <div className="relative pointer-events-auto">
@@ -46,7 +45,7 @@ const PoliticianMeme = () => {
             className="absolute -left-2 top-1/2 -translate-y-1/2 bg-white rounded-xl shadow-2xl p-3 border-3 border-destructive max-w-[140px]"
             initial={{ scale: 0, rotate: -10 }}
             animate={{ scale: 1, rotate: 0 }}
-            transition={{ delay: 2.4, duration: 0.3, type: "spring" }}
+            transition={{ delay: 5.5, duration: 0.4, ease: "easeOut" }}
           >
             {/* Speech bubble pointer */}
             <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-full">
@@ -64,7 +63,7 @@ const PoliticianMeme = () => {
             className="absolute -bottom-1 -left-1 bg-destructive text-white px-2 py-0.5 rounded-full text-[10px] font-bold uppercase shadow-lg rotate-[-5deg]"
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
-            transition={{ delay: 2.6, type: "spring" }}
+            transition={{ delay: 5.8, duration: 0.3 }}
           >
             ⚠️ Run!
           </motion.div>
