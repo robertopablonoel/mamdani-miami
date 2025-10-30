@@ -31,39 +31,37 @@ const PoliticianMeme = () => {
         </button>
 
         {/* Meme container */}
-        <div className="relative w-64 md:w-80">
-          {/* Image */}
-          <div className="relative rounded-bl-3xl overflow-hidden shadow-2xl border-4 border-white">
+        <div className="relative w-32 md:w-40">
+          {/* Circular Image */}
+          <div className="relative rounded-full overflow-hidden shadow-2xl border-4 border-white">
             <img 
               src={memeImage}
               alt="Political meme"
-              className="w-full h-auto"
+              className="w-full h-full aspect-square object-cover"
             />
-            {/* Gradient overlay for text readability */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
           </div>
 
           {/* Speech bubble */}
           <motion.div
-            className="absolute -left-4 top-1/2 -translate-y-1/2 bg-white rounded-2xl shadow-2xl p-4 border-4 border-destructive max-w-[200px]"
+            className="absolute -left-2 top-1/2 -translate-y-1/2 bg-white rounded-xl shadow-2xl p-3 border-3 border-destructive max-w-[140px]"
             initial={{ scale: 0, rotate: -10 }}
             animate={{ scale: 1, rotate: 0 }}
             transition={{ delay: 2.4, duration: 0.3, type: "spring" }}
           >
             {/* Speech bubble pointer */}
             <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-full">
-              <div className="w-0 h-0 border-t-[15px] border-t-transparent border-b-[15px] border-b-transparent border-l-[20px] border-l-destructive"></div>
-              <div className="absolute top-1/2 -translate-y-1/2 right-[4px] w-0 h-0 border-t-[12px] border-t-transparent border-b-[12px] border-b-transparent border-l-[16px] border-l-white"></div>
+              <div className="w-0 h-0 border-t-[10px] border-t-transparent border-b-[10px] border-b-transparent border-l-[15px] border-l-destructive"></div>
+              <div className="absolute top-1/2 -translate-y-1/2 right-[3px] w-0 h-0 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent border-l-[12px] border-l-white"></div>
             </div>
 
-            <p className="text-destructive font-bold text-lg leading-tight text-center">
+            <p className="text-destructive font-bold text-sm leading-tight text-center">
               "Tax the rich!"
             </p>
           </motion.div>
 
           {/* Warning badge */}
           <motion.div
-            className="absolute -bottom-2 -left-2 bg-destructive text-white px-3 py-1 rounded-full text-xs font-bold uppercase shadow-lg rotate-[-5deg]"
+            className="absolute -bottom-1 -left-1 bg-destructive text-white px-2 py-0.5 rounded-full text-[10px] font-bold uppercase shadow-lg rotate-[-5deg]"
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ delay: 2.6, type: "spring" }}
