@@ -57,7 +57,7 @@ const PoliticianMeme = () => {
             </div>
 
             <p className="text-destructive font-bold text-lg leading-tight text-center">
-              "I'm coming for your income!"
+              "Tax the rich!"
             </p>
           </motion.div>
 
