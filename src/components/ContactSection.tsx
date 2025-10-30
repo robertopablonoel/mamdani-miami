@@ -7,24 +7,24 @@ import { Phone, Mail, MapPin } from "lucide-react";
 
 const ContactSection = () => {
   return (
-    <section className="py-32 bg-background" id="contact">
+    <section className="py-16 md:py-24 lg:py-32 bg-background" id="contact">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-serif text-foreground mb-6">
+          <div className="text-center mb-12 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-4 md:mb-6 px-2">
               Begin Your Journey
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed px-4">
               Connect with our experienced team to discuss your South Florida real estate goals. 
               We provide personalized service and market insights tailored to your unique requirements.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
             {/* Contact Info */}
-            <div className="space-y-8">
+            <div className="space-y-6 md:space-y-8">
               <Card className="shadow-elegant border-0">
-                <CardContent className="p-8">
+                <CardContent className="p-6 md:p-8">
                   <div className="space-y-8">
                     <div className="flex items-start gap-4">
                       <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
@@ -79,8 +79,8 @@ const ContactSection = () => {
 
             {/* Contact Form */}
             <Card className="shadow-elegant border-0">
-              <CardContent className="p-8">
-                <form className="space-y-6">
+              <CardContent className="p-6 md:p-8">
+                <form className="space-y-4 md:space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="firstName">First Name</Label>

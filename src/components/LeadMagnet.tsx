@@ -6,7 +6,7 @@ import { Download } from "lucide-react";
 
 const LeadMagnet = () => {
   return (
-    <section className="py-32 gradient-premium relative overflow-hidden">
+    <section className="py-16 md:py-24 lg:py-32 gradient-premium relative overflow-hidden">
       {/* Decorative Elements */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-white rounded-full blur-3xl"></div>
@@ -16,45 +16,45 @@ const LeadMagnet = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto">
           <Card className="shadow-premium border-0 overflow-hidden bg-white">
-            <CardContent className="p-12 md:p-16 text-center">
-              <div className="w-24 h-24 rounded-full gradient-gold flex items-center justify-center mx-auto mb-8 shadow-glow">
-                <Download className="w-12 h-12 text-primary" />
+            <CardContent className="p-8 md:p-12 lg:p-16 text-center">
+              <div className="w-20 md:w-24 h-20 md:h-24 rounded-full gradient-gold flex items-center justify-center mx-auto mb-6 md:mb-8 shadow-glow">
+                <Download className="w-10 md:w-12 h-10 md:h-12 text-primary" />
               </div>
 
-              <h2 className="text-4xl md:text-5xl font-serif text-foreground mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-3 md:mb-4 px-2">
                 The Great New York Exodus
               </h2>
               
-              <p className="text-xl text-muted-foreground mb-4 max-w-2xl mx-auto">
+              <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-3 md:mb-4 max-w-2xl mx-auto px-4">
                 Download our exclusive guide: "10 Florida Neighborhoods Where Freedom Still Lives."
               </p>
               
               {/* Social Proof */}
-              <div className="flex items-center justify-center gap-2 mb-10">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-2 md:gap-3 mb-8 md:mb-10 px-4">
                 <div className="flex -space-x-2">
                   {[1, 2, 3, 4].map((i) => (
                     <div key={i} className="w-8 h-8 rounded-full bg-muted border-2 border-white"></div>
                   ))}
                 </div>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-xs sm:text-sm text-muted-foreground text-center sm:text-left">
                   Join <strong className="text-foreground">1,200+</strong> New Yorkers who downloaded this guide
                 </p>
               </div>
 
-              <form className="max-w-md mx-auto space-y-4">
+              <form className="max-w-md mx-auto space-y-3 md:space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="guide-email" className="sr-only">Email Address</Label>
                   <Input 
                     id="guide-email" 
                     type="email" 
                     placeholder="Enter your email address"
-                    className="h-14 text-center text-lg border-2 focus:border-primary"
+                    className="h-12 md:h-14 text-center text-base md:text-lg border-2 focus:border-primary"
                   />
                 </div>
 
-                <Button type="submit" size="lg" variant="secondary" className="w-full h-14 text-lg">
+                <Button type="submit" size="lg" variant="secondary" className="w-full h-12 md:h-14 text-base md:text-lg">
                   Send Me the Free Guide
-                  <Download className="ml-2 w-5 h-5" />
+                  <Download className="ml-2 w-4 md:w-5 h-4 md:h-5" />
                 </Button>
 
                 <p className="text-xs text-muted-foreground pt-2">

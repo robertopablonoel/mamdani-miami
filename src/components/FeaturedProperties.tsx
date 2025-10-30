@@ -43,19 +43,19 @@ const properties = [
 
 const FeaturedProperties = () => {
   return (
-    <section className="py-32 bg-background" id="properties">
+    <section className="py-16 md:py-24 lg:py-32 bg-background" id="properties">
       <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto text-center mb-20">
-          <h2 className="text-4xl md:text-5xl font-serif text-foreground mb-6">
+        <div className="max-w-4xl mx-auto text-center mb-12 md:mb-20">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-4 md:mb-6 px-2">
             Featured Listings
           </h2>
-          <p className="text-lg text-muted-foreground leading-relaxed">
+          <p className="text-base md:text-lg text-muted-foreground leading-relaxed px-4">
             Curated selection of South Florida's finest coastal properties, 
             each representing the pinnacle of luxury living and architectural excellence.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto">
           {properties.map((property) => (
             <Card key={property.id} className="overflow-hidden shadow-elegant hover:shadow-hover transition-smooth group border-0">
               <div className="relative overflow-hidden aspect-[4/3]">
@@ -66,21 +66,21 @@ const FeaturedProperties = () => {
                 />
               </div>
               
-              <CardContent className="p-8 space-y-4">
+              <CardContent className="p-5 md:p-8 space-y-3 md:space-y-4">
                 <div>
-                  <h3 className="text-2xl font-serif mb-2">{property.title}</h3>
-                  <div className="flex items-center gap-2 text-muted-foreground mb-3">
+                  <h3 className="text-xl md:text-2xl font-serif mb-2">{property.title}</h3>
+                  <div className="flex items-center gap-2 text-muted-foreground mb-2 md:mb-3">
                     <MapPin className="w-4 h-4" />
-                    <span className="text-sm">{property.location}</span>
+                    <span className="text-xs md:text-sm">{property.location}</span>
                   </div>
-                  <p className="text-3xl font-serif text-primary mb-4">{property.price}</p>
+                  <p className="text-2xl md:text-3xl font-serif text-primary mb-3 md:mb-4">{property.price}</p>
                 </div>
 
-                <p className="text-muted-foreground leading-relaxed text-sm">
+                <p className="text-muted-foreground leading-relaxed text-xs md:text-sm">
                   {property.description}
                 </p>
 
-                <div className="flex items-center justify-between text-sm text-muted-foreground pt-4 border-t border-border">
+                <div className="flex items-center justify-between text-xs md:text-sm text-muted-foreground pt-3 md:pt-4 border-t border-border">
                   <div className="flex items-center gap-1.5">
                     <Bed className="w-4 h-4" />
                     <span>{property.beds}</span>
@@ -95,7 +95,7 @@ const FeaturedProperties = () => {
                   </div>
                 </div>
 
-                <Button variant="outline" className="w-full mt-4">
+                <Button variant="outline" className="w-full mt-3 md:mt-4 h-10 md:h-auto text-sm md:text-base">
                   View Details
                   <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
@@ -104,8 +104,8 @@ const FeaturedProperties = () => {
           ))}
         </div>
 
-        <div className="text-center mt-16">
-          <Button variant="default" size="lg">
+        <div className="text-center mt-12 md:mt-16 px-4">
+          <Button variant="default" size="lg" className="w-full sm:w-auto h-12 md:h-auto">
             View All Properties
           </Button>
         </div>

@@ -20,10 +20,10 @@ const Index = () => {
       <ContactSection />
       
       {/* Footer */}
-      <footer className="bg-primary text-primary-foreground py-16">
+      <footer className="bg-primary text-primary-foreground py-12 md:py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 mb-8 md:mb-12">
               {/* Brand */}
               <div className="md:col-span-2">
                 <div className="text-2xl font-serif font-bold mb-4">

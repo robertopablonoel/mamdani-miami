@@ -27,21 +27,21 @@ const testimonials = [
 
 const ExodusTestimonials = () => {
   return (
-    <section className="py-32 gradient-subtle">
+    <section className="py-16 md:py-24 lg:py-32 gradient-subtle">
       <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto text-center mb-20">
-          <h2 className="text-4xl md:text-5xl font-serif text-foreground mb-6">
+        <div className="max-w-4xl mx-auto text-center mb-12 md:mb-20">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-4 md:mb-6 px-2">
             Freedom Stories from Former New Yorkers
           </h2>
-          <p className="text-lg text-muted-foreground leading-relaxed">
+          <p className="text-base md:text-lg text-muted-foreground leading-relaxed px-4">
             Real people. Real escapes. Real estate that makes sense.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto">
           {testimonials.map((testimonial, idx) => (
             <Card key={idx} className="shadow-elegant hover:shadow-hover transition-smooth bg-card border-0 group">
-              <CardContent className="p-10 space-y-6">
+              <CardContent className="p-6 md:p-10 space-y-4 md:space-y-6">
                 <div className="flex items-start justify-between">
                   <Quote className="w-10 h-10 text-primary/20 group-hover:text-primary/40 transition-smooth" />
                   <div className="flex gap-1">
@@ -53,7 +53,7 @@ const ExodusTestimonials = () => {
                   </div>
                 </div>
 
-                <blockquote className="text-foreground leading-relaxed text-lg">
+                <blockquote className="text-foreground leading-relaxed text-base md:text-lg">
                   "{testimonial.quote}"
                 </blockquote>
 
