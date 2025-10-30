@@ -69,11 +69,26 @@ const ContactSection = () => {
                 </CardContent>
               </Card>
 
-              <div className="bg-accent p-6 rounded border border-border">
-                <p className="text-sm text-muted-foreground">
-                  <strong className="text-foreground">Confidential Service:</strong> All inquiries are handled with complete discretion. 
-                  We understand the importance of privacy in luxury real estate transactions.
-                </p>
+              <div className="relative overflow-hidden bg-gradient-to-br from-primary/5 to-primary/10 p-6 md:p-8 rounded-lg border border-primary/20 shadow-elegant">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl"></div>
+                <div className="relative flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <svg className="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-foreground mb-2 flex items-center gap-2">
+                      <span>100% Confidential Service</span>
+                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+                        Guaranteed
+                      </span>
+                    </h4>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      All inquiries are handled with complete discretion. We understand the importance of privacy in luxury real estate transactions and protect your information with the highest standards.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
 
