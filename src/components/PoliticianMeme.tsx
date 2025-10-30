@@ -42,7 +42,7 @@ const PoliticianMeme = () => {
 
           {/* Name badge */}
           <motion.div
-            className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground px-3 py-1 rounded-full text-[10px] md:text-xs font-bold uppercase shadow-lg whitespace-nowrap border-2 border-white"
+            className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground px-3 py-1 rounded-full text-[10px] md:text-xs font-bold uppercase shadow-lg whitespace-nowrap border-2 border-white text-center"
             initial={{ scale: 0, y: -10 }}
             animate={{ scale: 1, y: 0 }}
             transition={{ delay: 5.2, duration: 0.3 }}
