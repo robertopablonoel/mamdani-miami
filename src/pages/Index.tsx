@@ -7,10 +7,12 @@ import BrokerSection from "@/components/BrokerSection";
 import ExodusTestimonials from "@/components/ExodusTestimonials";
 import LeadMagnet from "@/components/LeadMagnet";
 import ContactSection from "@/components/ContactSection";
+import PoliticianMeme from "@/components/PoliticianMeme";
 
 const Index = () => {
   return (
     <main className="min-h-screen">
+      <PoliticianMeme />
       <Navigation />
       <HeroSection />
       <FreedomIndex />
