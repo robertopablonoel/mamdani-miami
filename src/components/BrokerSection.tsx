@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import brokerImage from "@/assets/broker-professional.jpg";
 
 const BrokerSection = () => {
   return (
@@ -8,17 +9,29 @@ const BrokerSection = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
-            {/* Image Placeholder */}
-            <div className="relative aspect-[4/5] bg-muted rounded overflow-hidden shadow-elegant">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center text-muted-foreground">
-                  <p className="text-sm uppercase tracking-wider">Broker Photo</p>
-                </div>
-              </div>
-            </div>
+            {/* Broker Image */}
+            <motion.div 
+              className="relative aspect-[4/5] rounded overflow-hidden shadow-elegant"
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+            >
+              <img 
+                src={brokerImage}
+                alt="Professional luxury real estate broker"
+                className="w-full h-full object-cover"
+              />
+            </motion.div>
 
             {/* Content */}
-            <div className="space-y-4 md:space-y-6">
+            <motion.div 
+              className="space-y-4 md:space-y-6"
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+            >
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-foreground px-2">
                 Meet [Broker Name], Your Escape Facilitator.
               </h2>
@@ -51,7 +64,7 @@ const BrokerSection = () => {
                   Available for consultation · Response within 2 hours
                 </p>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>

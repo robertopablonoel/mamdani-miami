@@ -1,5 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 import { MapPin, Bed, Bath, Square, ArrowRight } from "lucide-react";
 import palmBeachImage from "@/assets/property-palm-beach.jpg";
 import miamiPenthouseImage from "@/assets/property-miami-penthouse.jpg";
@@ -56,8 +57,15 @@ const FeaturedProperties = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto">
-          {properties.map((property) => (
-            <Card key={property.id} className="overflow-hidden shadow-elegant hover:shadow-hover transition-smooth group border-0">
+          {properties.map((property, idx) => (
+            <motion.div
+              key={property.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: idx * 0.15 }}
+            >
+              <Card className="overflow-hidden shadow-elegant hover:shadow-hover transition-smooth group border-0 h-full">
               <div className="relative overflow-hidden aspect-[4/3]">
                 <img 
                   src={property.image} 
@@ -101,6 +109,7 @@ const FeaturedProperties = () => {
                 </Button>
               </CardContent>
             </Card>
+            </motion.div>
           ))}
         </div>
 

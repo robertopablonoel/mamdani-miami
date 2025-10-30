@@ -1,4 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
+import { motion } from "framer-motion";
 import { Quote } from "lucide-react";
 
 const testimonials = [
@@ -40,8 +41,15 @@ const ExodusTestimonials = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto">
           {testimonials.map((testimonial, idx) => (
-            <Card key={idx} className="shadow-elegant hover:shadow-hover transition-smooth bg-card border-0 group">
-              <CardContent className="p-6 md:p-10 space-y-4 md:space-y-6">
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: idx * 0.15 }}
+            >
+              <Card className="shadow-elegant hover:shadow-hover transition-smooth bg-card border-0 group h-full">
+                <CardContent className="p-6 md:p-10 space-y-4 md:space-y-6">
                 <div className="flex items-start justify-between">
                   <Quote className="w-10 h-10 text-primary/20 group-hover:text-primary/40 transition-smooth" />
                   <div className="flex gap-1">
@@ -65,6 +73,7 @@ const ExodusTestimonials = () => {
                 </div>
               </CardContent>
             </Card>
+            </motion.div>
           ))}
         </div>
       </div>
