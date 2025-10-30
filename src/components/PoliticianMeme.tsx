@@ -35,10 +35,20 @@ const PoliticianMeme = () => {
           <div className="relative rounded-full overflow-hidden shadow-2xl border-4 border-white">
             <img 
               src={memeImage}
-              alt="Political meme"
+              alt="Zohran Mamdani - NYC Politician"
               className="w-full h-full aspect-square object-cover"
             />
           </div>
+
+          {/* Name badge */}
+          <motion.div
+            className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground px-3 py-1 rounded-full text-[10px] md:text-xs font-bold uppercase shadow-lg whitespace-nowrap border-2 border-white"
+            initial={{ scale: 0, y: -10 }}
+            animate={{ scale: 1, y: 0 }}
+            transition={{ delay: 5.2, duration: 0.3 }}
+          >
+            Zohran Mamdani
+          </motion.div>
 
           {/* Speech bubble */}
           <motion.div
