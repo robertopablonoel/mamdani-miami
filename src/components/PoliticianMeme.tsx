@@ -52,15 +52,15 @@ const PoliticianMeme = () => {
 
           {/* Speech bubble */}
           <motion.div
-            className="absolute -left-2 top-1/2 -translate-y-1/2 bg-white rounded-xl shadow-2xl p-3 border-3 border-destructive max-w-[140px]"
+            className="absolute -left-20 md:-left-24 top-1/3 bg-white rounded-xl shadow-2xl p-3 border-3 border-destructive max-w-[140px]"
             initial={{ scale: 0, rotate: -10 }}
             animate={{ scale: 1, rotate: 0 }}
             transition={{ delay: 5.5, duration: 0.4, ease: "easeOut" }}
           >
-            {/* Speech bubble pointer */}
-            <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-full">
-              <div className="w-0 h-0 border-t-[10px] border-t-transparent border-b-[10px] border-b-transparent border-l-[15px] border-l-destructive"></div>
-              <div className="absolute top-1/2 -translate-y-1/2 right-[3px] w-0 h-0 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent border-l-[12px] border-l-white"></div>
+            {/* Speech bubble pointer - pointing right to his mouth */}
+            <div className="absolute left-full top-1/2 -translate-y-1/2">
+              <div className="w-0 h-0 border-t-[10px] border-t-transparent border-b-[10px] border-b-transparent border-r-[15px] border-r-destructive rotate-180"></div>
+              <div className="absolute top-1/2 -translate-y-1/2 left-[3px] w-0 h-0 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent border-r-[12px] border-r-white rotate-180"></div>
             </div>
 
             <p className="text-destructive font-bold text-sm leading-tight text-center">
