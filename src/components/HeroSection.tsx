@@ -42,13 +42,18 @@ const HeroSection = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
-            <Button size="lg" variant="default" className="text-base px-10 py-6">
+            <Button size="lg" variant="secondary" className="text-base px-10 py-6 h-14">
               Explore Refuge Properties
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
-            <Button size="lg" variant="outline" className="text-base px-10 py-6 border-white text-white hover:bg-white hover:text-primary">
+            <Button size="lg" variant="outline" className="text-base px-10 py-6 h-14 border-white/60 bg-white/5 backdrop-blur-sm text-white hover:bg-white hover:text-primary">
               Speak with an Agent
             </Button>
+          </div>
+          
+          {/* Trust Badge */}
+          <div className="pt-8">
+            <p className="text-white/70 text-sm uppercase tracking-widest">Trusted by 250+ New York families since 2010</p>
           </div>
         </div>
       </div>

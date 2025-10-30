@@ -39,10 +39,13 @@ const FreedomIndex = () => {
           </div>
         </div>
 
-        <div className="text-center mt-16">
-          <Button size="lg" variant="default">
+        <div className="text-center mt-16 space-y-4">
+          <Button size="lg" variant="premium" className="h-14 px-12">
             See Available Homes
           </Button>
+          <p className="text-sm text-muted-foreground">
+            💎 Over <strong className="text-foreground">$850M</strong> in successful relocations
+          </p>
         </div>
       </div>
     </section>

@@ -40,11 +40,20 @@ const ExodusTestimonials = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {testimonials.map((testimonial, idx) => (
-            <Card key={idx} className="shadow-elegant bg-card border-0">
+            <Card key={idx} className="shadow-elegant hover:shadow-hover transition-smooth bg-card border-0 group">
               <CardContent className="p-10 space-y-6">
-                <Quote className="w-10 h-10 text-primary/20" />
+                <div className="flex items-start justify-between">
+                  <Quote className="w-10 h-10 text-primary/20 group-hover:text-primary/40 transition-smooth" />
+                  <div className="flex gap-1">
+                    {[...Array(5)].map((_, i) => (
+                      <svg key={i} className="w-4 h-4 fill-secondary" viewBox="0 0 20 20">
+                        <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                      </svg>
+                    ))}
+                  </div>
+                </div>
 
-                <blockquote className="text-foreground leading-relaxed">
+                <blockquote className="text-foreground leading-relaxed text-lg">
                   "{testimonial.quote}"
                 </blockquote>
 
@@ -52,6 +61,7 @@ const ExodusTestimonials = () => {
                   <p className="font-semibold text-foreground">{testimonial.name}</p>
                   <p className="text-sm text-muted-foreground">{testimonial.title}</p>
                   <p className="text-xs text-muted-foreground">{testimonial.location} · {testimonial.year}</p>
+                  <p className="text-xs text-primary font-medium mt-2">✓ Verified Client</p>
                 </div>
               </CardContent>
             </Card>

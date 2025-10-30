@@ -121,14 +121,21 @@ const ContactSection = () => {
                     />
                   </div>
 
-                  <Button type="submit" variant="default" size="lg" className="w-full">
-                    Request Consultation
+                  <Button type="submit" variant="premium" size="lg" className="w-full h-14">
+                    Request Free Consultation
                   </Button>
 
-                  <p className="text-xs text-muted-foreground text-center">
-                    By submitting this form, you agree to our privacy policy and consent to be contacted 
-                    regarding your inquiry.
-                  </p>
+                  <div className="flex items-center justify-center gap-4 pt-2">
+                    <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                      <span className="text-green-500">✓</span> No obligation
+                    </div>
+                    <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                      <span className="text-green-500">✓</span> 100% confidential
+                    </div>
+                    <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                      <span className="text-green-500">✓</span> 2-hour response
+                    </div>
+                  </div>
                 </form>
               </CardContent>
             </Card>
