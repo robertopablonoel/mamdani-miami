@@ -15,7 +15,7 @@ const HeroSection = () => {
         <div className="max-w-5xl mx-auto space-y-6 md:space-y-8">
           {/* Headline */}
           <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-serif font-normal text-white leading-tight text-balance px-2">Florida, where success is still legal...</h1>
-          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-serif font-light text-white/95 leading-tight text-balance px-2 mt-4">Before Your Tax Bracket Becomes a Moral Issue.</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-serif font-light text-white/95 leading-tight text-balance px-2 mt-4">Relocate before Your Tax Bracket Becomes a Moral Issue.</h2>
 
           {/* Stats Bar */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 max-w-4xl mx-auto pt-6 md:pt-8 px-4">
