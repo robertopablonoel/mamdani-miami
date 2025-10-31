@@ -26,7 +26,7 @@ const PoliticianMeme = () => {
         <div className="relative w-48 md:w-64">
           {/* Circular Image */}
           <div className="relative rounded-full overflow-hidden shadow-2xl">
-            <img src={memeImage} alt="Zohran Mamdani - NYC Politician" className="w-full h-full aspect-square object-cover" />
+            <img src={memeImage} alt="Zohran Mamdani - NYC Politician" className="w-full h-full aspect-square object-cover opacity-70" />
           </div>
 
           {/* Name badge */}
