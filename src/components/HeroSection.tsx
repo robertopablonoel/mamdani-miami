@@ -20,11 +20,11 @@ const HeroSection = () => {
           {/* Stats Bar */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 max-w-4xl mx-auto pt-6 md:pt-8 px-4">
             {[{
-            stat: "0% State Income Tax",
-            label: "Save Millions Annually"
+            stat: "No Estate Tax",
+            label: "Generational Wealth"
           }, {
-            stat: "No Wealth Tax",
-            label: "Protect Your Assets"
+            stat: "0% State Income Tax",
+            label: "Keep Your Earnings"
           }, {
             stat: "Business-Friendly",
             label: "Entrepreneur Paradise"
