@@ -1,15 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import heroImage from "@/assets/hero-miami-sunset.jpg";
-
 const HeroSection = () => {
-  return (
-    <section className="relative min-h-screen flex items-center justify-center">
+  return <section className="relative min-h-screen flex items-center justify-center">
       {/* Background Image */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url(${heroImage})` }}
-      >
+      <div className="absolute inset-0 bg-cover bg-center" style={{
+      backgroundImage: `url(${heroImage})`
+    }}>
         <div className="absolute inset-0 bg-black/40" />
       </div>
 
@@ -22,22 +19,23 @@ const HeroSection = () => {
           </h1>
 
           {/* Subheadline */}
-          <p className="text-base sm:text-lg md:text-2xl text-white/90 max-w-3xl mx-auto font-light leading-relaxed px-4">
-            When rent freezes meet grocery socialism, it's time to head south. We help New Yorkers relocate before the next wealth tax proposal drops.
-          </p>
+          <p className="text-base sm:text-lg md:text-2xl text-white/90 max-w-3xl mx-auto font-light leading-relaxed px-4">We help New Yorkers relocate before the next wealth tax proposal drops.</p>
 
           {/* Stats Bar */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 max-w-4xl mx-auto pt-6 md:pt-8 px-4">
-            {[
-              { stat: "$850M+", label: "In Closed Sales" },
-              { stat: "250+", label: "Luxury Properties" },
-              { stat: "15 Years", label: "Market Expertise" }
-            ].map((item, idx) => (
-              <div key={idx} className="bg-white/10 backdrop-blur-md border border-white/20 p-4 sm:p-6 md:p-8 rounded">
+            {[{
+            stat: "$850M+",
+            label: "In Closed Sales"
+          }, {
+            stat: "250+",
+            label: "Luxury Properties"
+          }, {
+            stat: "15 Years",
+            label: "Market Expertise"
+          }].map((item, idx) => <div key={idx} className="bg-white/10 backdrop-blur-md border border-white/20 p-4 sm:p-6 md:p-8 rounded">
                 <div className="text-2xl sm:text-3xl md:text-5xl font-serif text-white mb-1 md:mb-2">{item.stat}</div>
                 <div className="text-xs sm:text-sm text-white/80 uppercase tracking-wider">{item.label}</div>
-              </div>
-            ))}
+              </div>)}
           </div>
 
           {/* CTA Buttons */}
@@ -65,8 +63,6 @@ const HeroSection = () => {
           <div className="w-1 h-3 bg-white/40 rounded-full animate-bounce" />
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default HeroSection;
