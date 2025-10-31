@@ -2,43 +2,43 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import brokerImage from "@/assets/broker-professional.jpg";
-
 const BrokerSection = () => {
-  return (
-    <section className="py-16 md:py-24 lg:py-32 bg-background">
+  return <section className="py-16 md:py-24 lg:py-32 bg-background">
       <div className="container mx-auto px-4">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
             {/* Broker Image */}
-            <motion.div 
-              className="relative aspect-[4/5] rounded overflow-hidden shadow-elegant"
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
-            >
-              <img 
-                src={brokerImage}
-                alt="Professional luxury real estate broker"
-                className="w-full h-full object-cover"
-              />
+            <motion.div className="relative aspect-[4/5] rounded overflow-hidden shadow-elegant" initial={{
+            opacity: 0,
+            x: -30
+          }} whileInView={{
+            opacity: 1,
+            x: 0
+          }} viewport={{
+            once: true
+          }} transition={{
+            duration: 0.7
+          }}>
+              <img src={brokerImage} alt="Professional luxury real estate broker" className="w-full h-full object-cover" />
             </motion.div>
 
             {/* Content */}
-            <motion.div 
-              className="space-y-4 md:space-y-6"
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-            >
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-foreground px-2">
-                Meet [Broker Name], Your Escape Facilitator.
-              </h2>
+            <motion.div className="space-y-4 md:space-y-6" initial={{
+            opacity: 0,
+            x: 30
+          }} whileInView={{
+            opacity: 1,
+            x: 0
+          }} viewport={{
+            once: true
+          }} transition={{
+            duration: 0.7,
+            delay: 0.2
+          }}>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-foreground px-2">Meet Julie, 
+Your Escape Facilitator.</h2>
               
-              <p className="text-base md:text-lg text-muted-foreground leading-relaxed px-2">
-                She's helped countless New Yorkers find refuge in South Florida's luxury market. Whether you want a Brickell penthouse, Boca golf villa, or Palm Beach mansion, she'll make your move painless and profitable.
-              </p>
+              <p className="text-base md:text-lg text-muted-foreground leading-relaxed px-2">She’s guided countless New Yorkers through the Great Resettlement, finding them refuge in South Florida's luxury market. Whether you want a Brickell penthouse, Boca golf villa, or Palm Beach mansion, she'll make your move painless and profitable.</p>
 
               <div className="space-y-4 md:space-y-6 mt-4 md:mt-6">
                 {/* Credentials */}
@@ -68,8 +68,6 @@ const BrokerSection = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default BrokerSection;
