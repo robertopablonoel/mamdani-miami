@@ -20,17 +20,17 @@ const HeroSection = () => {
           {/* Stats Bar */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 max-w-4xl mx-auto pt-6 md:pt-8 px-4">
             {[{
-            stat: "0% State Income Tax",
-            label: "Tax Freedom"
+            stat: "Tax Freedom",
+            label: "0% State Income Tax"
           }, {
-            stat: "Year-Round Paradise",
-            label: "230+ Sunny Days"
+            stat: "230+ Sunny Days",
+            label: "Year-Round Paradise"
           }, {
-            stat: "Entrepreneur Haven",
-            label: "Business Friendly"
+            stat: "Business Friendly",
+            label: "Entrepreneur Haven"
           }].map((item, idx) => <div key={idx} className="bg-white/10 backdrop-blur-md border border-white/20 p-4 sm:p-6 md:p-8 rounded">
-                <div className="text-xs sm:text-sm text-white/80 uppercase tracking-wider mb-1 md:mb-2">{item.label}</div>
-                <div className="text-xl sm:text-2xl md:text-4xl font-serif text-white">{item.stat}</div>
+                <div className="text-xl sm:text-2xl md:text-4xl font-serif text-white mb-1 md:mb-2">{item.stat}</div>
+                <div className="text-xs sm:text-sm text-white/80 uppercase tracking-wider">{item.label}</div>
               </div>)}
           </div>
 
