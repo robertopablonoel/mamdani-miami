@@ -32,8 +32,8 @@ const ContactSection = () => {
                       </div>
                       <div>
                         <h3 className="font-semibold mb-2 text-foreground">Phone</h3>
-                        <a href="tel:+1-888-555-0123" className="text-muted-foreground hover:text-primary transition-colors">
-                          888-555-0123
+                        <a href="tel:+1-650-229-4964" className="text-muted-foreground hover:text-primary transition-colors">
+                          650-229-4964
                         </a>
                         <p className="text-sm text-muted-foreground mt-1">Available 7 days a week</p>
                       </div>
