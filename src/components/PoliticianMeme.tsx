@@ -10,8 +10,8 @@ const PoliticianMeme = () => {
 
   return (
     <motion.div
-      className="fixed top-0 right-0 z-[100] pointer-events-none"
-      initial={{ x: "100%", y: "-100%" }}
+      className="fixed top-24 right-0 z-[100] pointer-events-none"
+      initial={{ x: "100%", y: "0%" }}
       animate={{ x: "0%", y: "0%" }}
       transition={{ 
         delay: 3,
