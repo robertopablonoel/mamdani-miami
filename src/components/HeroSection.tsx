@@ -14,7 +14,7 @@ const HeroSection = () => {
       <div className="relative z-10 container mx-auto px-4 pt-24 md:pt-32 pb-16 md:pb-20 text-center">
         <div className="max-w-5xl mx-auto space-y-6 md:space-y-8">
           {/* Headline */}
-          <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-serif font-normal text-white leading-tight text-balance px-2">Florida, where success is still legal...</h1>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-normal text-white leading-tight text-balance px-2">Florida, where success is still legal...</h1>
           <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-serif font-light text-white/95 leading-tight text-balance px-2 mt-4">Relocate before Your Tax Bracket Becomes a Moral Issue.</h2>
 
           {/* Stats Bar */}
@@ -28,9 +28,9 @@ const HeroSection = () => {
           }, {
             stat: "Business Friendly",
             label: "Entrepreneur Haven"
-          }].map((item, idx) => <div key={idx} className="bg-white/10 backdrop-blur-md border border-white/20 p-4 sm:p-6 md:p-8 rounded">
-                <div className="text-xl sm:text-2xl md:text-4xl font-serif text-white mb-1 md:mb-2">{item.stat}</div>
-                <div className="text-xs sm:text-sm text-white/80 uppercase tracking-wider">{item.label}</div>
+          }].map((item, idx) => <div key={idx} className="bg-white/10 backdrop-blur-md border border-white/20 p-6 sm:p-6 md:p-8 rounded-lg">
+                <div className="text-2xl sm:text-2xl md:text-4xl font-serif text-white mb-2 md:mb-2">{item.stat}</div>
+                <div className="text-sm sm:text-sm text-white/80 uppercase tracking-wider">{item.label}</div>
               </div>)}
           </div>
 
@@ -38,12 +38,12 @@ const HeroSection = () => {
           <p className="text-base sm:text-lg md:text-2xl text-white/90 max-w-3xl mx-auto font-light leading-relaxed px-4">We help New Yorkers relocate before Socialism takes over and the next wealth tax proposal drops.</p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center items-stretch sm:items-center pt-4 md:pt-4 px-4">
-            <Button size="lg" variant="secondary" className="text-sm sm:text-base px-6 sm:px-10 py-5 sm:py-6 h-auto sm:h-14 w-full sm:w-auto">
+          <div className="flex flex-col sm:flex-row gap-4 md:gap-4 justify-center items-stretch sm:items-center pt-4 md:pt-4 px-4">
+            <Button size="lg" variant="secondary" className="text-base sm:text-base px-8 sm:px-10 py-6 sm:py-6 h-auto sm:h-14 w-full sm:w-auto">
               Explore Refuge Properties
-              <ArrowRight className="ml-2 w-4 sm:w-5 h-4 sm:h-5" />
+              <ArrowRight className="ml-2 w-5 sm:w-5 h-5 sm:h-5" />
             </Button>
-            <Button size="lg" variant="outline" className="text-sm sm:text-base px-6 sm:px-10 py-5 sm:py-6 h-auto sm:h-14 w-full sm:w-auto border-white/60 bg-white/5 backdrop-blur-sm text-white hover:bg-white hover:text-primary">
+            <Button size="lg" variant="outline" className="text-base sm:text-base px-8 sm:px-10 py-6 sm:py-6 h-auto sm:h-14 w-full sm:w-auto border-white/60 bg-white/5 backdrop-blur-sm text-white hover:bg-white hover:text-primary">
               Speak with an Agent
             </Button>
           </div>

@@ -74,36 +74,36 @@ const FeaturedProperties = () => {
                 />
               </div>
               
-              <CardContent className="p-5 md:p-8 space-y-3 md:space-y-4">
+              <CardContent className="p-6 md:p-8 space-y-4 md:space-y-4">
                 <div>
                   <h3 className="text-xl md:text-2xl font-serif mb-2">{property.title}</h3>
-                  <div className="flex items-center gap-2 text-muted-foreground mb-2 md:mb-3">
+                  <div className="flex items-center gap-2 text-muted-foreground mb-3 md:mb-3">
                     <MapPin className="w-4 h-4" />
-                    <span className="text-xs md:text-sm">{property.location}</span>
+                    <span className="text-sm md:text-sm">{property.location}</span>
                   </div>
-                  <p className="text-2xl md:text-3xl font-serif text-primary mb-3 md:mb-4">{property.price}</p>
+                  <p className="text-2xl md:text-3xl font-serif text-primary mb-4 md:mb-4">{property.price}</p>
                 </div>
 
-                <p className="text-muted-foreground leading-relaxed text-xs md:text-sm">
+                <p className="text-muted-foreground leading-relaxed text-sm md:text-sm">
                   {property.description}
                 </p>
 
-                <div className="flex items-center justify-between text-xs md:text-sm text-muted-foreground pt-3 md:pt-4 border-t border-border">
-                  <div className="flex items-center gap-1.5">
-                    <Bed className="w-4 h-4" />
+                <div className="flex items-center justify-between text-sm md:text-sm text-muted-foreground pt-4 md:pt-4 border-t border-border">
+                  <div className="flex items-center gap-2">
+                    <Bed className="w-5 h-5" />
                     <span>{property.beds}</span>
                   </div>
-                  <div className="flex items-center gap-1.5">
-                    <Bath className="w-4 h-4" />
+                  <div className="flex items-center gap-2">
+                    <Bath className="w-5 h-5" />
                     <span>{property.baths}</span>
                   </div>
-                  <div className="flex items-center gap-1.5">
-                    <Square className="w-4 h-4" />
+                  <div className="flex items-center gap-2">
+                    <Square className="w-5 h-5" />
                     <span>{property.sqft} SF</span>
                   </div>
                 </div>
 
-                <Button variant="outline" className="w-full mt-3 md:mt-4 h-10 md:h-auto text-sm md:text-base">
+                <Button variant="outline" className="w-full mt-4 md:mt-4 h-12 md:h-auto text-base md:text-base">
                   View Details
                   <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
@@ -114,7 +114,7 @@ const FeaturedProperties = () => {
         </div>
 
         <div className="text-center mt-12 md:mt-16 px-4">
-          <Button variant="default" size="lg" className="w-full sm:w-auto h-12 md:h-auto">
+          <Button variant="default" size="lg" className="w-full sm:w-auto h-14 md:h-auto text-base">
             View All Properties
           </Button>
         </div>

@@ -136,18 +136,18 @@ const ContactSection = () => {
                     />
                   </div>
 
-                  <Button type="submit" variant="premium" size="lg" className="w-full h-14">
+                  <Button type="submit" variant="premium" size="lg" className="w-full h-14 text-base">
                     Request Free Consultation
                   </Button>
 
-                  <div className="flex items-center justify-center gap-4 pt-2">
-                    <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                  <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 pt-2">
+                    <div className="flex items-center gap-1 text-sm text-muted-foreground">
                       <span className="text-green-500">✓</span> No obligation
                     </div>
-                    <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                    <div className="flex items-center gap-1 text-sm text-muted-foreground">
                       <span className="text-green-500">✓</span> 100% confidential
                     </div>
-                    <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                    <div className="flex items-center gap-1 text-sm text-muted-foreground">
                       <span className="text-green-500">✓</span> 2-hour response
                     </div>
                   </div>

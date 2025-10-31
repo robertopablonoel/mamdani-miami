@@ -35,31 +35,31 @@ const BrokerSection = () => {
             duration: 0.7,
             delay: 0.2
           }}>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-foreground px-2">Meet Julie, 
+              <h2 className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-foreground px-2">Meet Julie, 
 Your Escape Facilitator.</h2>
               
               <p className="text-base md:text-lg text-muted-foreground leading-relaxed px-2">She’s guided countless New Yorkers through the Great Resettlement, finding them refuge in South Florida's luxury market. Whether you want a Brickell penthouse, Boca golf villa, or Palm Beach mansion, she'll make your move painless and profitable.</p>
 
-              <div className="space-y-4 md:space-y-6 mt-4 md:mt-6">
+              <div className="space-y-5 md:space-y-6 mt-5 md:mt-6">
                 {/* Credentials */}
-                <div className="flex flex-wrap gap-2 md:gap-3 px-2">
-                  <div className="bg-accent px-3 md:px-4 py-1.5 md:py-2 rounded-full text-xs md:text-sm font-medium text-foreground border border-border">
+                <div className="flex flex-wrap gap-3 md:gap-3 px-2">
+                  <div className="bg-accent px-4 md:px-4 py-2 md:py-2 rounded-full text-sm md:text-sm font-medium text-foreground border border-border">
                     15+ Years Experience
                   </div>
-                  <div className="bg-accent px-3 md:px-4 py-1.5 md:py-2 rounded-full text-xs md:text-sm font-medium text-foreground border border-border">
+                  <div className="bg-accent px-4 md:px-4 py-2 md:py-2 rounded-full text-sm md:text-sm font-medium text-foreground border border-border">
                     250+ Closed Deals
                   </div>
-                  <div className="bg-accent px-3 md:px-4 py-1.5 md:py-2 rounded-full text-xs md:text-sm font-medium text-foreground border border-border">
+                  <div className="bg-accent px-4 md:px-4 py-2 md:py-2 rounded-full text-sm md:text-sm font-medium text-foreground border border-border">
                     Luxury Specialist
                   </div>
                 </div>
                 
-                <Button size="lg" variant="secondary" className="h-12 md:h-14 px-8 md:px-10 w-full sm:w-auto text-sm md:text-base">
+                <Button size="lg" variant="secondary" className="h-14 md:h-14 px-8 md:px-10 w-full sm:w-auto text-base md:text-base">
                   Book an Exit Strategy Call
-                  <ArrowRight className="ml-2 w-4 md:w-5 h-4 md:h-5" />
+                  <ArrowRight className="ml-2 w-5 md:w-5 h-5 md:h-5" />
                 </Button>
                 
-                <p className="text-xs md:text-sm text-muted-foreground flex items-center gap-2 px-2">
+                <p className="text-sm md:text-sm text-muted-foreground flex items-center gap-2 px-2">
                   <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
                   Available for consultation · Response within 2 hours
                 </p>

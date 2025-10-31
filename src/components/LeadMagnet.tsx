@@ -21,43 +21,43 @@ const LeadMagnet = () => {
                 <Download className="w-10 md:w-12 h-10 md:h-12 text-primary" />
               </div>
 
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-3 md:mb-4 px-2">
+              <h2 className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-4 md:mb-4 px-2">
                 The Great New York Exodus
               </h2>
               
-              <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-3 md:mb-4 max-w-2xl mx-auto px-4">
+              <p className="text-lg sm:text-lg md:text-xl text-muted-foreground mb-4 md:mb-4 max-w-2xl mx-auto px-4">
                 Download our exclusive guide: "10 Florida Neighborhoods Where Freedom Still Lives."
               </p>
               
               {/* Social Proof */}
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-2 md:gap-3 mb-8 md:mb-10 px-4">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-3 mb-8 md:mb-10 px-4">
                 <div className="flex -space-x-2">
                   {[1, 2, 3, 4].map((i) => (
-                    <div key={i} className="w-8 h-8 rounded-full bg-muted border-2 border-white"></div>
+                    <div key={i} className="w-10 h-10 rounded-full bg-muted border-2 border-white"></div>
                   ))}
                 </div>
-                <p className="text-xs sm:text-sm text-muted-foreground text-center sm:text-left">
+                <p className="text-sm sm:text-sm text-muted-foreground text-center sm:text-left">
                   Join <strong className="text-foreground">1,200+</strong> New Yorkers who downloaded this guide
                 </p>
               </div>
 
-              <form className="max-w-md mx-auto space-y-3 md:space-y-4">
+              <form className="max-w-md mx-auto space-y-4 md:space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="guide-email" className="sr-only">Email Address</Label>
                   <Input 
                     id="guide-email" 
                     type="email" 
                     placeholder="Enter your email address"
-                    className="h-12 md:h-14 text-center text-base md:text-lg border-2 focus:border-primary"
+                    className="h-14 md:h-14 text-center text-base md:text-lg border-2 focus:border-primary"
                   />
                 </div>
 
-                <Button type="submit" size="lg" variant="secondary" className="w-full h-12 md:h-14 text-base md:text-lg">
+                <Button type="submit" size="lg" variant="secondary" className="w-full h-14 md:h-14 text-base md:text-lg">
                   Send Me the Free Guide
-                  <Download className="ml-2 w-4 md:w-5 h-4 md:h-5" />
+                  <Download className="ml-2 w-5 md:w-5 h-5 md:h-5" />
                 </Button>
 
-                <p className="text-xs text-muted-foreground pt-2">
+                <p className="text-sm text-muted-foreground pt-2">
                   🔒 No spam. Just the truth about where to relocate. Unsubscribe anytime.
                 </p>
               </form>

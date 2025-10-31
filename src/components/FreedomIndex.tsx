@@ -55,10 +55,10 @@ const FreedomIndex = () => {
         </div>
 
         <div className="text-center mt-12 md:mt-16 space-y-3 md:space-y-4 px-4">
-          <Button size="lg" variant="premium" className="h-12 md:h-14 px-8 md:px-12 w-full sm:w-auto text-sm md:text-base">
+          <Button size="lg" variant="premium" className="h-14 md:h-14 px-8 md:px-12 w-full sm:w-auto text-base md:text-base">
             See Available Homes
           </Button>
-          <p className="text-xs md:text-sm text-muted-foreground">
+          <p className="text-sm md:text-sm text-muted-foreground">
             💎 Over <strong className="text-foreground">$850M</strong> in successful relocations
           </p>
         </div>
