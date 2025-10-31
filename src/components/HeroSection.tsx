@@ -14,8 +14,8 @@ const HeroSection = () => {
       <div className="relative z-10 container mx-auto px-4 pt-24 md:pt-32 pb-16 md:pb-20 text-center">
         <div className="max-w-5xl mx-auto space-y-6 md:space-y-8">
           {/* Headline */}
-          <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-serif font-normal text-white leading-tight text-balance px-2">Before Your Tax Bracket Becomes a Moral Issue.</h1>
-          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-serif font-light text-white/95 leading-tight text-balance px-2 mt-4">Relocate to Florida, where success is still legal.</h2>
+          <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-serif font-normal text-white leading-tight text-balance px-2">Relocate to Florida, where success is still legal.</h1>
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-serif font-light text-white/95 leading-tight text-balance px-2 mt-4">Before Your Tax Bracket Becomes a Moral Issue.</h2>
 
           {/* Subheadline */}
           <p className="text-base sm:text-lg md:text-2xl text-white/90 max-w-3xl mx-auto font-light leading-relaxed px-4">We help New Yorkers relocate before Socialism takes over and the next wealth tax proposal drops.</p>
