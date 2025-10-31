@@ -19,12 +19,12 @@ const HeroSection = () => {
 
           {/* Stats Bar */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 max-w-4xl mx-auto pt-6 md:pt-8 px-4">
-            {[{
+          {[{
             stat: "Tax Freedom",
             label: "0% State Income Tax"
           }, {
-            stat: "230+ Sunny Days",
-            label: "Year-Round Paradise"
+            stat: "Year-Round Paradise",
+            label: "230+ Sunny Days"
           }, {
             stat: "Business Friendly",
             label: "Entrepreneur Haven"
