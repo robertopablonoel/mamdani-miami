@@ -24,8 +24,9 @@ const ExodusTestimonials = () => {
   return <section className="py-16 md:py-24 lg:py-32 gradient-subtle">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center mb-12 md:mb-20">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-4 md:mb-6 px-2">Freedom Stories From Former New Yorkers
-        </h2>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-4 md:mb-6 px-2">
+            Freedom Stories<br />From Former New Yorkers
+          </h2>
           <p className="text-base md:text-lg text-muted-foreground leading-relaxed px-4">
             Real people. Real escapes. Real estate that makes sense.
           </p>
