@@ -50,7 +50,7 @@ const HeroSection = () => {
           
           {/* Trust Badge */}
           <div className="pt-6 md:pt-8 px-4">
-            <p className="text-white/70 text-xs sm:text-sm uppercase tracking-widest font-bold">"Now my biggest problem is sunscreen, not socialism." - Michael R</p>
+            <p className="text-white/70 text-sm sm:text-lg uppercase tracking-widest font-bold">"Now my biggest problem is sunscreen, not socialism." - Michael R</p>
           </div>
         </div>
       </div>
