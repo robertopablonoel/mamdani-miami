@@ -19,6 +19,12 @@ const testimonials = [{
   location: "New home in Boca Raton",
   quote: "Best financial decision we ever made. And the weather doesn't hurt either.",
   year: "2024"
+}, {
+  name: "Robert T.",
+  title: "Tech Executive",
+  location: "Settled in Fort Lauderdale",
+  quote: "Left the city taxes behind, kept the city salary. Florida math just makes sense.",
+  year: "2024"
 }];
 const ExodusTestimonials = () => {
   return <section className="py-16 md:py-24 lg:py-32 gradient-subtle">
