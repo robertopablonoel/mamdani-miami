@@ -57,9 +57,7 @@ const FreedomIndex = () => {
           <Button size="lg" variant="premium" className="h-14 md:h-14 px-8 md:px-12 w-full sm:w-auto text-base md:text-base">
             See Available Homes
           </Button>
-          <p className="text-sm md:text-sm text-muted-foreground">
-            💎 Successful relocations are our thing
-          </p>
+          <p className="text-sm md:text-sm text-muted-foreground">Successful relocations are our thing.</p>
         </div>
       </div>
     </section>;
