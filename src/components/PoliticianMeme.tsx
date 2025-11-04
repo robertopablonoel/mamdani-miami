@@ -1,11 +1,36 @@
 import { motion } from "framer-motion";
 import { X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import memeImage from "@/assets/meme-politician.jpg";
 const PoliticianMeme = () => {
   const [isVisible, setIsVisible] = useState(true);
+  const [opacity, setOpacity] = useState(1);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const fadeStart = 100;
+      const fadeEnd = 400;
+      
+      if (scrollPosition <= fadeStart) {
+        setOpacity(1);
+      } else if (scrollPosition >= fadeEnd) {
+        setOpacity(0);
+      } else {
+        const fadeRange = fadeEnd - fadeStart;
+        const scrollInRange = scrollPosition - fadeStart;
+        const newOpacity = 1 - (scrollInRange / fadeRange);
+        setOpacity(newOpacity);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
   if (!isVisible) return null;
-  return <motion.div className="fixed top-24 right-0 z-[100] pointer-events-none" initial={{
+  return <motion.div className="fixed top-24 right-0 z-[100] pointer-events-none" style={{
+    opacity: opacity
+  }} initial={{
     x: "100%",
     y: "0%"
   }} animate={{
