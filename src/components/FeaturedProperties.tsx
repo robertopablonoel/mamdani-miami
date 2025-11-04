@@ -116,7 +116,7 @@ const FeaturedProperties = () => {
 
         <div className="text-center mt-12 md:mt-16 px-4">
           <Button variant="default" size="lg" className="w-full sm:w-auto h-14 md:h-auto text-base">
-            View All Properties
+            Schedule a consultation to learn more
           </Button>
         </div>
       </div>
