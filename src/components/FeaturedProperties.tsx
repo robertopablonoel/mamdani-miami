@@ -115,8 +115,10 @@ const FeaturedProperties = () => {
         </div>
 
         <div className="text-center mt-12 md:mt-16 px-4">
-          <Button variant="default" size="lg" className="w-full sm:w-auto h-14 md:h-auto text-base">
-            Schedule a consultation to learn more
+          <Button variant="default" size="lg" className="w-full sm:w-auto h-16 md:h-16 text-base" asChild>
+            <a href="https://calendly.com/julie-nyrefugee/30min" target="_blank" rel="noopener noreferrer">
+              Schedule a consultation to learn more
+            </a>
           </Button>
         </div>
       </div>
