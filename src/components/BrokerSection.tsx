@@ -41,15 +41,6 @@ Your Escape Facilitator.</h2>
               <p className="text-base md:text-lg text-muted-foreground leading-relaxed px-2">She’s guided countless New Yorkers through the Great Resettlement, finding them refuge in South Florida's luxury market. Whether you want a Brickell penthouse, Boca golf villa, or Palm Beach mansion, she'll make your move painless and profitable.</p>
 
               <div className="space-y-5 md:space-y-6 mt-5 md:mt-6">
-                {/* Credentials */}
-                <div className="flex flex-wrap gap-3 md:gap-3 px-2">
-                  <div className="bg-accent px-4 md:px-4 py-2 md:py-2 rounded-full text-sm md:text-sm font-medium text-foreground border border-border">Bespoke Experience</div>
-                  <div className="bg-accent px-4 md:px-4 py-2 md:py-2 rounded-full text-sm md:text-sm font-medium text-foreground border border-border">Luxury Specialist</div>
-                  <div className="bg-accent px-4 md:px-4 py-2 md:py-2 rounded-full text-sm md:text-sm font-medium text-foreground border border-border">Certified Financial Analyst</div>
-                  <div className="bg-accent px-4 md:px-4 py-2 md:py-2 rounded-full text-sm md:text-sm font-medium text-foreground border border-border">$185B+ Volume in 2024</div>
-                  <div className="bg-accent px-4 md:px-4 py-2 md:py-2 rounded-full text-sm md:text-sm font-medium text-foreground border border-border">Largest Broker In North America</div>
-                </div>
-                
                 <Button size="lg" variant="secondary" className="h-14 md:h-14 px-8 md:px-10 w-full sm:w-auto text-base md:text-base" asChild>
                   <a href="https://calendly.com/julie-nyrefugee/30min" target="_blank" rel="noopener noreferrer">
                     Book an Exit Strategy Call
