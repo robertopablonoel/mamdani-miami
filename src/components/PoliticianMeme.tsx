@@ -5,6 +5,7 @@ import memeImage from "@/assets/meme-politician.jpg";
 const PoliticianMeme = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [opacity, setOpacity] = useState(1);
+  const [scale, setScale] = useState(1);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -12,16 +13,21 @@ const PoliticianMeme = () => {
       const fadeStart = 100;
       const fadeEnd = 400;
       const minOpacity = 0.35;
+      const minScale = 0.5;
       
       if (scrollPosition <= fadeStart) {
         setOpacity(1);
+        setScale(1);
       } else if (scrollPosition >= fadeEnd) {
         setOpacity(minOpacity);
+        setScale(minScale);
       } else {
         const fadeRange = fadeEnd - fadeStart;
         const scrollInRange = scrollPosition - fadeStart;
         const newOpacity = 1 - ((scrollInRange / fadeRange) * (1 - minOpacity));
+        const newScale = 1 - ((scrollInRange / fadeRange) * (1 - minScale));
         setOpacity(newOpacity);
+        setScale(newScale);
       }
     };
 
@@ -30,7 +36,9 @@ const PoliticianMeme = () => {
   }, []);
   if (!isVisible) return null;
   return <motion.div className="fixed top-24 right-0 z-[100] pointer-events-none" style={{
-    opacity: opacity
+    opacity: opacity,
+    transform: `scale(${scale})`,
+    transformOrigin: "top right"
   }} initial={{
     x: "100%",
     y: "0%"
