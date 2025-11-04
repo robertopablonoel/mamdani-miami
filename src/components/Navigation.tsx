@@ -54,7 +54,7 @@ const Navigation = () => {
               <Phone className="w-4 h-4" />
               <span>650-229-4964</span>
             </a>
-            <Button variant="default" size="sm" asChild>
+            <Button variant="default" size="default" asChild>
               <a href="https://calendly.com/julie-nyrefugee/30min" target="_blank" rel="noopener noreferrer">
                 Schedule Consultation
               </a>
