@@ -8,7 +8,7 @@ const BrokerSection = () => {
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
             {/* Broker Image */}
-            <motion.div className="relative aspect-[4/5] rounded overflow-hidden shadow-elegant" initial={{
+            <motion.div className="relative aspect-[4/5] rounded overflow-hidden shadow-elegant max-w-[70%] mx-auto md:max-w-full md:mx-0" initial={{
             opacity: 0,
             x: -30
           }} whileInView={{
