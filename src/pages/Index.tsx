@@ -38,8 +38,7 @@ const Index = () => {
                   </span>
                 </div>
                 <p className="text-primary-foreground/80 text-sm leading-relaxed max-w-md">
-                  South Florida's premier luxury real estate firm, specializing in coastal properties 
-                  for discerning clients seeking exceptional lifestyle and investment opportunities.
+                  South Florida's premier escape facilitator for discerning clients seeking exceptional lifestyle and investment opportunities.
                 </p>
               </div>
 
