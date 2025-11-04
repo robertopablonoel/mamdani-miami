@@ -24,7 +24,7 @@ const HeroSection = () => {
             label: "0% State Income Tax"
           }, {
             stat: "Year-Round Paradise",
-            label: "230+ Sunny Days"
+            label: "300+ Sunny Days"
           }, {
             stat: "Business Friendly",
             label: "Entrepreneur Haven"
