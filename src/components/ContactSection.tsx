@@ -154,10 +154,11 @@ const ContactSection = () => {
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 md:space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <Label htmlFor="firstName">First Name</Label>
+                      <Label htmlFor="firstName" className="text-base">First Name</Label>
                       <Input 
                         id="firstName" 
-                        placeholder="John" 
+                        placeholder="John"
+                        className="h-12 md:h-11 text-base"
                         {...register("firstName")}
                       />
                       {errors.firstName && (
@@ -165,10 +166,11 @@ const ContactSection = () => {
                       )}
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="lastName">Last Name</Label>
+                      <Label htmlFor="lastName" className="text-base">Last Name</Label>
                       <Input 
                         id="lastName" 
-                        placeholder="Smith" 
+                        placeholder="Smith"
+                        className="h-12 md:h-11 text-base"
                         {...register("lastName")}
                       />
                       {errors.lastName && (
@@ -178,11 +180,12 @@ const ContactSection = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="email">Email Address</Label>
+                    <Label htmlFor="email" className="text-base">Email Address</Label>
                     <Input 
                       id="email" 
                       type="email" 
-                      placeholder="john.smith@example.com" 
+                      placeholder="john.smith@example.com"
+                      className="h-12 md:h-11 text-base"
                       {...register("email")}
                     />
                     {errors.email && (
@@ -191,39 +194,43 @@ const ContactSection = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="phone">Phone Number</Label>
+                    <Label htmlFor="phone" className="text-base">Phone Number</Label>
                     <Input 
                       id="phone" 
                       type="tel" 
-                      placeholder="(555) 123-4567" 
+                      placeholder="(555) 123-4567"
+                      className="h-12 md:h-11 text-base"
                       {...register("phone")}
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="location">Current Location</Label>
+                    <Label htmlFor="location" className="text-base">Current Location</Label>
                     <Input 
                       id="location" 
-                      placeholder="e.g., New York, NY" 
+                      placeholder="e.g., New York, NY"
+                      className="h-12 md:h-11 text-base"
                       {...register("location")}
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="investmentRange">Investment Range</Label>
+                    <Label htmlFor="investmentRange" className="text-base">Investment Range</Label>
                     <Input 
                       id="investmentRange" 
-                      placeholder="e.g., $2M - $5M" 
+                      placeholder="e.g., $2M - $5M"
+                      className="h-12 md:h-11 text-base"
                       {...register("investmentRange")}
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="message">Message</Label>
+                    <Label htmlFor="message" className="text-base">Message</Label>
                     <Textarea 
                       id="message" 
                       placeholder="Please share details about your real estate objectives and timeline..."
                       rows={4}
+                      className="text-base min-h-[120px]"
                       {...register("message")}
                     />
                   </div>
@@ -232,7 +239,7 @@ const ContactSection = () => {
                     type="submit" 
                     variant="premium" 
                     size="lg" 
-                    className="w-full h-14 text-base"
+                    className="w-full h-14 text-base md:text-base font-medium"
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? "Sending..." : "Submit Inquiry"}

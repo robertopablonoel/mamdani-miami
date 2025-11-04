@@ -87,14 +87,14 @@ const LeadMagnet = () => {
                 </p>
               </div>
 
-              <form onSubmit={form.handleSubmit(onSubmit)} className="max-w-md mx-auto space-y-4 md:space-y-4">
+              <form onSubmit={form.handleSubmit(onSubmit)} className="max-w-md mx-auto space-y-4 md:space-y-4 px-4">
                 <div className="space-y-2">
                   <Label htmlFor="guide-email" className="sr-only">Email Address</Label>
                   <Input 
                     id="guide-email" 
                     type="email" 
                     placeholder="Enter your email address" 
-                    className="h-14 md:h-14 text-center text-base md:text-lg border-2 focus:border-primary" 
+                    className="h-14 md:h-14 text-center text-base md:text-lg border-2 focus:border-primary touch-manipulation" 
                     {...form.register("email")}
                     disabled={isSubmitting}
                   />
@@ -103,7 +103,7 @@ const LeadMagnet = () => {
                   )}
                 </div>
 
-                <Button type="submit" size="lg" variant="secondary" className="w-full h-14 md:h-14 text-base md:text-lg" disabled={isSubmitting}>
+                <Button type="submit" size="lg" variant="secondary" className="w-full h-14 md:h-14 text-base md:text-lg font-medium touch-manipulation" disabled={isSubmitting}>
                   {isSubmitting ? "Sending..." : "Send Me the Free Guide"}
                   <Download className="ml-2 w-5 md:w-5 h-5 md:h-5" />
                 </Button>

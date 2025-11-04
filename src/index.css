@@ -114,10 +114,25 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-tap-highlight-color: transparent;
   }
   
   h1, h2, h3, h4, h5, h6 {
     @apply font-serif;
+  }
+  
+  /* Mobile-specific improvements */
+  @media (max-width: 768px) {
+    body {
+      font-size: 16px; /* Prevents iOS zoom on input focus */
+    }
+  }
+  
+  /* Touch-friendly inputs */
+  input, textarea, select, button {
+    @apply touch-manipulation;
   }
 }
 
