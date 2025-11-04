@@ -6,6 +6,7 @@ const PoliticianMeme = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [opacity, setOpacity] = useState(1);
   const [scale, setScale] = useState(1);
+  const [hasScrolled, setHasScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,13 +16,17 @@ const PoliticianMeme = () => {
       const minOpacity = 0.35;
       const minScale = 0.5;
       
-      if (scrollPosition <= fadeStart) {
+      if (scrollPosition > fadeStart) {
+        setHasScrolled(true);
+      }
+      
+      if (!hasScrolled && scrollPosition <= fadeStart) {
         setOpacity(1);
         setScale(1);
       } else if (scrollPosition >= fadeEnd) {
         setOpacity(minOpacity);
         setScale(minScale);
-      } else {
+      } else if (scrollPosition > fadeStart) {
         const fadeRange = fadeEnd - fadeStart;
         const scrollInRange = scrollPosition - fadeStart;
         const newOpacity = 1 - ((scrollInRange / fadeRange) * (1 - minOpacity));
@@ -33,7 +38,7 @@ const PoliticianMeme = () => {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [hasScrolled]);
   if (!isVisible) return null;
   return <motion.div className="fixed top-24 right-0 z-[100] pointer-events-none origin-top-right" style={{
     opacity: opacity,
