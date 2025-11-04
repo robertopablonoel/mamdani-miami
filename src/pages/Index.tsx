@@ -68,7 +68,7 @@ const Index = () => {
               <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-primary-foreground/60">
                 <p>© 2025 Freedom Coast Luxury Realty. All rights reserved.</p>
                 <div className="flex gap-6">
-                  <a href="#" className="hover:text-primary-foreground transition-colors">Privacy Policy</a>
+                  <a href="/privacy" className="hover:text-primary-foreground transition-colors">Privacy Policy</a>
                   <a href="#" className="hover:text-primary-foreground transition-colors">Terms of Service</a>
                 </div>
               </div>
