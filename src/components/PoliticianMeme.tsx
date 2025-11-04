@@ -6,7 +6,7 @@ const PoliticianMeme = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [opacity, setOpacity] = useState(1);
   const [scale, setScale] = useState(1);
-  const [hasScrolled, setHasScrolled] = useState(false);
+  const [hasShrunk, setHasShrunk] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,30 +15,42 @@ const PoliticianMeme = () => {
       const fadeEnd = 400;
       const minOpacity = 0.35;
       const minScale = 0.5;
-      
-      if (scrollPosition > fadeStart) {
-        setHasScrolled(true);
+
+      // Once it shrinks the first time, lock it small permanently
+      if (!hasShrunk && scrollPosition > fadeStart) {
+        setHasShrunk(true);
+        setOpacity(minOpacity);
+        setScale(minScale);
+        return;
       }
-      
-      if (!hasScrolled && scrollPosition <= fadeStart) {
+
+      if (hasShrunk) {
+        if (opacity !== minOpacity) setOpacity(minOpacity);
+        if (scale !== minScale) setScale(minScale);
+        return;
+      }
+
+      // Before first shrink, interpolate normally
+      if (scrollPosition <= fadeStart) {
         setOpacity(1);
         setScale(1);
       } else if (scrollPosition >= fadeEnd) {
         setOpacity(minOpacity);
         setScale(minScale);
-      } else if (scrollPosition > fadeStart) {
+      } else {
         const fadeRange = fadeEnd - fadeStart;
         const scrollInRange = scrollPosition - fadeStart;
-        const newOpacity = 1 - ((scrollInRange / fadeRange) * (1 - minOpacity));
-        const newScale = 1 - ((scrollInRange / fadeRange) * (1 - minScale));
+        const newOpacity = 1 - (scrollInRange / fadeRange) * (1 - minOpacity);
+        const newScale = 1 - (scrollInRange / fadeRange) * (1 - minScale);
         setOpacity(newOpacity);
         setScale(newScale);
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll(); // initialize based on current position
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [hasScrolled]);
+  }, [hasShrunk, opacity, scale]);
   if (!isVisible) return null;
   return <motion.div className="fixed top-24 right-0 z-[100] pointer-events-none origin-top-right" style={{
     opacity: opacity,
