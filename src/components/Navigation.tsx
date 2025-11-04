@@ -27,9 +27,6 @@ const Navigation = () => {
             <a href="#contact" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
               Contact
             </a>
-            <a href="/admin" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-              Admin
-            </a>
           </div>
 
           {/* Desktop CTA */}
@@ -62,9 +59,6 @@ const Navigation = () => {
               </a>
               <a href="#contact" className="text-base font-medium text-foreground hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>
                 Contact
-              </a>
-              <a href="/admin" className="text-base font-medium text-foreground hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>
-                Admin
               </a>
               <a href="tel:+1-650-229-4964" className="flex items-center gap-2 text-base font-medium text-foreground hover:text-primary transition-colors py-2">
                 <Phone className="w-5 h-5" />
