@@ -54,9 +54,11 @@ Your Escape Facilitator.</h2>
                   </div>
                 </div>
                 
-                <Button size="lg" variant="secondary" className="h-14 md:h-14 px-8 md:px-10 w-full sm:w-auto text-base md:text-base">
-                  Book an Exit Strategy Call
-                  <ArrowRight className="ml-2 w-5 md:w-5 h-5 md:h-5" />
+                <Button size="lg" variant="secondary" className="h-14 md:h-14 px-8 md:px-10 w-full sm:w-auto text-base md:text-base" asChild>
+                  <a href="https://calendly.com/julie-nyrefugee/30min" target="_blank" rel="noopener noreferrer">
+                    Book an Exit Strategy Call
+                    <ArrowRight className="ml-2 w-5 md:w-5 h-5 md:h-5" />
+                  </a>
                 </Button>
                 
                 <p className="text-sm md:text-sm text-muted-foreground flex items-center gap-2 px-2">

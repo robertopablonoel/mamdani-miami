@@ -136,8 +136,10 @@ const ContactSection = () => {
                     />
                   </div>
 
-                  <Button type="submit" variant="premium" size="lg" className="w-full h-14 text-base">
-                    Request Free Consultation
+                  <Button type="button" variant="premium" size="lg" className="w-full h-14 text-base" asChild>
+                    <a href="https://calendly.com/julie-nyrefugee/30min" target="_blank" rel="noopener noreferrer">
+                      Request Free Consultation
+                    </a>
                   </Button>
 
                   <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 pt-2">

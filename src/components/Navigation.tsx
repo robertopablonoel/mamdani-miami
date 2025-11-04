@@ -35,8 +35,10 @@ const Navigation = () => {
               <Phone className="w-4 h-4" />
               <span>650-229-4964</span>
             </a>
-            <Button variant="default" size="sm">
-              Schedule Consultation
+            <Button variant="default" size="sm" asChild>
+              <a href="https://calendly.com/julie-nyrefugee/30min" target="_blank" rel="noopener noreferrer">
+                Schedule Consultation
+              </a>
             </Button>
           </div>
 
@@ -62,8 +64,10 @@ const Navigation = () => {
                 <Phone className="w-5 h-5" />
                 <span>650-229-4964</span>
               </a>
-              <Button variant="default" size="lg" className="w-full mt-2">
-                Schedule Consultation
+              <Button variant="default" size="lg" className="w-full mt-2" asChild>
+                <a href="https://calendly.com/julie-nyrefugee/30min" target="_blank" rel="noopener noreferrer">
+                  Schedule Consultation
+                </a>
               </Button>
             </div>
           </div>}
