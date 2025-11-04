@@ -26,7 +26,7 @@ const PoliticianMeme = () => {
       }
 
       if (hasShrunk) {
-        if (opacity !== minOpacity) setOpacity(minOpacity);
+        if (!isManuallyRestored && opacity !== minOpacity) setOpacity(minOpacity);
         if (scale !== minScale) setScale(minScale);
         return;
       }
