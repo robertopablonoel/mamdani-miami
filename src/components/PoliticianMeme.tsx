@@ -35,10 +35,9 @@ const PoliticianMeme = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
   if (!isVisible) return null;
-  return <motion.div className="fixed top-24 right-0 z-[100] pointer-events-none" style={{
+  return <motion.div className="fixed top-24 right-0 z-[100] pointer-events-none origin-top-right" style={{
     opacity: opacity,
-    transform: `scale(${scale})`,
-    transformOrigin: "top right"
+    scale: scale
   }} initial={{
     x: "100%",
     y: "0%"
