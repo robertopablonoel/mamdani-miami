@@ -43,7 +43,6 @@ const LeadMagnet = () => {
       
       form.reset();
     } catch (error) {
-      console.error("Error submitting lead form:", error);
       toast({
         title: "Error",
         description: "Something went wrong. Please try again.",

@@ -15,10 +15,10 @@ const formSchema = z.object({
   firstName: z.string().min(1, "First name is required").max(100),
   lastName: z.string().min(1, "Last name is required").max(100),
   email: z.string().email("Invalid email address").max(255),
-  phone: z.string().optional(),
-  location: z.string().optional(),
-  investmentRange: z.string().optional(),
-  message: z.string().optional(),
+  phone: z.string().regex(/^[\d\s()+-]+$/, "Invalid phone format").min(10, "Phone too short").max(20, "Phone too long").optional().or(z.literal("")),
+  location: z.string().max(200, "Location too long").optional(),
+  investmentRange: z.string().max(100, "Investment range too long").optional(),
+  message: z.string().max(2000, "Message too long").optional(),
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -51,7 +51,6 @@ const ContactSection = () => {
       });
       reset();
     } catch (error) {
-      console.error("Error submitting form:", error);
       toast({
         title: "Error",
         description: "Failed to send message. Please try again.",
