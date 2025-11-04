@@ -11,15 +11,16 @@ const PoliticianMeme = () => {
       const scrollPosition = window.scrollY;
       const fadeStart = 100;
       const fadeEnd = 400;
+      const minOpacity = 0.35;
       
       if (scrollPosition <= fadeStart) {
         setOpacity(1);
       } else if (scrollPosition >= fadeEnd) {
-        setOpacity(0);
+        setOpacity(minOpacity);
       } else {
         const fadeRange = fadeEnd - fadeStart;
         const scrollInRange = scrollPosition - fadeStart;
-        const newOpacity = 1 - (scrollInRange / fadeRange);
+        const newOpacity = 1 - ((scrollInRange / fadeRange) * (1 - minOpacity));
         setOpacity(newOpacity);
       }
     };
