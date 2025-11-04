@@ -23,25 +23,25 @@ const Navigation = () => {
           <div className="hidden md:flex items-center gap-8">
             {isHomePage ? (
               <>
-                <a href="#properties" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+                <a href="#properties" className="text-base font-medium text-foreground hover:text-primary transition-colors">
                   Properties
                 </a>
-                <a href="#about" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+                <a href="#about" className="text-base font-medium text-foreground hover:text-primary transition-colors">
                   About
                 </a>
-                <a href="#contact" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+                <a href="#contact" className="text-base font-medium text-foreground hover:text-primary transition-colors">
                   Contact
                 </a>
               </>
             ) : (
               <>
-                <Link to="/#properties" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+                <Link to="/#properties" className="text-base font-medium text-foreground hover:text-primary transition-colors">
                   Properties
                 </Link>
-                <Link to="/#about" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+                <Link to="/#about" className="text-base font-medium text-foreground hover:text-primary transition-colors">
                   About
                 </Link>
-                <Link to="/#contact" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+                <Link to="/#contact" className="text-base font-medium text-foreground hover:text-primary transition-colors">
                   Contact
                 </Link>
               </>
