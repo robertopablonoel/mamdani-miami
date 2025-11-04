@@ -4,8 +4,64 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Phone, Mail, MapPin } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
+import { useState } from "react";
+
+const formSchema = z.object({
+  firstName: z.string().min(1, "First name is required").max(100),
+  lastName: z.string().min(1, "Last name is required").max(100),
+  email: z.string().email("Invalid email address").max(255),
+  phone: z.string().optional(),
+  location: z.string().optional(),
+  investmentRange: z.string().optional(),
+  message: z.string().optional(),
+});
+
+type FormData = z.infer<typeof formSchema>;
 
 const ContactSection = () => {
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  
+  const { register, handleSubmit, formState: { errors }, reset } = useForm<FormData>({
+    resolver: zodResolver(formSchema),
+  });
+
+  const onSubmit = async (data: FormData) => {
+    setIsSubmitting(true);
+    try {
+      const { error } = await supabase.from("contact_submissions").insert({
+        name: `${data.firstName} ${data.lastName}`,
+        email: data.email,
+        phone: data.phone || null,
+        location: data.location || null,
+        investment_range: data.investmentRange || null,
+        message: data.message || null,
+      });
+
+      if (error) throw error;
+
+      toast({
+        title: "Message sent!",
+        description: "We'll respond within 1 hour.",
+      });
+      reset();
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast({
+        title: "Error",
+        description: "Failed to send message. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <section className="py-16 md:py-24 lg:py-32 bg-background" id="contact">
       <div className="container mx-auto px-4">
@@ -95,36 +151,71 @@ const ContactSection = () => {
             {/* Contact Form */}
             <Card className="shadow-elegant border-0">
               <CardContent className="p-6 md:p-8">
-                <form className="space-y-4 md:space-y-6">
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 md:space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="firstName">First Name</Label>
-                      <Input id="firstName" placeholder="John" />
+                      <Input 
+                        id="firstName" 
+                        placeholder="John" 
+                        {...register("firstName")}
+                      />
+                      {errors.firstName && (
+                        <p className="text-sm text-destructive">{errors.firstName.message}</p>
+                      )}
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="lastName">Last Name</Label>
-                      <Input id="lastName" placeholder="Smith" />
+                      <Input 
+                        id="lastName" 
+                        placeholder="Smith" 
+                        {...register("lastName")}
+                      />
+                      {errors.lastName && (
+                        <p className="text-sm text-destructive">{errors.lastName.message}</p>
+                      )}
                     </div>
                   </div>
 
                   <div className="space-y-2">
                     <Label htmlFor="email">Email Address</Label>
-                    <Input id="email" type="email" placeholder="john.smith@example.com" />
+                    <Input 
+                      id="email" 
+                      type="email" 
+                      placeholder="john.smith@example.com" 
+                      {...register("email")}
+                    />
+                    {errors.email && (
+                      <p className="text-sm text-destructive">{errors.email.message}</p>
+                    )}
                   </div>
 
                   <div className="space-y-2">
                     <Label htmlFor="phone">Phone Number</Label>
-                    <Input id="phone" type="tel" placeholder="(555) 123-4567" />
+                    <Input 
+                      id="phone" 
+                      type="tel" 
+                      placeholder="(555) 123-4567" 
+                      {...register("phone")}
+                    />
                   </div>
 
                   <div className="space-y-2">
                     <Label htmlFor="location">Current Location</Label>
-                    <Input id="location" placeholder="e.g., New York, NY" />
+                    <Input 
+                      id="location" 
+                      placeholder="e.g., New York, NY" 
+                      {...register("location")}
+                    />
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="budget">Investment Range</Label>
-                    <Input id="budget" placeholder="e.g., $2M - $5M" />
+                    <Label htmlFor="investmentRange">Investment Range</Label>
+                    <Input 
+                      id="investmentRange" 
+                      placeholder="e.g., $2M - $5M" 
+                      {...register("investmentRange")}
+                    />
                   </div>
 
                   <div className="space-y-2">
@@ -133,13 +224,18 @@ const ContactSection = () => {
                       id="message" 
                       placeholder="Please share details about your real estate objectives and timeline..."
                       rows={4}
+                      {...register("message")}
                     />
                   </div>
 
-                  <Button type="button" variant="premium" size="lg" className="w-full h-14 text-base" asChild>
-                    <a href="https://calendly.com/julie-nyrefugee/30min" target="_blank" rel="noopener noreferrer">
-                      Request Free Consultation
-                    </a>
+                  <Button 
+                    type="submit" 
+                    variant="premium" 
+                    size="lg" 
+                    className="w-full h-14 text-base"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? "Sending..." : "Submit Inquiry"}
                   </Button>
 
                   <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 pt-2">
@@ -150,7 +246,7 @@ const ContactSection = () => {
                       <span className="text-green-500">✓</span> 100% confidential
                     </div>
                     <div className="flex items-center gap-1 text-sm text-muted-foreground">
-                      <span className="text-green-500">✓</span> 2-hour response
+                      <span className="text-green-500">✓</span> 1-hour response
                     </div>
                   </div>
                 </form>
