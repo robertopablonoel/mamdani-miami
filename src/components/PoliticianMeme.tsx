@@ -7,6 +7,7 @@ const PoliticianMeme = () => {
   const [opacity, setOpacity] = useState(1);
   const [scale, setScale] = useState(1);
   const [hasShrunk, setHasShrunk] = useState(false);
+  const [isManuallyRestored, setIsManuallyRestored] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,17 +33,17 @@ const PoliticianMeme = () => {
 
       // Before it's locked, interpolate gradually
       if (scrollPosition <= fadeStart) {
-        setOpacity(1);
+        if (!isManuallyRestored) setOpacity(1);
         setScale(1);
       } else if (scrollPosition >= fadeEnd) {
-        setOpacity(minOpacity);
+        if (!isManuallyRestored) setOpacity(minOpacity);
         setScale(minScale);
       } else {
         const fadeRange = fadeEnd - fadeStart;
         const scrollInRange = scrollPosition - fadeStart;
         const newOpacity = 1 - (scrollInRange / fadeRange) * (1 - minOpacity);
         const newScale = 1 - (scrollInRange / fadeRange) * (1 - minScale);
-        setOpacity(newOpacity);
+        if (!isManuallyRestored) setOpacity(newOpacity);
         setScale(newScale);
       }
     };
@@ -50,7 +51,7 @@ const PoliticianMeme = () => {
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll(); // initialize based on current position
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [hasShrunk, opacity, scale]);
+  }, [hasShrunk, opacity, scale, isManuallyRestored]);
   if (!isVisible) return null;
   return <motion.div className="fixed top-24 right-0 z-[100] pointer-events-none origin-top-right" style={{
     opacity: opacity,
@@ -77,6 +78,7 @@ const PoliticianMeme = () => {
           {/* Circular Image */}
           <div className="relative rounded-full overflow-hidden shadow-2xl cursor-pointer" onClick={() => {
             setOpacity(1);
+            setIsManuallyRestored(true);
           }}>
             <img src={memeImage} alt="Zohran Mamdani - NYC Politician" className="w-full h-full aspect-square object-cover" />
           </div>
