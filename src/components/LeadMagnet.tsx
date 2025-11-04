@@ -3,7 +3,57 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Download } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
+import { useState } from "react";
+
+const leadSchema = z.object({
+  email: z.string().trim().email("Please enter a valid email address").max(255, "Email must be less than 255 characters"),
+});
+
+type LeadFormData = z.infer<typeof leadSchema>;
+
 const LeadMagnet = () => {
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  
+  const form = useForm<LeadFormData>({
+    resolver: zodResolver(leadSchema),
+    defaultValues: {
+      email: "",
+    },
+  });
+
+  const onSubmit = async (data: LeadFormData) => {
+    setIsSubmitting(true);
+    try {
+      const { error } = await supabase
+        .from("lead_submissions")
+        .insert([{ email: data.email }]);
+
+      if (error) throw error;
+
+      toast({
+        title: "Success!",
+        description: "Your guide is on its way to your inbox.",
+      });
+      
+      form.reset();
+    } catch (error) {
+      console.error("Error submitting lead form:", error);
+      toast({
+        title: "Error",
+        description: "Something went wrong. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return <section className="py-16 md:py-24 lg:py-32 gradient-premium relative overflow-hidden">
       {/* Decorative Elements */}
       <div className="absolute inset-0 opacity-5">
@@ -37,18 +87,28 @@ const LeadMagnet = () => {
                 </p>
               </div>
 
-              <form className="max-w-md mx-auto space-y-4 md:space-y-4">
+              <form onSubmit={form.handleSubmit(onSubmit)} className="max-w-md mx-auto space-y-4 md:space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="guide-email" className="sr-only">Email Address</Label>
-                  <Input id="guide-email" type="email" placeholder="Enter your email address" className="h-14 md:h-14 text-center text-base md:text-lg border-2 focus:border-primary" />
+                  <Input 
+                    id="guide-email" 
+                    type="email" 
+                    placeholder="Enter your email address" 
+                    className="h-14 md:h-14 text-center text-base md:text-lg border-2 focus:border-primary" 
+                    {...form.register("email")}
+                    disabled={isSubmitting}
+                  />
+                  {form.formState.errors.email && (
+                    <p className="text-sm text-destructive text-center">{form.formState.errors.email.message}</p>
+                  )}
                 </div>
 
-                <Button type="submit" size="lg" variant="secondary" className="w-full h-14 md:h-14 text-base md:text-lg">
-                  Send Me the Free Guide
+                <Button type="submit" size="lg" variant="secondary" className="w-full h-14 md:h-14 text-base md:text-lg" disabled={isSubmitting}>
+                  {isSubmitting ? "Sending..." : "Send Me the Free Guide"}
                   <Download className="ml-2 w-5 md:w-5 h-5 md:h-5" />
                 </Button>
 
-                <p className="text-sm text-muted-foreground pt-2">🔒 No spam. Just the truth about where to relocate. 
+                <p className="text-sm text-muted-foreground pt-2">🔒 No spam. Just the truth about where to relocate. 
 Unsubscribe anytime.</p>
               </form>
             </CardContent>
