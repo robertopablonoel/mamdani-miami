@@ -47,7 +47,7 @@ const Index = () => {
                 <h4 className="font-semibold mb-4 text-sm uppercase tracking-wider">Navigation</h4>
                 <ul className="space-y-3 text-sm text-primary-foreground/80">
                   <li><a href="#properties" className="hover:text-primary-foreground transition-colors">Properties</a></li>
-                  <li><a href="#markets" className="hover:text-primary-foreground transition-colors">Markets</a></li>
+                  <li><a href="/auth" className="hover:text-primary-foreground transition-colors">Admin</a></li>
                   <li><a href="#about" className="hover:text-primary-foreground transition-colors">About</a></li>
                   <li><a href="#contact" className="hover:text-primary-foreground transition-colors">Contact</a></li>
                 </ul>
