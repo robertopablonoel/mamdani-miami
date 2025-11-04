@@ -28,18 +28,67 @@ const Admin = () => {
   const [contactSubmissions, setContactSubmissions] = useState<ContactSubmission[]>([]);
   const [leadSubmissions, setLeadSubmissions] = useState<LeadSubmission[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
 
   useEffect(() => {
     checkAuth();
-    fetchSubmissions();
   }, []);
 
   const checkAuth = async () => {
-    const { data: { session } } = await supabase.auth.getSession();
-    if (!session) {
-      navigate("/auth");
+    try {
+      // Check if user is authenticated
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        toast({
+          title: "Unauthorized",
+          description: "Please sign in to access the admin dashboard",
+          variant: "destructive",
+        });
+        navigate("/auth");
+        return;
+      }
+
+      // Check if user has admin role using the has_role function
+      const { data: hasAdminRole, error } = await supabase.rpc('has_role', {
+        _user_id: session.user.id,
+        _role: 'admin'
+      });
+
+      if (error) {
+        console.error("Error checking admin role:", error);
+        toast({
+          title: "Error",
+          description: "Failed to verify admin access",
+          variant: "destructive",
+        });
+        navigate("/");
+        return;
+      }
+
+      if (!hasAdminRole) {
+        toast({
+          title: "Access Denied",
+          description: "You do not have admin privileges",
+          variant: "destructive",
+        });
+        navigate("/");
+        return;
+      }
+
+      // User is authenticated and has admin role
+      setIsAdmin(true);
+      fetchSubmissions();
+    } catch (error: any) {
+      toast({
+        title: "Error",
+        description: error.message || "An error occurred",
+        variant: "destructive",
+      });
+      navigate("/");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -61,8 +110,6 @@ const Admin = () => {
         description: error.message || "Failed to fetch submissions",
         variant: "destructive",
       });
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -80,6 +127,19 @@ const Admin = () => {
       minute: "2-digit",
     });
   };
+
+  // Don't render admin content until authorization is verified
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p>Verifying admin access...</p>
+      </div>
+    );
+  }
+
+  if (!isAdmin) {
+    return null; // Redirect is handled in checkAuth
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary/5 to-secondary/5 p-4 md:p-8">
@@ -101,9 +161,7 @@ const Admin = () => {
                 <CardTitle>Contact Form Submissions</CardTitle>
               </CardHeader>
               <CardContent>
-                {loading ? (
-                  <p>Loading...</p>
-                ) : contactSubmissions.length === 0 ? (
+                {contactSubmissions.length === 0 ? (
                   <p className="text-muted-foreground">No submissions yet.</p>
                 ) : (
                   <div className="overflow-x-auto">
@@ -145,9 +203,7 @@ const Admin = () => {
                 <CardTitle>Lead Magnet Submissions</CardTitle>
               </CardHeader>
               <CardContent>
-                {loading ? (
-                  <p>Loading...</p>
-                ) : leadSubmissions.length === 0 ? (
+                {leadSubmissions.length === 0 ? (
                   <p className="text-muted-foreground">No submissions yet.</p>
                 ) : (
                   <div className="overflow-x-auto">
