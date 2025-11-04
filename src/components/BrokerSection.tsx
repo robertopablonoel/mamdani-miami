@@ -63,7 +63,7 @@ Your Escape Facilitator.</h2>
                 
                 <p className="text-sm md:text-sm text-muted-foreground flex items-center gap-2 px-2">
                   <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                  Available for consultation · Response within 2 hours
+                  Available for consultation · Responds within 1 hour
                 </p>
               </div>
             </motion.div>
