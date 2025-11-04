@@ -3,10 +3,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Download } from "lucide-react";
-
 const LeadMagnet = () => {
-  return (
-    <section className="py-16 md:py-24 lg:py-32 gradient-premium relative overflow-hidden">
+  return <section className="py-16 md:py-24 lg:py-32 gradient-premium relative overflow-hidden">
       {/* Decorative Elements */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-white rounded-full blur-3xl"></div>
@@ -32,9 +30,7 @@ const LeadMagnet = () => {
               {/* Social Proof */}
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-3 mb-8 md:mb-10 px-4">
                 <div className="flex -space-x-2">
-                  {[1, 2, 3, 4].map((i) => (
-                    <div key={i} className="w-10 h-10 rounded-full bg-muted border-2 border-white"></div>
-                  ))}
+                  {[1, 2, 3, 4].map(i => <div key={i} className="w-10 h-10 rounded-full bg-muted border-2 border-white"></div>)}
                 </div>
                 <p className="text-sm sm:text-sm text-muted-foreground text-center sm:text-left">
                   Join <strong className="text-foreground">1,200+</strong> New Yorkers who downloaded this guide
@@ -44,12 +40,7 @@ const LeadMagnet = () => {
               <form className="max-w-md mx-auto space-y-4 md:space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="guide-email" className="sr-only">Email Address</Label>
-                  <Input 
-                    id="guide-email" 
-                    type="email" 
-                    placeholder="Enter your email address"
-                    className="h-14 md:h-14 text-center text-base md:text-lg border-2 focus:border-primary"
-                  />
+                  <Input id="guide-email" type="email" placeholder="Enter your email address" className="h-14 md:h-14 text-center text-base md:text-lg border-2 focus:border-primary" />
                 </div>
 
                 <Button type="submit" size="lg" variant="secondary" className="w-full h-14 md:h-14 text-base md:text-lg">
@@ -57,16 +48,13 @@ const LeadMagnet = () => {
                   <Download className="ml-2 w-5 md:w-5 h-5 md:h-5" />
                 </Button>
 
-                <p className="text-sm text-muted-foreground pt-2">
-                  🔒 No spam. Just the truth about where to relocate. Unsubscribe anytime.
-                </p>
+                <p className="text-sm text-muted-foreground pt-2">🔒 No spam. Just the truth about where to relocate. 
+Unsubscribe anytime.</p>
               </form>
             </CardContent>
           </Card>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default LeadMagnet;
