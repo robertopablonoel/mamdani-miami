@@ -75,7 +75,11 @@ const PoliticianMeme = () => {
         {/* Meme container */}
         <div className="relative w-48 md:w-64">
           {/* Circular Image */}
-          <div className="relative rounded-full overflow-hidden shadow-2xl">
+          <div className="relative rounded-full overflow-hidden shadow-2xl cursor-pointer" onClick={() => {
+            setHasShrunk(false);
+            setOpacity(1);
+            setScale(1);
+          }}>
             <img src={memeImage} alt="Zohran Mamdani - NYC Politician" className="w-full h-full aspect-square object-cover" />
           </div>
 
