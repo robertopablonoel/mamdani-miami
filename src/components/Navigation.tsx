@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Phone, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 const Navigation = () => {
@@ -50,10 +50,6 @@ const Navigation = () => {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-4">
-            <a href="tel:+1-650-229-4964" className="hidden lg:flex items-center gap-2 text-sm font-medium text-foreground hover:text-primary transition-colors">
-              <Phone className="w-4 h-4" />
-              <span>650-229-4964</span>
-            </a>
             <Button variant="default" size="default" asChild>
               <a href="https://calendly.com/julie-nyrefugee/30min" target="_blank" rel="noopener noreferrer">
                 Schedule Consultation
@@ -95,10 +91,6 @@ const Navigation = () => {
                   </Link>
                 </>
               )}
-              <a href="tel:+1-650-229-4964" className="flex items-center gap-2 text-base font-medium text-foreground hover:text-primary transition-colors py-2">
-                <Phone className="w-5 h-5" />
-                <span>650-229-4964</span>
-              </a>
               <Button variant="default" size="lg" className="w-full mt-2" asChild>
                 <a href="https://calendly.com/julie-nyrefugee/30min" target="_blank" rel="noopener noreferrer">
                   Schedule Consultation

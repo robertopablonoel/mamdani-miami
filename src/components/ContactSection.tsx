@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Phone, Mail, MapPin } from "lucide-react";
+import { Mail, MapPin } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -82,19 +82,6 @@ const ContactSection = () => {
                 <CardContent className="p-6 md:p-8">
                   <div className="space-y-8">
                     <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                        <Phone className="w-5 h-5 text-primary" />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold mb-2 text-foreground">Phone</h3>
-                        <a href="tel:+1-650-229-4964" className="text-muted-foreground hover:text-primary transition-colors">
-                          650-229-4964
-                        </a>
-                        <p className="text-sm text-muted-foreground mt-1">Available 7 days a week</p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start gap-4 pt-8 border-t border-border">
                       <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
                         <Mail className="w-5 h-5 text-primary" />
                       </div>

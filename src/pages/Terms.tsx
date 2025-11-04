@@ -300,7 +300,6 @@ const Terms = () => {
               <div className="mt-4 p-6 bg-muted rounded-lg">
                 <p className="font-semibold">Freedom Coast Luxury Realty</p>
                 <p className="mt-2">Email: <a href="mailto:julie@nyrefugee.com" className="text-primary hover:underline">julie@nyrefugee.com</a></p>
-                <p>Phone: <a href="tel:+1-650-229-4964" className="text-primary hover:underline">650-229-4964</a></p>
               </div>
             </section>
 
