@@ -19,7 +19,7 @@ const BrokerSection = () => {
           }} transition={{
             duration: 0.7
           }}>
-              <img src={brokerImage} alt="Professional luxury real estate broker" className="w-full h-full object-cover" />
+              <img src={brokerImage} alt="Professional luxury real estate broker" loading="lazy" className="w-full h-full object-cover" />
             </motion.div>
 
             {/* Content */}

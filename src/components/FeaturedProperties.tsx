@@ -70,6 +70,7 @@ const FeaturedProperties = () => {
                 <img 
                   src={property.image} 
                   alt={property.title}
+                  loading="lazy"
                   className="w-full h-full object-cover group-hover:scale-105 transition-smooth duration-700"
                 />
               </div>

@@ -85,7 +85,7 @@ const PoliticianMeme = () => {
               setIsManuallyRestored(true);
             }
           }}>
-            <img src={memeImage} alt="Zohran Mamdani - NYC Politician" className="w-full h-full aspect-square object-cover" />
+            <img src={memeImage} alt="Zohran Mamdani - NYC Politician" loading="lazy" className="w-full h-full aspect-square object-cover" />
           </div>
 
           {/* Name badge */}

@@ -34,6 +34,7 @@ const LifestyleSection = () => {
               <img 
                 src={lifestyleMiamiImage}
                 alt="Luxury Miami lifestyle - couple enjoying sunset on penthouse terrace"
+                loading="lazy"
                 className="w-full h-full object-cover group-hover:scale-105 transition-smooth duration-700"
               />
             </div>
@@ -59,6 +60,7 @@ const LifestyleSection = () => {
               <img 
                 src={lifestylePalmBeachImage}
                 alt="Luxury Palm Beach lifestyle - family enjoying oceanfront pool"
+                loading="lazy"
                 className="w-full h-full object-cover group-hover:scale-105 transition-smooth duration-700"
               />
             </div>
