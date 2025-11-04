@@ -16,8 +16,8 @@ const PoliticianMeme = () => {
       const minOpacity = 0.35;
       const minScale = 0.5;
 
-      // Once it shrinks the first time, lock it small permanently
-      if (!hasShrunk && scrollPosition > fadeStart) {
+      // Once it reaches the end of fade range, lock it small permanently
+      if (!hasShrunk && scrollPosition >= fadeEnd) {
         setHasShrunk(true);
         setOpacity(minOpacity);
         setScale(minScale);
@@ -30,7 +30,7 @@ const PoliticianMeme = () => {
         return;
       }
 
-      // Before first shrink, interpolate normally
+      // Before it's locked, interpolate gradually
       if (scrollPosition <= fadeStart) {
         setOpacity(1);
         setScale(1);
