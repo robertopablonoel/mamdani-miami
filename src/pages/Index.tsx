@@ -58,7 +58,7 @@ const Index = () => {
                 <h4 className="font-semibold mb-4 text-sm uppercase tracking-wider">Contact</h4>
                 <ul className="space-y-3 text-sm text-primary-foreground/80">
                   <li>650-229-4964</li>
-                  <li>info@freedomcoastrealty.com</li>
+                  <li>info@nyrefugee.com</li>
                   <li className="pt-2">Miami · Palm Beach · Boca Raton</li>
                 </ul>
               </div>
