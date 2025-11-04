@@ -44,9 +44,8 @@ Your Escape Facilitator.</h2>
                 {/* Credentials */}
                 <div className="flex flex-wrap gap-3 md:gap-3 px-2">
                   <div className="bg-accent px-4 md:px-4 py-2 md:py-2 rounded-full text-sm md:text-sm font-medium text-foreground border border-border">Bespoke Experience</div>
-                  <div className="bg-accent px-4 md:px-4 py-2 md:py-2 rounded-full text-sm md:text-sm font-medium text-foreground border border-border">Luxury Specialist</div>
+                  <div className="bg-accent px-4 md:px-4 py-2 md:py-2 rounded-full text-sm md:text-sm font-medium text-foreground border border-border">$185B+ Volume in 2024</div>
                   <div className="bg-accent px-4 md:px-4 py-2 md:py-2 rounded-full text-sm md:text-sm font-medium text-foreground border border-border">Largest Broker In North America</div>
-                  <div className="bg-accent px-4 md:px-4 py-2 md:py-2 rounded-full text-sm md:text-sm font-medium text-foreground border border-border">$185B+ Volume in 2025</div>
                 </div>
                 
                 <Button size="lg" variant="secondary" className="h-14 md:h-14 px-8 md:px-10 w-full sm:w-auto text-base md:text-base" asChild>
