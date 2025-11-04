@@ -8,23 +8,23 @@ const Navigation = () => {
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <div className="flex items-center">
-            <div className="text-xl md:text-2xl font-serif font-bold tracking-tight text-primary">
+            <a href="/" className="text-xl md:text-2xl font-serif font-bold tracking-tight text-primary hover:opacity-80 transition-opacity">
               FREEDOM COAST
               <span className="block text-[10px] md:text-xs font-sans font-normal tracking-widest text-muted-foreground mt-0.5">
                 LUXURY REALTY
               </span>
-            </div>
+            </a>
           </div>
 
           {/* Desktop Navigation Links */}
           <div className="hidden md:flex items-center gap-8">
-            <a href="#properties" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+            <a href="/#properties" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
               Properties
             </a>
-            <a href="#about" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+            <a href="/#about" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
               About
             </a>
-            <a href="#contact" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+            <a href="/#contact" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
               Contact
             </a>
           </div>
@@ -51,13 +51,13 @@ const Navigation = () => {
         {/* Mobile Menu */}
         {mobileMenuOpen && <div className="md:hidden py-4 border-t border-border">
             <div className="flex flex-col gap-4">
-              <a href="#properties" className="text-base font-medium text-foreground hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>
+              <a href="/#properties" className="text-base font-medium text-foreground hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>
                 Properties
               </a>
-              <a href="#about" className="text-base font-medium text-foreground hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>
+              <a href="/#about" className="text-base font-medium text-foreground hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>
                 About
               </a>
-              <a href="#contact" className="text-base font-medium text-foreground hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>
+              <a href="/#contact" className="text-base font-medium text-foreground hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>
                 Contact
               </a>
               <a href="tel:+1-650-229-4964" className="flex items-center gap-2 text-base font-medium text-foreground hover:text-primary transition-colors py-2">
