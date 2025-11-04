@@ -38,7 +38,7 @@ const ExodusTestimonials = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-7xl mx-auto">
           {testimonials.map((testimonial, idx) => <motion.div key={idx} initial={{
           opacity: 0,
           y: 30
