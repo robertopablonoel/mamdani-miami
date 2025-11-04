@@ -21,9 +21,6 @@ const Navigation = () => {
             <a href="#properties" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
               Properties
             </a>
-            <a href="#markets" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-              Markets
-            </a>
             <a href="#about" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
               About
             </a>
@@ -54,9 +51,6 @@ const Navigation = () => {
             <div className="flex flex-col gap-4">
               <a href="#properties" className="text-base font-medium text-foreground hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>
                 Properties
-              </a>
-              <a href="#markets" className="text-base font-medium text-foreground hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>
-                Markets
               </a>
               <a href="#about" className="text-base font-medium text-foreground hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>
                 About
