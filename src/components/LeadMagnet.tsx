@@ -76,16 +76,6 @@ const LeadMagnet = () => {
                 Download our exclusive guide: "10 Florida Neighborhoods Where Freedom Still Lives."
               </p>
               
-              {/* Social Proof */}
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-3 mb-8 md:mb-10 px-4">
-                <div className="flex -space-x-2">
-                  {[1, 2, 3, 4].map(i => <div key={i} className="w-10 h-10 rounded-full bg-muted border-2 border-white"></div>)}
-                </div>
-                <p className="text-sm sm:text-sm text-muted-foreground text-center sm:text-left">
-                  Join <strong className="text-foreground">1,200+</strong> New Yorkers who downloaded this guide
-                </p>
-              </div>
-
               <form onSubmit={form.handleSubmit(onSubmit)} className="max-w-md mx-auto space-y-4 md:space-y-4 px-4">
                 <div className="space-y-2">
                   <Label htmlFor="guide-email" className="sr-only">Email Address</Label>
