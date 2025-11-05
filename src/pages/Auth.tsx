@@ -20,6 +20,7 @@ type AuthFormData = z.infer<typeof authSchema>;
 const Auth = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [mode, setMode] = useState<"signin" | "signup">("signin");
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -121,7 +122,7 @@ const Auth = () => {
               <Label htmlFor="password">Password</Label>
               <Input
                 id="password"
-                type="password"
+                type={showPassword ? "text" : "password"}
                 placeholder="••••••••"
                 {...form.register("password")}
                 disabled={isLoading}
@@ -129,6 +130,18 @@ const Auth = () => {
               {form.formState.errors.password && (
                 <p className="text-sm text-destructive">{form.formState.errors.password.message}</p>
               )}
+              <div className="flex items-center space-x-2">
+                <input
+                  type="checkbox"
+                  id="show-password"
+                  checked={showPassword}
+                  onChange={(e) => setShowPassword(e.target.checked)}
+                  className="h-4 w-4 rounded border-gray-300"
+                />
+                <label htmlFor="show-password" className="text-sm text-muted-foreground cursor-pointer">
+                  Show password
+                </label>
+              </div>
             </div>
 
             <Button type="submit" className="w-full" disabled={isLoading}>
