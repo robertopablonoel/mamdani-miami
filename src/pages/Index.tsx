@@ -16,9 +16,9 @@ const Index = () => {
       <PoliticianMeme />
       <Navigation />
       <HeroSection />
-      <FreedomIndex />
-      <ContactSection />
       <LifestyleSection />
+      <ContactSection />
+      <FreedomIndex />
       <BrokerSection />
       <ExodusTestimonials />
       <FeaturedProperties />
