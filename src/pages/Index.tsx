@@ -21,7 +21,6 @@ const Index = () => {
       <LifestyleSection />
       <BrokerSection />
       <ExodusTestimonials />
-      <LeadMagnet />
       <ContactSection />
       
       {/* Footer */}
