@@ -41,7 +41,7 @@ const FreedomIndex = memo(() => {
 
         <div className="text-center mt-4 md:mt-6 px-4">
           <Button size="default" variant="premium" className="h-11 px-6 w-full sm:w-auto" asChild>
-            <a href="https://calendly.com/julie-nyrefugee/30min" target="_blank" rel="noopener noreferrer">
+            <a href="#contact">
               Schedule Consultation
             </a>
           </Button>
