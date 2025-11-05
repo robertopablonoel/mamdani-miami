@@ -7,7 +7,7 @@ const benefits = [
   "0% state income tax", 
   "Year-round summer", 
   "Predictable regulations", 
-  "Luxury properties that appreciate faster than NYC rent boards"
+  "Properties that actually appreciate"
 ];
 
 const FreedomIndex = memo(() => {
