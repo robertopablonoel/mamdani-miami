@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import brokerImage from "@/assets/broker-julie-anime.png";
+import brokerImage from "@/assets/broker-julie-vest.png";
 const BrokerSection = () => {
   return <section id="about" className="py-16 md:py-24 lg:py-32 bg-background">
       <div className="container mx-auto px-4">
