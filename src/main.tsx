@@ -1,12 +1,5 @@
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
-import { usePageAnalytics } from "@/hooks/usePageAnalytics";
 
-// Analytics wrapper component
-function AppWithAnalytics() {
-  usePageAnalytics();
-  return <App />;
-}
-
-createRoot(document.getElementById("root")!).render(<AppWithAnalytics />);
+createRoot(document.getElementById("root")!).render(<App />);
