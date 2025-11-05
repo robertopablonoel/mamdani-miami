@@ -75,6 +75,17 @@ const Admin = () => {
 
         if (bootstrapError) {
           console.error("Bootstrap admin error:", bootstrapError);
+          const msg = String(bootstrapError.message || "");
+          if (msg.includes("violates foreign key constraint") || msg.includes("user_roles_user_id_fkey")) {
+            toast({
+              title: "Session invalid",
+              description: "Please sign in again to initialize admin access.",
+              variant: "destructive",
+            });
+            await supabase.auth.signOut();
+            navigate("/auth");
+            return;
+          }
         }
 
         if (bootstrapped) {
