@@ -27,7 +27,7 @@ const testimonials = [{
   year: "2024"
 }];
 const ExodusTestimonials = () => {
-  return <section className="py-16 md:py-24 lg:py-32 gradient-subtle">
+  return <section id="freedom-stories" className="py-16 md:py-24 lg:py-32 gradient-subtle">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center mb-12 md:mb-20">
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-4 md:mb-6 px-2">
