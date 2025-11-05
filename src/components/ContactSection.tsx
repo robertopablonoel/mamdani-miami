@@ -73,10 +73,7 @@ const ContactSection = () => {
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-4 md:mb-6 px-2">
               Begin Your Journey
             </h2>
-            <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed px-4">
-              Connect with our experienced team to discuss your South Florida real estate goals. 
-              We provide personalized service and market insights tailored to your unique requirements.
-            </p>
+            <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed px-4">Connect with our experienced team to discuss your South Florida relocation goals. We provide personalized service and market insights tailored to your unique requirements.</p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
