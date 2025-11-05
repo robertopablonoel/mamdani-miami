@@ -40,7 +40,7 @@ const FreedomIndex = memo(() => {
         </div>
 
         <div className="text-center mt-4 md:mt-6 px-4">
-          <Button size="default" variant="premium" className="h-11 px-6 w-full sm:w-auto" asChild>
+          <Button size="default" variant="secondary" className="h-11 px-6 w-full sm:w-auto" asChild>
             <a href="#inquiry-form">
               Explore Options
             </a>
