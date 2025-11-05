@@ -7,7 +7,7 @@ const benefits = [
   "0% State Income Tax", 
   "Year-Round Summer", 
   "Pro Business Regulations", 
-  "Properties That Actually Appreciate"
+  "Well Funded Police Program"
 ];
 
 const FreedomIndex = memo(() => {
