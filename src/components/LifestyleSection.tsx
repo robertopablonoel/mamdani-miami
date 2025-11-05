@@ -76,7 +76,7 @@ const LifestyleSection = memo(() => {
           {benefits.map((item, idx) => (
             <div 
               key={idx}
-              className="text-center p-4 md:p-6 bg-muted/30 rounded-lg hover:-translate-y-1 transition-smooth"
+              className={`text-center p-4 md:p-6 bg-muted/30 rounded-lg hover:-translate-y-1 transition-smooth ${idx === 4 ? 'hidden md:block' : ''}`}
             >
               <div className="text-2xl md:text-4xl font-serif text-primary mb-2">{item.number}</div>
               <div className="text-xs md:text-sm text-muted-foreground uppercase tracking-wider">{item.label}</div>
