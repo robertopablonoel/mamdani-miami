@@ -23,7 +23,7 @@ const Navigation = () => {
           <div className="hidden md:flex items-center gap-8">
             {isHomePage ? (
               <>
-                <a href="#properties" className="text-base font-medium text-foreground hover:text-primary transition-colors">
+                <a href="#freedom-stories" className="text-base font-medium text-foreground hover:text-primary transition-colors">
                   Freedom Stories
                 </a>
                 <a href="#about" className="text-base font-medium text-foreground hover:text-primary transition-colors">
@@ -35,7 +35,7 @@ const Navigation = () => {
               </>
             ) : (
               <>
-                <Link to="/#properties" className="text-base font-medium text-foreground hover:text-primary transition-colors">
+                <Link to="/#freedom-stories" className="text-base font-medium text-foreground hover:text-primary transition-colors">
                   Freedom Stories
                 </Link>
                 <Link to="/#about" className="text-base font-medium text-foreground hover:text-primary transition-colors">
@@ -74,7 +74,7 @@ const Navigation = () => {
             <div className="flex flex-col gap-4">
               {isHomePage ? (
                 <>
-                  <a href="#properties" className="text-base font-medium text-foreground hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>
+                  <a href="#freedom-stories" className="text-base font-medium text-foreground hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>
                     Freedom Stories
                   </a>
                   <a href="#about" className="text-base font-medium text-foreground hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>
@@ -86,7 +86,7 @@ const Navigation = () => {
                 </>
               ) : (
                 <>
-                  <Link to="/#properties" className="text-base font-medium text-foreground hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>
+                  <Link to="/#freedom-stories" className="text-base font-medium text-foreground hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>
                     Freedom Stories
                   </Link>
                   <Link to="/#about" className="text-base font-medium text-foreground hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>
