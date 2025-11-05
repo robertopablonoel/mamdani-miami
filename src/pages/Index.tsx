@@ -17,11 +17,11 @@ const Index = () => {
       <Navigation />
       <HeroSection />
       <FreedomIndex />
-      <FeaturedProperties />
+      <ContactSection />
       <LifestyleSection />
       <BrokerSection />
       <ExodusTestimonials />
-      <ContactSection />
+      <FeaturedProperties />
       
       {/* Footer */}
       <footer className="bg-primary text-primary-foreground py-12 md:py-16">
