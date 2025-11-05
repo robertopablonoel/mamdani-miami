@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { memo } from "react";
 import heroImage from "@/assets/hero-miami-sunset.jpg";
+import { trackCTAClick } from "@/lib/analytics";
 
 const HeroSection = memo(() => {
   return <section className="relative min-h-screen flex items-center justify-center">
@@ -48,7 +49,7 @@ const HeroSection = memo(() => {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 md:gap-4 justify-center items-stretch sm:items-center pt-4 md:pt-4 px-4">
             <Button size="lg" variant="secondary" className="text-base sm:text-base px-8 sm:px-10 py-6 sm:py-6 h-auto sm:h-14 w-full sm:w-auto" asChild>
-              <a href="https://calendly.com/julie-nyrefugee/30min" target="_blank" rel="noopener noreferrer">
+              <a href="https://calendly.com/julie-nyrefugee/30min" target="_blank" rel="noopener noreferrer" onClick={() => trackCTAClick('Schedule Consultation', 'hero')}>
                 Schedule Consultation
                 <ArrowRight className="ml-2 w-5 sm:w-5 h-5 sm:h-5" />
               </a>

@@ -10,6 +10,7 @@ import * as z from "zod";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
+import { trackFormSubmission, trackPhoneClick } from "@/lib/analytics";
 const formSchema = z.object({
   firstName: z.string().min(1, "First name is required").max(100),
   lastName: z.string().min(1, "Last name is required").max(100),
@@ -53,6 +54,7 @@ const ContactSection = () => {
         title: "Message sent!",
         description: "We'll respond within 1 hour."
       });
+      trackFormSubmission('contact_form');
       reset();
     } catch (error) {
       toast({
@@ -100,7 +102,7 @@ const ContactSection = () => {
                       </div>
                       <div>
                         <h3 className="font-semibold mb-2 text-foreground">Phone</h3>
-                        <a href="tel:+17872431212" className="text-muted-foreground hover:text-primary transition-colors">+1 (787) 243-1212</a>
+                        <a href="tel:+17872431212" className="text-muted-foreground hover:text-primary transition-colors" onClick={() => trackPhoneClick()}>+1 (787) 243-1212</a>
                         <p className="text-sm text-muted-foreground mt-1">Available 9 AM - 6 PM EST</p>
                       </div>
                     </div>

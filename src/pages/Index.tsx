@@ -6,6 +6,7 @@ import FreedomIndex from "@/components/FreedomIndex";
 import LifestyleSection from "@/components/LifestyleSection";
 import BrokerSection from "@/components/BrokerSection";
 import ContactSection from "@/components/ContactSection";
+import { useScrollTracking } from "@/hooks/useScrollTracking";
 
 // Lazy load heavy components
 const ExodusTestimonials = lazy(() => import("@/components/ExodusTestimonials"));
@@ -19,6 +20,9 @@ const ComponentLoader = () => (
 );
 
 const Index = memo(() => {
+  // Track scroll depth for analytics
+  useScrollTracking();
+  
   return (
     <main className="min-h-screen">
       <Suspense fallback={null}>
