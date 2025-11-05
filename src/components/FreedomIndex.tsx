@@ -6,7 +6,7 @@ import { CheckCircle2, TrendingUp } from "lucide-react";
 const benefits = [
   "0% state income tax", 
   "Year-round summer", 
-  "Predictable regulations", 
+  "Pro Business Regulations", 
   "Properties that actually appreciate"
 ];
 
