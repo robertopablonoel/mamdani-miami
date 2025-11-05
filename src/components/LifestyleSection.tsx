@@ -77,13 +77,14 @@ const LifestyleSection = () => {
 
         {/* Benefits Grid */}
         <motion.div 
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-5xl mx-auto mt-12 md:mt-16"
+          className="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-6 max-w-6xl mx-auto mt-12 md:mt-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
           {[
+            { number: "✓", label: "Business Friendly Regulations" },
             { number: "300+", label: "Days of Sunshine" },
             { number: "0%", label: "State Income Tax" },
             { number: "75°F", label: "Average Temperature" },
