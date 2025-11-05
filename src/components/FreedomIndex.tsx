@@ -30,9 +30,9 @@ const FreedomIndex = memo(() => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
             {benefits.map((benefit, idx) => <div key={idx} className="animate-fade-in">
                 <Card className="shadow-elegant border-0 h-full hover:shadow-hover transition-smooth bg-card/50 backdrop-blur-sm">
-                  <CardContent className="p-3 md:p-4 flex items-center gap-2.5">
+                  <CardContent className="p-3 md:p-4 flex items-center justify-center gap-2.5">
                     <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />
-                    <p className="text-sm md:text-base text-foreground/90 font-light leading-relaxed">{benefit}</p>
+                    <p className="text-sm md:text-base text-foreground/90 font-light whitespace-nowrap">{benefit}</p>
                   </CardContent>
                 </Card>
               </div>)}
