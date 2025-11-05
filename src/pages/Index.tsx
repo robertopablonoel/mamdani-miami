@@ -70,6 +70,9 @@ const Index = () => {
                   <Link to="/terms" className="hover:text-primary-foreground transition-colors">Terms of Service</Link>
                 </div>
               </div>
+              <div className="mt-4 text-xs text-primary-foreground/50 text-center">
+                <p>Erant Properties | Sales Associate License #SL3631128 | Brokerage License #BK3296946</p>
+              </div>
             </div>
           </div>
         </div>
