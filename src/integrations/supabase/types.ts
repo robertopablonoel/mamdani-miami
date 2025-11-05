@@ -16,6 +16,8 @@ export type Database = {
     Tables: {
       contact_submissions: {
         Row: {
+          admin_notes: string | null
+          assigned_to: string | null
           created_at: string
           email: string
           id: string
@@ -24,9 +26,14 @@ export type Database = {
           message: string | null
           name: string
           phone: string | null
+          priority: string | null
           status: string | null
+          tags: string[] | null
+          updated_at: string | null
         }
         Insert: {
+          admin_notes?: string | null
+          assigned_to?: string | null
           created_at?: string
           email: string
           id?: string
@@ -35,9 +42,14 @@ export type Database = {
           message?: string | null
           name: string
           phone?: string | null
+          priority?: string | null
           status?: string | null
+          tags?: string[] | null
+          updated_at?: string | null
         }
         Update: {
+          admin_notes?: string | null
+          assigned_to?: string | null
           created_at?: string
           email?: string
           id?: string
@@ -46,7 +58,10 @@ export type Database = {
           message?: string | null
           name?: string
           phone?: string | null
+          priority?: string | null
           status?: string | null
+          tags?: string[] | null
+          updated_at?: string | null
         }
         Relationships: []
       }
@@ -79,22 +94,43 @@ export type Database = {
       }
       lead_submissions: {
         Row: {
+          admin_notes: string | null
+          assigned_to: string | null
+          converted: boolean | null
+          converted_at: string | null
           created_at: string
           email: string
           id: string
+          priority: string | null
           status: string | null
+          tags: string[] | null
+          updated_at: string | null
         }
         Insert: {
+          admin_notes?: string | null
+          assigned_to?: string | null
+          converted?: boolean | null
+          converted_at?: string | null
           created_at?: string
           email: string
           id?: string
+          priority?: string | null
           status?: string | null
+          tags?: string[] | null
+          updated_at?: string | null
         }
         Update: {
+          admin_notes?: string | null
+          assigned_to?: string | null
+          converted?: boolean | null
+          converted_at?: string | null
           created_at?: string
           email?: string
           id?: string
+          priority?: string | null
           status?: string | null
+          tags?: string[] | null
+          updated_at?: string | null
         }
         Relationships: []
       }
