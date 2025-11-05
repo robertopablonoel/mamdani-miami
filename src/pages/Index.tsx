@@ -1,27 +1,41 @@
+import { lazy, Suspense, memo } from "react";
+import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
 import FreedomIndex from "@/components/FreedomIndex";
-import FeaturedProperties from "@/components/FeaturedProperties";
 import LifestyleSection from "@/components/LifestyleSection";
 import BrokerSection from "@/components/BrokerSection";
-import ExodusTestimonials from "@/components/ExodusTestimonials";
-import LeadMagnet from "@/components/LeadMagnet";
 import ContactSection from "@/components/ContactSection";
-import PoliticianMeme from "@/components/PoliticianMeme";
-import { Link } from "react-router-dom";
 
-const Index = () => {
+// Lazy load heavy components
+const ExodusTestimonials = lazy(() => import("@/components/ExodusTestimonials"));
+const FeaturedProperties = lazy(() => import("@/components/FeaturedProperties"));
+const PoliticianMeme = lazy(() => import("@/components/PoliticianMeme"));
+
+const ComponentLoader = () => (
+  <div className="w-full h-20 flex items-center justify-center">
+    <div className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+  </div>
+);
+
+const Index = memo(() => {
   return (
     <main className="min-h-screen">
-      <PoliticianMeme />
+      <Suspense fallback={null}>
+        <PoliticianMeme />
+      </Suspense>
       <Navigation />
       <HeroSection />
       <FreedomIndex />
       <ContactSection />
       <LifestyleSection />
       <BrokerSection />
-      <ExodusTestimonials />
-      <FeaturedProperties />
+      <Suspense fallback={<ComponentLoader />}>
+        <ExodusTestimonials />
+      </Suspense>
+      <Suspense fallback={<ComponentLoader />}>
+        <FeaturedProperties />
+      </Suspense>
       
       {/* Footer */}
       <footer className="bg-primary text-primary-foreground py-12 md:py-16">
@@ -79,6 +93,8 @@ const Index = () => {
       </footer>
     </main>
   );
-};
+});
+
+Index.displayName = "Index";
 
 export default Index;

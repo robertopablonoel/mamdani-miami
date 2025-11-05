@@ -1,7 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { memo } from "react";
 import heroImage from "@/assets/hero-miami-sunset.jpg";
-const HeroSection = () => {
+
+const HeroSection = memo(() => {
   return <section className="relative min-h-screen flex items-center justify-center">
       {/* Background Image */}
       <div className="absolute inset-0 bg-cover bg-center" style={{
@@ -60,5 +62,8 @@ const HeroSection = () => {
         
       </div>
     </section>;
-};
+});
+
+HeroSection.displayName = "HeroSection";
+
 export default HeroSection;

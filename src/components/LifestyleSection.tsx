@@ -1,8 +1,17 @@
 import { motion } from "framer-motion";
+import { memo } from "react";
 import lifestyleMiamiImage from "@/assets/lifestyle-miami-terrace.jpg";
 import lifestylePalmBeachImage from "@/assets/lifestyle-palm-beach-pool.jpg";
 
-const LifestyleSection = () => {
+const benefits = [
+  { number: "300+", label: "Days of Sunshine" },
+  { number: "0%", label: "State Income Tax" },
+  { number: "✓", label: "Pro Business Regulations" },
+  { number: "75°F", label: "Average Temperature" },
+  { number: "∞", label: "Lifestyle Possibilities" }
+];
+
+const LifestyleSection = memo(() => {
   return (
     <section className="py-16 md:py-24 lg:py-32 bg-background">
       <div className="container mx-auto px-4">
@@ -35,6 +44,9 @@ const LifestyleSection = () => {
                 src={lifestyleMiamiImage}
                 alt="Luxury Miami lifestyle - couple enjoying sunset on penthouse terrace"
                 loading="lazy"
+                decoding="async"
+                width="1600"
+                height="1000"
                 className="w-full h-full object-cover group-hover:scale-105 transition-smooth duration-700"
               />
             </div>
@@ -61,6 +73,9 @@ const LifestyleSection = () => {
                 src={lifestylePalmBeachImage}
                 alt="Luxury Palm Beach lifestyle - family enjoying oceanfront pool"
                 loading="lazy"
+                decoding="async"
+                width="1600"
+                height="1000"
                 className="w-full h-full object-cover group-hover:scale-105 transition-smooth duration-700"
               />
             </div>
@@ -83,13 +98,7 @@ const LifestyleSection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          {[
-            { number: "300+", label: "Days of Sunshine" },
-            { number: "0%", label: "State Income Tax" },
-            { number: "✓", label: "Pro Business Regulations" },
-            { number: "75°F", label: "Average Temperature" },
-            { number: "∞", label: "Lifestyle Possibilities" }
-          ].map((item, idx) => (
+          {benefits.map((item, idx) => (
             <motion.div 
               key={idx}
               className="text-center p-4 md:p-6 bg-muted/30 rounded-lg"
@@ -104,6 +113,8 @@ const LifestyleSection = () => {
       </div>
     </section>
   );
-};
+});
+
+LifestyleSection.displayName = "LifestyleSection";
 
 export default LifestyleSection;

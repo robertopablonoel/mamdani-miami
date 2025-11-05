@@ -1,11 +1,21 @@
 import { Button } from "@/components/ui/button";
 import { Menu, X, Phone } from "lucide-react";
-import { useState } from "react";
+import { useState, useCallback, memo } from "react";
 import { Link, useLocation } from "react-router-dom";
-const Navigation = () => {
+
+const Navigation = memo(() => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
   const isHomePage = location.pathname === '/';
+
+  const toggleMobileMenu = useCallback(() => {
+    setMobileMenuOpen(prev => !prev);
+  }, []);
+
+  const closeMobileMenu = useCallback(() => {
+    setMobileMenuOpen(false);
+  }, []);
+
   return <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16 md:h-20">
@@ -64,7 +74,7 @@ const Navigation = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="md:hidden p-2 text-foreground hover:text-primary transition-colors" aria-label="Toggle menu">
+          <button onClick={toggleMobileMenu} className="md:hidden p-2 text-foreground hover:text-primary transition-colors" aria-label="Toggle menu">
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
@@ -74,25 +84,25 @@ const Navigation = () => {
             <div className="flex flex-col gap-4">
               {isHomePage ? (
                 <>
-                  <a href="#about" className="text-base font-medium text-foreground hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>
+                  <a href="#about" className="text-base font-medium text-foreground hover:text-primary transition-colors py-2" onClick={closeMobileMenu}>
                     About
                   </a>
-                  <a href="#freedom-stories" className="text-base font-medium text-foreground hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>
+                  <a href="#freedom-stories" className="text-base font-medium text-foreground hover:text-primary transition-colors py-2" onClick={closeMobileMenu}>
                     Freedom Stories
                   </a>
-                  <a href="#contact" className="text-base font-medium text-foreground hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>
+                  <a href="#contact" className="text-base font-medium text-foreground hover:text-primary transition-colors py-2" onClick={closeMobileMenu}>
                     Contact
                   </a>
                 </>
               ) : (
                 <>
-                  <Link to="/#about" className="text-base font-medium text-foreground hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>
+                  <Link to="/#about" className="text-base font-medium text-foreground hover:text-primary transition-colors py-2" onClick={closeMobileMenu}>
                     About
                   </Link>
-                  <Link to="/#freedom-stories" className="text-base font-medium text-foreground hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>
+                  <Link to="/#freedom-stories" className="text-base font-medium text-foreground hover:text-primary transition-colors py-2" onClick={closeMobileMenu}>
                     Freedom Stories
                   </Link>
-                  <Link to="/#contact" className="text-base font-medium text-foreground hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>
+                  <Link to="/#contact" className="text-base font-medium text-foreground hover:text-primary transition-colors py-2" onClick={closeMobileMenu}>
                     Contact
                   </Link>
                 </>
@@ -112,5 +122,8 @@ const Navigation = () => {
           </div>}
       </div>
     </nav>;
-};
+});
+
+Navigation.displayName = "Navigation";
+
 export default Navigation;

@@ -1,6 +1,8 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
+import { memo } from "react";
 import { Quote } from "lucide-react";
+
 const testimonials = [{
   name: "Jennifer K.",
   title: "Former Manhattan Resident",
@@ -26,7 +28,8 @@ const testimonials = [{
   quote: "Left the city taxes behind, kept the city salary. Florida math just makes sense.",
   year: "2024"
 }];
-const ExodusTestimonials = () => {
+
+const ExodusTestimonials = memo(() => {
   return <section id="freedom-stories" className="py-16 md:py-24 lg:py-32 gradient-subtle">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center mb-12 md:mb-20">
@@ -78,5 +81,8 @@ const ExodusTestimonials = () => {
         </div>
       </div>
     </section>;
-};
+});
+
+ExodusTestimonials.displayName = "ExodusTestimonials";
+
 export default ExodusTestimonials;

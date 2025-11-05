@@ -1,8 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { memo } from "react";
 import { ArrowRight } from "lucide-react";
 import brokerImage from "@/assets/broker-julie-vest.png";
-const BrokerSection = () => {
+
+const BrokerSection = memo(() => {
   return <section id="about" className="py-16 md:py-24 lg:py-32 bg-background">
       <div className="container mx-auto px-4">
         <div className="max-w-5xl mx-auto">
@@ -19,7 +21,15 @@ const BrokerSection = () => {
           }} transition={{
             duration: 0.7
           }}>
-              <img src={brokerImage} alt="Professional luxury real estate broker" className="w-full h-full object-contain" />
+              <img 
+                src={brokerImage} 
+                alt="Professional luxury real estate broker" 
+                loading="lazy"
+                decoding="async"
+                width="600"
+                height="800"
+                className="w-full h-full object-contain" 
+              />
             </motion.div>
 
             {/* Content */}
@@ -58,5 +68,8 @@ Your Escape Facilitator.</h2>
         </div>
       </div>
     </section>;
-};
+});
+
+BrokerSection.displayName = "BrokerSection";
+
 export default BrokerSection;

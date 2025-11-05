@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { memo } from "react";
 import { MapPin, Bed, Bath, Square, ArrowRight } from "lucide-react";
 import palmBeachImage from "@/assets/property-palm-beach.jpg";
 import miamiPenthouseImage from "@/assets/property-miami-penthouse.jpg";
@@ -42,7 +43,7 @@ const properties = [
   }
 ];
 
-const FeaturedProperties = () => {
+const FeaturedProperties = memo(() => {
   return (
     <section className="py-16 md:py-24 lg:py-32 bg-background" id="properties">
       <div className="container mx-auto px-4">
@@ -71,6 +72,9 @@ const FeaturedProperties = () => {
                   src={property.image} 
                   alt={property.title}
                   loading="lazy"
+                  decoding="async"
+                  width="800"
+                  height="600"
                   className="w-full h-full object-cover group-hover:scale-105 transition-smooth duration-700"
                 />
               </div>
@@ -124,6 +128,8 @@ const FeaturedProperties = () => {
       </div>
     </section>
   );
-};
+});
+
+FeaturedProperties.displayName = "FeaturedProperties";
 
 export default FeaturedProperties;

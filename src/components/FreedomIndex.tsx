@@ -1,9 +1,17 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { memo } from "react";
 import { CheckCircle2, TrendingUp } from "lucide-react";
-const FreedomIndex = () => {
-  const benefits = ["0% state income tax", "Year-round summer", "Predictable regulations", "Luxury properties that appreciate faster than NYC rent boards"];
+
+const benefits = [
+  "0% state income tax", 
+  "Year-round summer", 
+  "Predictable regulations", 
+  "Luxury properties that appreciate faster than NYC rent boards"
+];
+
+const FreedomIndex = memo(() => {
   return <section className="py-8 md:py-12 bg-muted/30">
       <div className="container mx-auto px-4">
         <motion.div className="max-w-4xl mx-auto text-center mb-6 md:mb-8" initial={{
@@ -63,5 +71,8 @@ const FreedomIndex = () => {
         </div>
       </div>
     </section>;
-};
+});
+
+FreedomIndex.displayName = "FreedomIndex";
+
 export default FreedomIndex;
