@@ -50,6 +50,33 @@ export type Database = {
         }
         Relationships: []
       }
+      form_rate_limits: {
+        Row: {
+          created_at: string
+          email: string
+          form_type: string
+          id: string
+          ip_address: string | null
+          submitted_at: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          form_type: string
+          id?: string
+          ip_address?: string | null
+          submitted_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          form_type?: string
+          id?: string
+          ip_address?: string | null
+          submitted_at?: string
+        }
+        Relationships: []
+      }
       lead_submissions: {
         Row: {
           created_at: string
@@ -122,6 +149,7 @@ export type Database = {
     }
     Functions: {
       bootstrap_admin_if_none: { Args: { _user_id: string }; Returns: boolean }
+      cleanup_old_rate_limits: { Args: never; Returns: undefined }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]

@@ -30,11 +30,20 @@ const LeadMagnet = () => {
   const onSubmit = async (data: LeadFormData) => {
     setIsSubmitting(true);
     try {
-      const { error } = await supabase
-        .from("lead_submissions")
-        .insert([{ email: data.email }]);
+      const { data: result, error } = await supabase.functions.invoke('submit-lead', {
+        body: { email: data.email }
+      });
 
       if (error) throw error;
+
+      if (result?.error) {
+        toast({
+          title: "Please wait",
+          description: result.error,
+          variant: "destructive",
+        });
+        return;
+      }
 
       toast({
         title: "Success!",

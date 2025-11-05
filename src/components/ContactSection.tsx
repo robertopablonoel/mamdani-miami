@@ -40,16 +40,28 @@ const ContactSection = () => {
     setIsSubmitting(true);
     try {
       const {
+        data: result,
         error
-      } = await supabase.from("contact_submissions").insert({
-        name: `${data.firstName} ${data.lastName}`,
-        email: data.email,
-        phone: data.phone || null,
-        location: data.location || null,
-        investment_range: data.investmentRange || null,
-        message: data.message || null
+      } = await supabase.functions.invoke('submit-contact', {
+        body: {
+          firstName: data.firstName,
+          lastName: data.lastName,
+          email: data.email,
+          phone: data.phone,
+          location: data.location,
+          investmentRange: data.investmentRange,
+          message: data.message
+        }
       });
       if (error) throw error;
+      if (result?.error) {
+        toast({
+          title: "Please wait",
+          description: result.error,
+          variant: "destructive"
+        });
+        return;
+      }
       toast({
         title: "Message sent!",
         description: "We'll respond within 1 hour."
