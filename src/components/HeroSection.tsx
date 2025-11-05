@@ -52,7 +52,7 @@ const HeroSection = memo(() => {
           {/* Trust Badge */}
           <div className="pt-6 md:pt-8 px-4">
             <p className="text-white/70 text-sm sm:text-lg uppercase tracking-widest font-bold">"NOW MY BIGGEST PROBLEM IS SUNSCREEN, NOT SOCIALISM"</p>
-            <p className="text-white/60 text-base sm:text-lg md:text-xl mt-6 font-bold">#MamdaniMadeMeDoIt</p>
+            <p className="text-white/60 text-base sm:text-lg md:text-xl mt-3 font-bold">#MamdaniMadeMeDoIt</p>
           </div>
         </div>
       </div>
