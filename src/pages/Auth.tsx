@@ -19,6 +19,7 @@ type AuthFormData = z.infer<typeof authSchema>;
 
 const Auth = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [mode, setMode] = useState<"signin" | "signup">("signin");
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -31,14 +32,13 @@ const Auth = () => {
   });
 
   useEffect(() => {
-    // Check if user is already logged in
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       if (session) {
         navigate("/admin");
       }
     });
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
       if (session) {
         navigate("/admin");
       }
@@ -50,21 +50,41 @@ const Auth = () => {
   const onSubmit = async (data: AuthFormData) => {
     setIsLoading(true);
     try {
-      const { error } = await supabase.auth.signInWithPassword({
-        email: data.email,
-        password: data.password,
-      });
+      if (mode === "signup") {
+        const redirectUrl = `${window.location.origin}/`;
+        const { error } = await supabase.auth.signUp({
+          email: data.email,
+          password: data.password,
+          options: {
+            emailRedirectTo: redirectUrl,
+          },
+        });
 
-      if (error) throw error;
+        if (error) throw error;
 
-      toast({
-        title: "Welcome back!",
-        description: "You've successfully logged in.",
-      });
+        toast({
+          title: "Check your email",
+          description: "Confirm your email, then return to sign in.",
+        });
+        setMode("signin");
+        return;
+      } else {
+        const { error } = await supabase.auth.signInWithPassword({
+          email: data.email,
+          password: data.password,
+        });
+
+        if (error) throw error;
+
+        toast({
+          title: "Welcome!",
+          description: "Signed in successfully.",
+        });
+      }
     } catch (error: any) {
       toast({
         title: "Error",
-        description: error.message || "An error occurred during authentication.",
+        description: error.message || "Authentication failed.",
         variant: "destructive",
       });
     } finally {
@@ -76,9 +96,9 @@ const Auth = () => {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/5 to-secondary/5 p-4">
       <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle>Admin Sign In</CardTitle>
+          <CardTitle>{mode === "signup" ? "Create Account" : "Admin Sign In"}</CardTitle>
           <CardDescription>
-            Sign in to access your admin dashboard
+            {mode === "signup" ? "Create your admin account" : "Sign in to access your admin dashboard"}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -112,8 +132,37 @@ const Auth = () => {
             </div>
 
             <Button type="submit" className="w-full" disabled={isLoading}>
-              {isLoading ? "Signing In..." : "Sign In"}
+              {isLoading
+                ? (mode === "signup" ? "Creating..." : "Signing In...")
+                : (mode === "signup" ? "Sign Up" : "Sign In")}
             </Button>
+            <div className="text-center text-sm text-muted-foreground">
+              {mode === "signup" ? (
+                <>
+                  Already have an account?{" "}
+                  <button
+                    type="button"
+                    className="underline hover:no-underline"
+                    onClick={() => setMode("signin")}
+                    disabled={isLoading}
+                  >
+                    Sign in
+                  </button>
+                </>
+              ) : (
+                <>
+                  New here?{" "}
+                  <button
+                    type="button"
+                    className="underline hover:no-underline"
+                    onClick={() => setMode("signup")}
+                    disabled={isLoading}
+                  >
+                    Create an account
+                  </button>
+                </>
+              )}
+            </div>
           </form>
         </CardContent>
       </Card>

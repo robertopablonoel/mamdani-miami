@@ -68,13 +68,26 @@ const Admin = () => {
       }
 
       if (!hasAdminRole) {
-        toast({
-          title: "Access Denied",
-          description: "You do not have admin privileges",
-          variant: "destructive",
+        // Attempt one-time bootstrap: if no admins exist, make this user admin
+        const { data: bootstrapped, error: bootstrapError } = await supabase.rpc('bootstrap_admin_if_none', {
+          _user_id: session.user.id
         });
-        navigate("/");
-        return;
+
+        if (bootstrapError) {
+          console.error("Bootstrap admin error:", bootstrapError);
+        }
+
+        if (bootstrapped) {
+          toast({ title: "Admin initialized", description: "Your account was granted admin access." });
+        } else {
+          toast({
+            title: "Access Denied",
+            description: "You do not have admin privileges",
+            variant: "destructive",
+          });
+          navigate("/");
+          return;
+        }
       }
 
       // User is authenticated and has admin role
