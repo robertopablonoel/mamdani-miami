@@ -29,7 +29,7 @@ const LifestyleSection = memo(() => {
             <div className="aspect-[16/10] overflow-hidden">
               <img 
                 src={lifestyleMiamiImage}
-                alt="Luxury Miami lifestyle - couple enjoying sunset on penthouse terrace"
+                alt="Florida lifestyle after moving from New York - luxury Miami penthouse terrace with ocean views and year-round sunshine"
                 loading="lazy"
                 decoding="async"
                 width="1600"
@@ -52,7 +52,7 @@ const LifestyleSection = memo(() => {
             <div className="aspect-[16/10] overflow-hidden">
               <img 
                 src={lifestylePalmBeachImage}
-                alt="Luxury Palm Beach lifestyle - family enjoying oceanfront pool"
+                alt="Palm Beach Florida living - luxury oceanfront pool and pro-business lifestyle for New York relocators"
                 loading="lazy"
                 decoding="async"
                 width="1600"

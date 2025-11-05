@@ -10,7 +10,7 @@ const HeroSection = memo(() => {
       <div className="absolute inset-0 bg-cover bg-center">
         <img 
           src={heroImage} 
-          alt="Miami sunset skyline"
+          alt="Move to Florida from New York - Miami luxury real estate sunset skyline with waterfront properties"
           className="w-full h-full object-cover"
           width="1920"
           height="1080"

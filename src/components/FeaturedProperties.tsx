@@ -63,7 +63,7 @@ const FeaturedProperties = memo(() => {
               <div className="relative overflow-hidden aspect-[4/3]">
                 <img 
                   src={property.image} 
-                  alt={property.title}
+                  alt={`${property.title} - ${property.location} luxury real estate for New Yorkers relocating to Florida - ${property.price}`}
                   loading="lazy"
                   decoding="async"
                   width="800"

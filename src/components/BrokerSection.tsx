@@ -12,7 +12,7 @@ const BrokerSection = memo(() => {
             <div className="relative aspect-[3/4] rounded overflow-hidden shadow-elegant max-w-[50%] mx-auto md:max-w-[80%] md:mx-0 animate-fade-in">
               <img
                 src={brokerImage} 
-                alt="Professional luxury real estate broker" 
+                alt="Julie - Expert Florida real estate broker specializing in New York to Florida relocation and luxury property sales" 
                 loading="lazy"
                 decoding="async"
                 width="600"
