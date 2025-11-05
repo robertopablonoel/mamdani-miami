@@ -19,7 +19,6 @@ type AuthFormData = z.infer<typeof authSchema>;
 
 const Auth = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [isSignUp, setIsSignUp] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -51,36 +50,17 @@ const Auth = () => {
   const onSubmit = async (data: AuthFormData) => {
     setIsLoading(true);
     try {
-      if (isSignUp) {
-        const { error } = await supabase.auth.signUp({
-          email: data.email,
-          password: data.password,
-          options: {
-            emailRedirectTo: `${window.location.origin}/`
-          }
-        });
+      const { error } = await supabase.auth.signInWithPassword({
+        email: data.email,
+        password: data.password,
+      });
 
-        if (error) throw error;
+      if (error) throw error;
 
-        toast({
-          title: "Account created!",
-          description: "You've successfully signed up. You can now sign in.",
-        });
-        setIsSignUp(false);
-        form.reset();
-      } else {
-        const { error } = await supabase.auth.signInWithPassword({
-          email: data.email,
-          password: data.password,
-        });
-
-        if (error) throw error;
-
-        toast({
-          title: "Welcome back!",
-          description: "You've successfully logged in.",
-        });
-      }
+      toast({
+        title: "Welcome back!",
+        description: "You've successfully logged in.",
+      });
     } catch (error: any) {
       toast({
         title: "Error",
@@ -96,9 +76,9 @@ const Auth = () => {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/5 to-secondary/5 p-4">
       <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle>{isSignUp ? "Admin Sign Up" : "Admin Sign In"}</CardTitle>
+          <CardTitle>Admin Sign In</CardTitle>
           <CardDescription>
-            {isSignUp ? "Create an admin account" : "Sign in to access your admin dashboard"}
+            Sign in to access your admin dashboard
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -132,18 +112,8 @@ const Auth = () => {
             </div>
 
             <Button type="submit" className="w-full" disabled={isLoading}>
-              {isLoading ? (isSignUp ? "Signing Up..." : "Signing In...") : (isSignUp ? "Sign Up" : "Sign In")}
+              {isLoading ? "Signing In..." : "Sign In"}
             </Button>
-
-            <div className="text-center mt-4">
-              <button
-                type="button"
-                onClick={() => setIsSignUp(!isSignUp)}
-                className="text-sm text-primary hover:underline"
-              >
-                {isSignUp ? "Already have an account? Sign in" : "Need an account? Sign up"}
-              </button>
-            </div>
           </form>
         </CardContent>
       </Card>
