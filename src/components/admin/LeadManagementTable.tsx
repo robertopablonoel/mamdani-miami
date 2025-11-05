@@ -36,6 +36,7 @@ export function LeadManagementTable({ leads, onUpdate }: Props) {
   const [sortDirection, setSortDirection] = useState<SortDirection>('desc');
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [priorityFilter, setPriorityFilter] = useState<string>('all');
+  const [searchQuery, setSearchQuery] = useState<string>('');
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editData, setEditData] = useState<Partial<LeadSubmission>>({});
 
@@ -52,6 +53,19 @@ export function LeadManagementTable({ leads, onUpdate }: Props) {
     .filter(lead => {
       if (statusFilter !== 'all' && lead.status !== statusFilter) return false;
       if (priorityFilter !== 'all' && lead.priority !== priorityFilter) return false;
+      
+      // Search filter
+      if (searchQuery) {
+        const query = searchQuery.toLowerCase();
+        const matchesEmail = lead.email.toLowerCase().includes(query);
+        const matchesNotes = lead.admin_notes?.toLowerCase().includes(query) || false;
+        const matchesTags = lead.tags?.some(tag => tag.toLowerCase().includes(query)) || false;
+        
+        if (!matchesEmail && !matchesNotes && !matchesTags) {
+          return false;
+        }
+      }
+      
       return true;
     })
     .sort((a, b) => {
@@ -136,6 +150,23 @@ export function LeadManagementTable({ leads, onUpdate }: Props) {
 
   return (
     <div className="space-y-4">
+      {/* Search Bar */}
+      <div className="flex items-center gap-4">
+        <div className="flex-1 max-w-md">
+          <Input
+            placeholder="Search by email, tags, or notes..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="h-10 bg-background"
+          />
+        </div>
+        {searchQuery && (
+          <Button variant="ghost" size="sm" onClick={() => setSearchQuery('')}>
+            Clear
+          </Button>
+        )}
+      </div>
+
       {/* Filters */}
       <div className="flex gap-4 items-center">
         <div className="flex items-center gap-2">

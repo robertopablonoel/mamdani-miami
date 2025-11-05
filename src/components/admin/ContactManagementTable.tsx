@@ -39,6 +39,7 @@ export function ContactManagementTable({ contacts, onUpdate }: Props) {
   const [sortDirection, setSortDirection] = useState<SortDirection>('desc');
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [priorityFilter, setPriorityFilter] = useState<string>('all');
+  const [searchQuery, setSearchQuery] = useState<string>('');
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editData, setEditData] = useState<Partial<ContactSubmission>>({});
 
@@ -55,6 +56,21 @@ export function ContactManagementTable({ contacts, onUpdate }: Props) {
     .filter(contact => {
       if (statusFilter !== 'all' && contact.status !== statusFilter) return false;
       if (priorityFilter !== 'all' && contact.priority !== priorityFilter) return false;
+      
+      // Search filter
+      if (searchQuery) {
+        const query = searchQuery.toLowerCase();
+        const matchesEmail = contact.email.toLowerCase().includes(query);
+        const matchesName = contact.name.toLowerCase().includes(query);
+        const matchesMessage = contact.message?.toLowerCase().includes(query) || false;
+        const matchesLocation = contact.location?.toLowerCase().includes(query) || false;
+        const matchesPhone = contact.phone?.toLowerCase().includes(query) || false;
+        
+        if (!matchesEmail && !matchesName && !matchesMessage && !matchesLocation && !matchesPhone) {
+          return false;
+        }
+      }
+      
       return true;
     })
     .sort((a, b) => {
@@ -139,6 +155,23 @@ export function ContactManagementTable({ contacts, onUpdate }: Props) {
 
   return (
     <div className="space-y-4">
+      {/* Search Bar */}
+      <div className="flex items-center gap-4">
+        <div className="flex-1 max-w-md">
+          <Input
+            placeholder="Search by name, email, phone, location, or message..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="h-10 bg-background"
+          />
+        </div>
+        {searchQuery && (
+          <Button variant="ghost" size="sm" onClick={() => setSearchQuery('')}>
+            Clear
+          </Button>
+        )}
+      </div>
+
       {/* Filters */}
       <div className="flex gap-4 items-center">
         <div className="flex items-center gap-2">
