@@ -4,10 +4,10 @@ import { memo } from "react";
 import { CheckCircle2, TrendingUp } from "lucide-react";
 
 const benefits = [
-  "0% state income tax", 
-  "Year-round summer", 
-  "Pro Business Regulations", 
-  "Properties that actually appreciate"
+  "0% STATE INCOME TAX", 
+  "YEAR-ROUND SUMMER", 
+  "PRO BUSINESS REGULATIONS", 
+  "PROPERTIES THAT ACTUALLY APPRECIATE"
 ];
 
 const FreedomIndex = memo(() => {
