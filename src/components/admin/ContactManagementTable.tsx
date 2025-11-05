@@ -208,6 +208,7 @@ export function ContactManagementTable({ contacts, onUpdate }: Props) {
               <TableHead>Phone</TableHead>
               <TableHead>Location</TableHead>
               <TableHead>Investment</TableHead>
+              <TableHead className="min-w-[200px]">Message</TableHead>
               <TableHead>
                 <Button variant="ghost" size="sm" onClick={() => handleSort('status')} className="font-semibold">
                   Status <ArrowUpDown className="ml-1 h-4 w-4" />
@@ -235,6 +236,22 @@ export function ContactManagementTable({ contacts, onUpdate }: Props) {
                   <TableCell>{contact.phone || <span className="text-muted-foreground">—</span>}</TableCell>
                   <TableCell>{contact.location || <span className="text-muted-foreground">—</span>}</TableCell>
                   <TableCell>{contact.investment_range || <span className="text-muted-foreground">—</span>}</TableCell>
+                  <TableCell>
+                    <div className="max-w-[300px]">
+                      {contact.message ? (
+                        <details className="cursor-pointer">
+                          <summary className="text-sm font-medium hover:text-primary">
+                            {contact.message.substring(0, 50)}...
+                          </summary>
+                          <p className="mt-2 text-sm whitespace-pre-wrap bg-muted/50 p-3 rounded-md">
+                            {contact.message}
+                          </p>
+                        </details>
+                      ) : (
+                        <span className="text-muted-foreground">—</span>
+                      )}
+                    </div>
+                  </TableCell>
                   
                   <TableCell>
                     {isEditing ? (
