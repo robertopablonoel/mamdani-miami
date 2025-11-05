@@ -86,7 +86,7 @@ const LifestyleSection = () => {
           {[
             { number: "300+", label: "Days of Sunshine" },
             { number: "0%", label: "State Income Tax" },
-            { number: "✓", label: "Business Friendly Regulations" },
+            { number: "✓", label: "Pro Business Regulations" },
             { number: "75°F", label: "Average Temperature" },
             { number: "∞", label: "Lifestyle Possibilities" }
           ].map((item, idx) => (
