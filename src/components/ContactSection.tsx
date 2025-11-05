@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Mail, MapPin } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -91,6 +91,17 @@ const ContactSection = () => {
                         <h3 className="font-semibold mb-2 text-foreground">Email</h3>
                         <a href="mailto:julie@nyrefugee.com" className="text-muted-foreground hover:text-primary transition-colors">info@nyrefugee.com</a>
                         <p className="text-sm text-muted-foreground mt-1">Response within 24 hours</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-4 pt-8 border-t border-border">
+                      <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                        <Phone className="w-5 h-5 text-primary" />
+                      </div>
+                      <div>
+                        <h3 className="font-semibold mb-2 text-foreground">Phone</h3>
+                        <a href="tel:+17872431212" className="text-muted-foreground hover:text-primary transition-colors">+1 (787) 243-1212</a>
+                        <p className="text-sm text-muted-foreground mt-1">Available 9 AM - 6 PM EST</p>
                       </div>
                     </div>
 
