@@ -5,7 +5,10 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
+import { X } from "lucide-react";
 
 type ContactSubmission = {
   id: string;
@@ -24,9 +27,17 @@ type LeadSubmission = {
   email: string;
 };
 
+type UserWithRoles = {
+  id: string;
+  email: string;
+  created_at: string;
+  roles: string[];
+};
+
 const Admin = () => {
   const [contactSubmissions, setContactSubmissions] = useState<ContactSubmission[]>([]);
   const [leadSubmissions, setLeadSubmissions] = useState<LeadSubmission[]>([]);
+  const [users, setUsers] = useState<UserWithRoles[]>([]);
   const [loading, setLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
   const navigate = useNavigate();
@@ -80,6 +91,7 @@ const Admin = () => {
       // User is authenticated and has admin role
       setIsAdmin(true);
       fetchSubmissions();
+      fetchUsers();
     } catch (error: any) {
       toast({
         title: "Error",
@@ -108,6 +120,89 @@ const Admin = () => {
       toast({
         title: "Error",
         description: error.message || "Failed to fetch submissions",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const fetchUsers = async () => {
+    try {
+      // Fetch all profiles with their roles
+      const { data: profiles, error: profilesError } = await supabase
+        .from("profiles")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (profilesError) throw profilesError;
+
+      // Fetch all user roles
+      const { data: userRoles, error: rolesError } = await supabase
+        .from("user_roles")
+        .select("*");
+
+      if (rolesError) throw rolesError;
+
+      // Combine profiles with their roles
+      const usersWithRoles = profiles?.map(profile => ({
+        id: profile.user_id,
+        email: profile.email,
+        created_at: profile.created_at,
+        roles: userRoles?.filter(ur => ur.user_id === profile.user_id).map(ur => ur.role) || []
+      })) || [];
+
+      setUsers(usersWithRoles);
+    } catch (error: any) {
+      toast({
+        title: "Error",
+        description: error.message || "Failed to fetch users",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleAddRole = async (userId: string, role: string) => {
+    try {
+      const { error } = await supabase
+        .from("user_roles")
+        .insert({ user_id: userId, role: role as any });
+
+      if (error) throw error;
+
+      toast({
+        title: "Success",
+        description: `Role "${role}" added successfully`,
+      });
+
+      fetchUsers();
+    } catch (error: any) {
+      toast({
+        title: "Error",
+        description: error.message || "Failed to add role",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleRemoveRole = async (userId: string, role: string) => {
+    try {
+      const { error } = await supabase
+        .from("user_roles")
+        .delete()
+        .eq("user_id", userId)
+        .eq("role", role as any);
+
+      if (error) throw error;
+
+      toast({
+        title: "Success",
+        description: `Role "${role}" removed successfully`,
+      });
+
+      fetchUsers();
+    } catch (error: any) {
+      toast({
+        title: "Error",
+        description: error.message || "Failed to remove role",
         variant: "destructive",
       });
     }
@@ -153,6 +248,7 @@ const Admin = () => {
           <TabsList>
             <TabsTrigger value="contacts">Contact Forms ({contactSubmissions.length})</TabsTrigger>
             <TabsTrigger value="leads">Lead Magnets ({leadSubmissions.length})</TabsTrigger>
+            <TabsTrigger value="users">Users ({users.length})</TabsTrigger>
           </TabsList>
 
           <TabsContent value="contacts">
@@ -219,6 +315,78 @@ const Admin = () => {
                           <TableRow key={submission.id}>
                             <TableCell className="whitespace-nowrap">{formatDate(submission.created_at)}</TableCell>
                             <TableCell>{submission.email}</TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="users">
+            <Card>
+              <CardHeader>
+                <CardTitle>User Management</CardTitle>
+              </CardHeader>
+              <CardContent>
+                {users.length === 0 ? (
+                  <p className="text-muted-foreground">No users yet.</p>
+                ) : (
+                  <div className="overflow-x-auto">
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead>Email</TableHead>
+                          <TableHead>Created</TableHead>
+                          <TableHead>Current Roles</TableHead>
+                          <TableHead>Add Role</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {users.map((user) => (
+                          <TableRow key={user.id}>
+                            <TableCell>{user.email}</TableCell>
+                            <TableCell className="whitespace-nowrap">{formatDate(user.created_at)}</TableCell>
+                            <TableCell>
+                              <div className="flex flex-wrap gap-2">
+                                {user.roles.length === 0 ? (
+                                  <span className="text-muted-foreground text-sm">No roles</span>
+                                ) : (
+                                  user.roles.map((role) => (
+                                    <Badge key={role} variant="secondary" className="gap-1">
+                                      {role}
+                                      <button
+                                        onClick={() => handleRemoveRole(user.id, role)}
+                                        className="ml-1 hover:text-destructive"
+                                        aria-label={`Remove ${role} role`}
+                                      >
+                                        <X className="h-3 w-3" />
+                                      </button>
+                                    </Badge>
+                                  ))
+                                )}
+                              </div>
+                            </TableCell>
+                            <TableCell>
+                              <Select onValueChange={(role) => handleAddRole(user.id, role)}>
+                                <SelectTrigger className="w-32">
+                                  <SelectValue placeholder="Add role" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  {!user.roles.includes('admin') && (
+                                    <SelectItem value="admin">Admin</SelectItem>
+                                  )}
+                                  {!user.roles.includes('moderator') && (
+                                    <SelectItem value="moderator">Moderator</SelectItem>
+                                  )}
+                                  {!user.roles.includes('user') && (
+                                    <SelectItem value="user">User</SelectItem>
+                                  )}
+                                </SelectContent>
+                              </Select>
+                            </TableCell>
                           </TableRow>
                         ))}
                       </TableBody>
