@@ -2,13 +2,13 @@ import { lazy, Suspense, memo } from "react";
 import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
-import FreedomIndex from "@/components/FreedomIndex";
-import LifestyleSection from "@/components/LifestyleSection";
-import BrokerSection from "@/components/BrokerSection";
-import ContactSection from "@/components/ContactSection";
 import { useScrollTracking } from "@/hooks/useScrollTracking";
 
-// Lazy load heavy components
+// Lazy load all below-the-fold components for faster initial load
+const FreedomIndex = lazy(() => import("@/components/FreedomIndex"));
+const ContactSection = lazy(() => import("@/components/ContactSection"));
+const LifestyleSection = lazy(() => import("@/components/LifestyleSection"));
+const BrokerSection = lazy(() => import("@/components/BrokerSection"));
 const ExodusTestimonials = lazy(() => import("@/components/ExodusTestimonials"));
 const FeaturedProperties = lazy(() => import("@/components/FeaturedProperties"));
 const PoliticianMeme = lazy(() => import("@/components/PoliticianMeme"));
@@ -30,10 +30,18 @@ const Index = memo(() => {
       </Suspense>
       <Navigation />
       <HeroSection />
-      <FreedomIndex />
-      <ContactSection />
-      <LifestyleSection />
-      <BrokerSection />
+      <Suspense fallback={<ComponentLoader />}>
+        <FreedomIndex />
+      </Suspense>
+      <Suspense fallback={<ComponentLoader />}>
+        <ContactSection />
+      </Suspense>
+      <Suspense fallback={<ComponentLoader />}>
+        <LifestyleSection />
+      </Suspense>
+      <Suspense fallback={<ComponentLoader />}>
+        <BrokerSection />
+      </Suspense>
       <Suspense fallback={<ComponentLoader />}>
         <ExodusTestimonials />
       </Suspense>
