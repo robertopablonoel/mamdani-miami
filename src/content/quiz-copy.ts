@@ -1,0 +1,163 @@
+import type { Frustration, Benefit, Concern } from '@/types/quiz';
+
+export const QUIZ_COPY = {
+  screens: [
+    {
+      step: 1,
+      goal: 'Establish baseline housing situation',
+      h1: "Let's start with your current housing situation.",
+      subhead: 'This helps us calculate your potential Miami savings.',
+      question: 'Are you currently renting or owning in the New York area?',
+      options: [
+        { value: 'rent', label: '🏢 Renting an apartment' },
+        { value: 'own_condo', label: '🏘️ Owning a condo or co-op' },
+        { value: 'own_house', label: '🏡 Owning a house' },
+        { value: 'exploring', label: '🔍 Exploring a purchase soon' },
+      ],
+      button: 'Next',
+    },
+    {
+      step: 2,
+      goal: 'Quantify housing burden',
+      h1: "What's your approximate monthly housing payment?",
+      subhead: 'Include rent or mortgage + HOA/co-op fees. Rough estimate is fine.',
+      question: 'Select your range:',
+      options: [
+        { value: 'under_2k', label: 'Less than $2,000/month' },
+        { value: '2k_3.5k', label: '$2,000 – $3,500/month' },
+        { value: '3.5k_5k', label: '$3,500 – $5,000/month' },
+        { value: '5k_7.5k', label: '$5,000 – $7,500/month' },
+        { value: '7.5k_10k', label: '$7,500 – $10,000/month' },
+        { value: 'over_10k', label: 'More than $10,000/month' },
+        { value: 'prefer_not_say', label: 'Prefer not to say' },
+      ],
+      button: 'Next',
+    },
+    {
+      step: 3,
+      goal: 'Calculate tax savings delta',
+      h1: "What's your approximate annual household income?",
+      subhead: 'Your answer is private and helps us estimate state tax savings.',
+      question: 'Select your income bracket:',
+      options: [
+        { value: 'under_100k', label: 'Under $100,000' },
+        { value: '100k_150k', label: '$100,000 – $150,000' },
+        { value: '150k_250k', label: '$150,000 – $250,000' },
+        { value: '250k_400k', label: '$250,000 – $400,000' },
+        { value: '400k_750k', label: '$400,000 – $750,000' },
+        { value: 'over_750k', label: 'Over $750,000' },
+        { value: 'prefer_not_say', label: 'Prefer not to say' },
+      ],
+      button: 'Next',
+    },
+    {
+      step: 4,
+      goal: 'Identify emotional pain point',
+      h1: "What's your biggest frustration about living in New York?",
+      subhead: 'Pick the one that resonates most.',
+      question: 'Your top challenge:',
+      options: [
+        { value: 'taxes', label: '💸 State income tax burden' },
+        { value: 'cost_of_living', label: '💰 High cost of living' },
+        { value: 'winters', label: '❄️ Cold winters & limited outdoor months' },
+        { value: 'congestion', label: '🚇 Congestion & commute times' },
+        { value: 'regulations', label: '📜 Business regulations & red tape' },
+        { value: 'space', label: '🏠 Lack of space (small apartments, no yard)' },
+      ],
+      button: 'Next',
+    },
+    {
+      step: 5,
+      goal: 'Identify aspirational motivation',
+      h1: 'What excites you most about Miami?',
+      subhead: 'Choose your top reason for considering a move.',
+      question: 'Your primary draw to Miami:',
+      options: [
+        { value: 'no_tax', label: '☀️ No state income tax' },
+        { value: 'outdoor_lifestyle', label: '🌴 Year-round outdoor lifestyle' },
+        { value: 'more_space', label: '🏡 More space for the same price' },
+        { value: 'pro_business', label: '💼 Pro-business climate & entrepreneurship' },
+        { value: 'work_life_balance', label: '🏖️ Better work-life balance' },
+        { value: 'networking', label: '🤝 Growing finance & tech networks' },
+      ],
+      button: 'Next',
+    },
+    {
+      step: 6,
+      goal: 'Qualify buying intent & urgency',
+      h1: 'When are you realistically considering a move?',
+      subhead: "No commitment—just helps us tailor your results.",
+      question: 'Your timeline:',
+      options: [
+        { value: '0-6mo', label: '🚀 In the next 6 months' },
+        { value: '6-12mo', label: '📅 6–12 months' },
+        { value: '1-3y', label: '🗓️ 1–3 years' },
+        { value: 'someday', label: '🤔 Someday / Just exploring' },
+      ],
+      button: 'Next',
+    },
+    {
+      step: 7,
+      goal: 'Surface objections',
+      h1: "What's your biggest concern about moving to Miami?",
+      subhead: "Let's address it directly in your personalized results.",
+      question: 'Select your top worry:',
+      options: [
+        { value: 'hurricanes', label: '🌀 Hurricanes & flood insurance costs' },
+        { value: 'heat', label: '🥵 Heat & humidity (summer weather)' },
+        { value: 'transit', label: '🚗 Lack of public transit (car-dependent)' },
+        { value: 'career_network', label: '🤝 Career network is still NY-centric' },
+        { value: 'industry_remote', label: "🏢 My industry hasn't fully embraced remote/Miami" },
+        { value: 'schools', label: '💼 Quality of schools & family infrastructure' },
+      ],
+      button: 'See My Results',
+      skipButton: 'Skip This Question',
+    },
+  ],
+
+  leadCapture: {
+    h1: 'See Your Personalized Savings & Miami Neighborhood Matches',
+    subhead: 'Enter your contact info to unlock your custom report.',
+    privacyNote: '🔒 We respect your privacy. No spam. Unsubscribe anytime.',
+    button: 'Show My Results',
+  },
+
+  lifestyleUpgrades: {
+    no_tax: '💰 **Keep more of what you earn.** FL has zero state income tax, no estate tax, and homestead exemption for property tax relief.',
+    outdoor_lifestyle: '☀️ **248 sunny days/year** (vs. NYC\'s 224). Beach, parks, and outdoor dining 12 months a year.',
+    more_space: '🏡 **Get 40% more space.** Median Miami 2BR: 1,200 sq ft vs. NYC 2BR: 850 sq ft at similar price points.',
+    pro_business: '💼 **Business-friendly environment.** No corporate income tax, lower regulatory burden, and a governor who prioritizes economic growth.',
+    work_life_balance: '🏖️ **Work from paradise.** Remote-first culture, rooftop coworking spaces, and networking events on yachts (yes, really).',
+    networking: '🤝 **Join 15,000+ finance & tech professionals** who\'ve relocated to Miami since 2020. Thriving startup scene (Founders Fund, Atomic, SoftBank offices).',
+  } as Record<Benefit, string>,
+
+  objectionRebuttals: {
+    hurricanes: "Yes, hurricanes happen—but so do NYC blizzards and floods (remember Ida?). Modern Miami buildings are engineered to hurricane standards, insurance is manageable with proper coverage, and you'll never shovel snow again. Plus, homestead exemptions offset property taxes.",
+    heat: "Summers are hot (85–90°F)—but every building has AC, and you're near the beach year-round. Trade 4 months of brutal winters for 4 months of indoor summers. Most relocators say they'd take Miami heat over NYC cold any day.",
+    transit: "Miami is car-dependent—true. But you'll have a garage (or parking!), traffic is lighter than NYC, and Uber/Lyft are cheaper. Plus, walkable neighborhoods like Brickell and Coral Gables rival Manhattan for pedestrian life.",
+    career_network: 'Finance, tech, and media hubs are expanding to Miami fast. Citadel, Blackstone, Goldman Sachs, and dozens of startups now have Miami offices. Plus, flights to NYC are 3 hours—keep your network, gain your freedom.',
+    industry_remote: "Remote work is the new normal. If your job allows it now, you're already halfway there. And Miami's coworking + networking scene (eMerge Americas, Miami Tech Week) rivals SF and NYC.",
+    schools: 'Miami has excellent private schools (Ransom Everglades, Gulliver, Palmer Trinity) and strong public districts (Coral Gables, Pinecrest). Family-friendly neighborhoods abound, with parks, beaches, and no snow days.',
+  } as Record<Concern, string>,
+
+  testimonials: [
+    {
+      quote: 'We saved $42,000 in our first year—and got a 3BR house with a pool for less than our Brooklyn 2BR. Best decision we ever made.',
+      author: 'Sarah & Mike T.',
+      location: 'Brooklyn → Coral Gables, 2023',
+    },
+    {
+      quote: 'I was worried about hurricanes and heat, but honestly? The beach access and zero state tax make it worth it. My portfolio thanks me.',
+      author: 'Jason L.',
+      location: 'UES → Brickell, 2022',
+    },
+  ],
+
+  neighborhoods: [
+    { slug: 'brickell', label: '🏙️ Brickell', description: 'Finance Hub' },
+    { slug: 'wynwood', label: '🎨 Wynwood', description: 'Arts & Culture' },
+    { slug: 'edgewater', label: '🌊 Edgewater', description: 'Waterfront Living' },
+    { slug: 'coral-gables', label: '🌳 Coral Gables', description: 'Family-Friendly' },
+    { slug: 'coconut-grove', label: '🥥 Coconut Grove', description: 'Bohemian Village' },
+  ],
+};

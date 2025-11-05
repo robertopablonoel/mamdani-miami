@@ -9,6 +9,7 @@ import { Download, BarChart3, LineChart } from "lucide-react";
 import * as XLSX from "xlsx";
 import { LeadManagementTable } from "@/components/admin/LeadManagementTable";
 import { ContactManagementTable } from "@/components/admin/ContactManagementTable";
+import { QuizLeadManagementTable } from "@/components/admin/QuizLeadManagementTable";
 import { AnalyticsDashboard } from "@/components/admin/AnalyticsDashboard";
 
 type ContactSubmission = {
@@ -40,9 +41,30 @@ type LeadSubmission = {
   converted_at: string | null;
 };
 
+type QuizLead = {
+  id: string;
+  created_at: string;
+  updated_at: string;
+  first_name: string;
+  email: string;
+  phone: string | null;
+  sms_consent: boolean;
+  tier: string;
+  timeline: string;
+  annual_savings: number;
+  status: string;
+  priority: string;
+  admin_notes: string | null;
+  tags: string[] | null;
+  converted: boolean;
+  converted_at: string | null;
+  answers: Record<string, string>;
+};
+
 const Admin = () => {
   const [contactSubmissions, setContactSubmissions] = useState<ContactSubmission[]>([]);
   const [leadSubmissions, setLeadSubmissions] = useState<LeadSubmission[]>([]);
+  const [quizLeads, setQuizLeads] = useState<QuizLead[]>([]);
   const [loading, setLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
   const navigate = useNavigate();
@@ -134,16 +156,19 @@ const Admin = () => {
 
   const fetchSubmissions = async () => {
     try {
-      const [contactResult, leadResult] = await Promise.all([
+      const [contactResult, leadResult, quizResult] = await Promise.all([
         supabase.from("contact_submissions").select("*").order("created_at", { ascending: false }),
         supabase.from("lead_submissions").select("*").order("created_at", { ascending: false }),
+        supabase.from("quiz_leads").select("*").order("created_at", { ascending: false }),
       ]);
 
       if (contactResult.error) throw contactResult.error;
       if (leadResult.error) throw leadResult.error;
+      if (quizResult.error) throw quizResult.error;
 
       setContactSubmissions(contactResult.data || []);
       setLeadSubmissions(leadResult.data || []);
+      setQuizLeads(quizResult.data || []);
     } catch (error: any) {
       toast({
         title: "Error",
@@ -208,6 +233,36 @@ const Admin = () => {
     XLSX.writeFile(workbook, `leads_${new Date().toISOString().split("T")[0]}.xlsx`);
   };
 
+  const exportQuizLeadsToExcel = () => {
+    const worksheet = XLSX.utils.json_to_sheet(
+      quizLeads.map((sub) => ({
+        Date: formatDate(sub.created_at),
+        Updated: formatDate(sub.updated_at),
+        "First Name": sub.first_name,
+        Email: sub.email,
+        Phone: sub.phone || "—",
+        "SMS Consent": sub.sms_consent ? 'Yes' : 'No',
+        Tier: sub.tier,
+        Timeline: sub.timeline,
+        "Annual Savings": `$${sub.annual_savings.toLocaleString()}`,
+        Status: sub.status,
+        Priority: sub.priority,
+        Converted: sub.converted ? 'Yes' : 'No',
+        "Housing Status": sub.answers.housing_status || "—",
+        "Monthly Cost": sub.answers.monthly_cost || "—",
+        "Income Bracket": sub.answers.income_bracket || "—",
+        Frustration: sub.answers.frustration || "—",
+        Benefit: sub.answers.benefit || "—",
+        Concern: sub.answers.concern || "—",
+        Tags: sub.tags?.join(', ') || "—",
+        Notes: sub.admin_notes || "—",
+      }))
+    );
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Quiz Leads");
+    XLSX.writeFile(workbook, `quiz_leads_${new Date().toISOString().split("T")[0]}.xlsx`);
+  };
+
   const getStats = () => {
     const contactStats = {
       total: contactSubmissions.length,
@@ -215,7 +270,7 @@ const Admin = () => {
       converted: contactSubmissions.filter(c => c.status === 'converted').length,
       highPriority: contactSubmissions.filter(c => c.priority === 'high' || c.priority === 'urgent').length,
     };
-    
+
     const leadStats = {
       total: leadSubmissions.length,
       pending: leadSubmissions.filter(l => l.status === 'pending').length,
@@ -223,7 +278,16 @@ const Admin = () => {
       highPriority: leadSubmissions.filter(l => l.priority === 'high' || l.priority === 'urgent').length,
     };
 
-    return { contactStats, leadStats };
+    const quizStats = {
+      total: quizLeads.length,
+      tierA: quizLeads.filter(q => q.tier === 'tier_a_hot_lead').length,
+      tierB: quizLeads.filter(q => q.tier === 'tier_b_nurture_warm').length,
+      tierC: quizLeads.filter(q => q.tier === 'tier_c_nurture_cold').length,
+      converted: quizLeads.filter(q => q.converted).length,
+      highPriority: quizLeads.filter(q => q.priority === 'high').length,
+    };
+
+    return { contactStats, leadStats, quizStats };
   };
 
   const stats = getStats();
@@ -253,7 +317,7 @@ const Admin = () => {
         </div>
 
         {/* Stats Overview */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
           <Card>
             <CardHeader className="pb-3">
               <CardTitle className="text-sm font-medium text-muted-foreground">Total Contacts</CardTitle>
@@ -280,6 +344,18 @@ const Admin = () => {
 
           <Card>
             <CardHeader className="pb-3">
+              <CardTitle className="text-sm font-medium text-muted-foreground">Quiz Leads</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{stats.quizStats.total}</div>
+              <p className="text-xs text-muted-foreground mt-1">
+                {stats.quizStats.tierA} Tier A • {stats.quizStats.tierB} Tier B
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="pb-3">
               <CardTitle className="text-sm font-medium text-muted-foreground">High Priority Contacts</CardTitle>
             </CardHeader>
             <CardContent>
@@ -299,8 +375,12 @@ const Admin = () => {
           </Card>
         </div>
 
-        <Tabs defaultValue="contacts" className="space-y-6">
-          <TabsList className="grid w-full max-w-2xl grid-cols-3">
+        <Tabs defaultValue="quiz-leads" className="space-y-6">
+          <TabsList className="grid w-full max-w-4xl grid-cols-4">
+            <TabsTrigger value="quiz-leads" className="flex items-center gap-2">
+              <BarChart3 className="h-4 w-4" />
+              Quiz Leads ({quizLeads.length})
+            </TabsTrigger>
             <TabsTrigger value="contacts" className="flex items-center gap-2">
               <BarChart3 className="h-4 w-4" />
               Contacts ({contactSubmissions.length})
@@ -314,6 +394,25 @@ const Admin = () => {
               Analytics
             </TabsTrigger>
           </TabsList>
+
+          <TabsContent value="quiz-leads" className="space-y-4">
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
+                <CardTitle>Miami Quiz Lead Submissions</CardTitle>
+                <Button onClick={exportQuizLeadsToExcel} variant="outline" size="sm">
+                  <Download className="mr-2 h-4 w-4" />
+                  Export to Excel
+                </Button>
+              </CardHeader>
+              <CardContent>
+                {quizLeads.length === 0 ? (
+                  <p className="text-muted-foreground text-center py-8">No quiz submissions yet.</p>
+                ) : (
+                  <QuizLeadManagementTable leads={quizLeads} onUpdate={fetchSubmissions} />
+                )}
+              </CardContent>
+            </Card>
+          </TabsContent>
 
           <TabsContent value="contacts" className="space-y-4">
             <Card>

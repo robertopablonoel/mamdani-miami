@@ -1,7 +1,10 @@
-project_id = "tsgxjmrrygcxbkgwrcjz"
+project_id = "olehhxaglocifnfkfbcz"
 
 [functions.submit-contact]
 verify_jwt = false
 
 [functions.submit-lead]
+verify_jwt = false
+
+[functions.submit-quiz]
 verify_jwt = false

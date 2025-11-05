@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Calculator } from "lucide-react";
 import { memo } from "react";
+import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-miami-sunset.jpg";
 import { trackCTAClick } from "@/lib/analytics";
 
@@ -48,8 +49,14 @@ const HeroSection = memo(() => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 md:gap-4 justify-center items-stretch sm:items-center pt-4 md:pt-4 px-4">
-            <Button size="lg" variant="secondary" className="text-base sm:text-base px-8 sm:px-10 py-6 sm:py-6 h-auto sm:h-14 w-full sm:w-auto" asChild>
-              <a href="https://calendly.com/julie-nyrefugee/30min" target="_blank" rel="noopener noreferrer" onClick={() => trackCTAClick('Schedule Consultation', 'hero')}>
+            <Button size="lg" variant="secondary" className="text-base sm:text-base px-8 sm:px-10 py-6 sm:py-6 h-auto sm:h-14 w-full sm:w-auto shadow-glow hover:shadow-lg transition-shadow" asChild>
+              <Link to="/move-to-miami" onClick={() => trackCTAClick('Calculate Tax Savings', 'hero')}>
+                <Calculator className="mr-2 w-5 sm:w-5 h-5 sm:h-5" />
+                Calculate Your Tax Savings
+              </Link>
+            </Button>
+            <Button size="lg" variant="outline" className="text-base sm:text-base px-8 sm:px-10 py-6 sm:py-6 h-auto sm:h-14 w-full sm:w-auto bg-white/10 backdrop-blur-md border-white/30 text-white hover:bg-white/20" asChild>
+              <a href="https://calendly.com/julie-nyrefugee/30min" target="_blank" rel="noopener noreferrer" onClick={() => trackCTAClick('Schedule Consultation', 'hero_secondary')}>
                 Schedule Consultation
                 <ArrowRight className="ml-2 w-5 sm:w-5 h-5 sm:h-5" />
               </a>

@@ -2,6 +2,7 @@ import { lazy, Suspense, memo } from "react";
 import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
+import QuizCTA from "@/components/QuizCTA";
 import { useScrollTracking } from "@/hooks/useScrollTracking";
 
 // Lazy load all below-the-fold components for faster initial load
@@ -30,6 +31,7 @@ const Index = memo(() => {
       </Suspense>
       <Navigation />
       <HeroSection />
+      <QuizCTA />
       <Suspense fallback={<ComponentLoader />}>
         <FreedomIndex />
       </Suspense>

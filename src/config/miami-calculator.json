@@ -1,0 +1,34 @@
+{
+  "tax_rates": {
+    "ny_effective_rates": {
+      "under_100k": 0.065,
+      "100k_150k": 0.075,
+      "150k_250k": 0.082,
+      "250k_400k": 0.088,
+      "400k_750k": 0.095,
+      "over_750k": 0.103,
+      "prefer_not_say": 0.082
+    },
+    "fl_effective_rate": 0.0
+  },
+  "income_midpoints": {
+    "under_100k": 75000,
+    "100k_150k": 125000,
+    "150k_250k": 200000,
+    "250k_400k": 325000,
+    "400k_750k": 575000,
+    "over_750k": 1000000,
+    "prefer_not_say": 200000
+  },
+  "housing_midpoints": {
+    "under_2k": 1500,
+    "2k_3.5k": 2750,
+    "3.5k_5k": 4250,
+    "5k_7.5k": 6250,
+    "7.5k_10k": 8750,
+    "over_10k": 12000,
+    "prefer_not_say": 4500
+  },
+  "miami_housing_multiplier": 0.75,
+  "utilities_delta_percent": -0.10
+}
