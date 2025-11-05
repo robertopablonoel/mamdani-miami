@@ -23,11 +23,11 @@ const Navigation = () => {
           <div className="hidden md:flex items-center gap-8">
             {isHomePage ? (
               <>
-                <a href="#freedom-stories" className="text-base font-medium text-foreground hover:text-primary transition-colors">
-                  Freedom Stories
-                </a>
                 <a href="#about" className="text-base font-medium text-foreground hover:text-primary transition-colors">
                   About
+                </a>
+                <a href="#freedom-stories" className="text-base font-medium text-foreground hover:text-primary transition-colors">
+                  Freedom Stories
                 </a>
                 <a href="#contact" className="text-base font-medium text-foreground hover:text-primary transition-colors">
                   Contact
@@ -35,11 +35,11 @@ const Navigation = () => {
               </>
             ) : (
               <>
-                <Link to="/#freedom-stories" className="text-base font-medium text-foreground hover:text-primary transition-colors">
-                  Freedom Stories
-                </Link>
                 <Link to="/#about" className="text-base font-medium text-foreground hover:text-primary transition-colors">
                   About
+                </Link>
+                <Link to="/#freedom-stories" className="text-base font-medium text-foreground hover:text-primary transition-colors">
+                  Freedom Stories
                 </Link>
                 <Link to="/#contact" className="text-base font-medium text-foreground hover:text-primary transition-colors">
                   Contact
@@ -74,11 +74,11 @@ const Navigation = () => {
             <div className="flex flex-col gap-4">
               {isHomePage ? (
                 <>
-                  <a href="#freedom-stories" className="text-base font-medium text-foreground hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>
-                    Freedom Stories
-                  </a>
                   <a href="#about" className="text-base font-medium text-foreground hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>
                     About
+                  </a>
+                  <a href="#freedom-stories" className="text-base font-medium text-foreground hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>
+                    Freedom Stories
                   </a>
                   <a href="#contact" className="text-base font-medium text-foreground hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>
                     Contact
@@ -86,11 +86,11 @@ const Navigation = () => {
                 </>
               ) : (
                 <>
-                  <Link to="/#freedom-stories" className="text-base font-medium text-foreground hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>
-                    Freedom Stories
-                  </Link>
                   <Link to="/#about" className="text-base font-medium text-foreground hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>
                     About
+                  </Link>
+                  <Link to="/#freedom-stories" className="text-base font-medium text-foreground hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>
+                    Freedom Stories
                   </Link>
                   <Link to="/#contact" className="text-base font-medium text-foreground hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>
                     Contact
