@@ -41,13 +41,8 @@ const HeroSection = () => {
           <div className="flex flex-col sm:flex-row gap-4 md:gap-4 justify-center items-stretch sm:items-center pt-4 md:pt-4 px-4">
             <Button size="lg" variant="secondary" className="text-base sm:text-base px-8 sm:px-10 py-6 sm:py-6 h-auto sm:h-14 w-full sm:w-auto" asChild>
               <a href="https://calendly.com/julie-nyrefugee/30min" target="_blank" rel="noopener noreferrer">
-                Explore Refuge Properties
-                <ArrowRight className="ml-2 w-5 sm:w-5 h-5 sm:h-5" />
-              </a>
-            </Button>
-            <Button size="lg" variant="outline" className="text-base sm:text-base px-8 sm:px-10 py-6 sm:py-6 h-auto sm:h-14 w-full sm:w-auto border-white/60 bg-white/5 backdrop-blur-sm text-white hover:bg-white hover:text-primary" asChild>
-              <a href="https://calendly.com/julie-nyrefugee/30min" target="_blank" rel="noopener noreferrer">
                 Schedule Consultation
+                <ArrowRight className="ml-2 w-5 sm:w-5 h-5 sm:h-5" />
               </a>
             </Button>
           </div>
