@@ -10,7 +10,6 @@ import * as z from "zod";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
-
 const formSchema = z.object({
   firstName: z.string().min(1, "First name is required").max(100),
   lastName: z.string().min(1, "Last name is required").max(100),
@@ -18,51 +17,54 @@ const formSchema = z.object({
   phone: z.string().regex(/^[\d\s()+-]+$/, "Invalid phone format").min(10, "Phone too short").max(20, "Phone too long").optional().or(z.literal("")),
   location: z.string().max(200, "Location too long").optional(),
   investmentRange: z.string().max(100, "Investment range too long").optional(),
-  message: z.string().max(2000, "Message too long").optional(),
+  message: z.string().max(2000, "Message too long").optional()
 });
-
 type FormData = z.infer<typeof formSchema>;
-
 const ContactSection = () => {
-  const { toast } = useToast();
+  const {
+    toast
+  } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  
-  const { register, handleSubmit, formState: { errors }, reset } = useForm<FormData>({
-    resolver: zodResolver(formSchema),
+  const {
+    register,
+    handleSubmit,
+    formState: {
+      errors
+    },
+    reset
+  } = useForm<FormData>({
+    resolver: zodResolver(formSchema)
   });
-
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
     try {
-      const { error } = await supabase.from("contact_submissions").insert({
+      const {
+        error
+      } = await supabase.from("contact_submissions").insert({
         name: `${data.firstName} ${data.lastName}`,
         email: data.email,
         phone: data.phone || null,
         location: data.location || null,
         investment_range: data.investmentRange || null,
-        message: data.message || null,
+        message: data.message || null
       });
-
       if (error) throw error;
-
       toast({
         title: "Message sent!",
-        description: "We'll respond within 1 hour.",
+        description: "We'll respond within 1 hour."
       });
       reset();
     } catch (error) {
       toast({
         title: "Error",
         description: "Failed to send message. Please try again.",
-        variant: "destructive",
+        variant: "destructive"
       });
     } finally {
       setIsSubmitting(false);
     }
   };
-
-  return (
-    <section className="py-16 md:py-24 lg:py-32 bg-background" id="contact">
+  return <section className="py-16 md:py-24 lg:py-32 bg-background" id="contact">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12 md:mb-16">
@@ -87,9 +89,7 @@ const ContactSection = () => {
                       </div>
                       <div>
                         <h3 className="font-semibold mb-2 text-foreground">Email</h3>
-                        <a href="mailto:julie@nyrefugee.com" className="text-muted-foreground hover:text-primary transition-colors">
-                          julie@nyrefugee.com
-                        </a>
+                        <a href="mailto:julie@nyrefugee.com" className="text-muted-foreground hover:text-primary transition-colors">info@nyrefugee.com</a>
                         <p className="text-sm text-muted-foreground mt-1">Response within 24 hours</p>
                       </div>
                     </div>
@@ -141,93 +141,43 @@ const ContactSection = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="firstName" className="text-base">First Name</Label>
-                      <Input 
-                        id="firstName" 
-                        placeholder="John"
-                        className="h-12 md:h-11 text-base"
-                        {...register("firstName")}
-                      />
-                      {errors.firstName && (
-                        <p className="text-sm text-destructive">{errors.firstName.message}</p>
-                      )}
+                      <Input id="firstName" placeholder="John" className="h-12 md:h-11 text-base" {...register("firstName")} />
+                      {errors.firstName && <p className="text-sm text-destructive">{errors.firstName.message}</p>}
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="lastName" className="text-base">Last Name</Label>
-                      <Input 
-                        id="lastName" 
-                        placeholder="Smith"
-                        className="h-12 md:h-11 text-base"
-                        {...register("lastName")}
-                      />
-                      {errors.lastName && (
-                        <p className="text-sm text-destructive">{errors.lastName.message}</p>
-                      )}
+                      <Input id="lastName" placeholder="Smith" className="h-12 md:h-11 text-base" {...register("lastName")} />
+                      {errors.lastName && <p className="text-sm text-destructive">{errors.lastName.message}</p>}
                     </div>
                   </div>
 
                   <div className="space-y-2">
                     <Label htmlFor="email" className="text-base">Email Address</Label>
-                    <Input 
-                      id="email" 
-                      type="email" 
-                      placeholder="john.smith@example.com"
-                      className="h-12 md:h-11 text-base"
-                      {...register("email")}
-                    />
-                    {errors.email && (
-                      <p className="text-sm text-destructive">{errors.email.message}</p>
-                    )}
+                    <Input id="email" type="email" placeholder="john.smith@example.com" className="h-12 md:h-11 text-base" {...register("email")} />
+                    {errors.email && <p className="text-sm text-destructive">{errors.email.message}</p>}
                   </div>
 
                   <div className="space-y-2">
                     <Label htmlFor="phone" className="text-base">Phone Number</Label>
-                    <Input 
-                      id="phone" 
-                      type="tel" 
-                      placeholder="(555) 123-4567"
-                      className="h-12 md:h-11 text-base"
-                      {...register("phone")}
-                    />
+                    <Input id="phone" type="tel" placeholder="(555) 123-4567" className="h-12 md:h-11 text-base" {...register("phone")} />
                   </div>
 
                   <div className="space-y-2">
                     <Label htmlFor="location" className="text-base">Current Location</Label>
-                    <Input 
-                      id="location" 
-                      placeholder="e.g., New York, NY"
-                      className="h-12 md:h-11 text-base"
-                      {...register("location")}
-                    />
+                    <Input id="location" placeholder="e.g., New York, NY" className="h-12 md:h-11 text-base" {...register("location")} />
                   </div>
 
                   <div className="space-y-2">
                     <Label htmlFor="investmentRange" className="text-base">Investment Range</Label>
-                    <Input 
-                      id="investmentRange" 
-                      placeholder="e.g., $2M - $5M"
-                      className="h-12 md:h-11 text-base"
-                      {...register("investmentRange")}
-                    />
+                    <Input id="investmentRange" placeholder="e.g., $2M - $5M" className="h-12 md:h-11 text-base" {...register("investmentRange")} />
                   </div>
 
                   <div className="space-y-2">
                     <Label htmlFor="message" className="text-base">Message</Label>
-                    <Textarea 
-                      id="message" 
-                      placeholder="Please share details about your real estate objectives and timeline..."
-                      rows={4}
-                      className="text-base min-h-[120px]"
-                      {...register("message")}
-                    />
+                    <Textarea id="message" placeholder="Please share details about your real estate objectives and timeline..." rows={4} className="text-base min-h-[120px]" {...register("message")} />
                   </div>
 
-                  <Button 
-                    type="submit" 
-                    variant="premium" 
-                    size="lg" 
-                    className="w-full h-14 text-base md:text-base font-medium"
-                    disabled={isSubmitting}
-                  >
+                  <Button type="submit" variant="premium" size="lg" className="w-full h-14 text-base md:text-base font-medium" disabled={isSubmitting}>
                     {isSubmitting ? "Sending..." : "Submit Inquiry"}
                   </Button>
 
@@ -248,8 +198,6 @@ const ContactSection = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default ContactSection;
