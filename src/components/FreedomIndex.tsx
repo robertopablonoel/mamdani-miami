@@ -54,8 +54,10 @@ const FreedomIndex = () => {
         </div>
 
         <div className="text-center mt-6 md:mt-8 px-4">
-          <Button size="default" variant="premium" className="h-11 px-6 w-full sm:w-auto">
-            See Available Homes
+          <Button size="default" variant="premium" className="h-11 px-6 w-full sm:w-auto" asChild>
+            <a href="https://calendly.com/julie-nyrefugee/30min" target="_blank" rel="noopener noreferrer">
+              Schedule Consultation
+            </a>
           </Button>
           <p className="text-xs text-muted-foreground mt-2">Successful relocations are our thing.</p>
         </div>
