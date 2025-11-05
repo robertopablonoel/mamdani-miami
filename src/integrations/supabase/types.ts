@@ -134,6 +134,60 @@ export type Database = {
         }
         Relationships: []
       }
+      page_analytics: {
+        Row: {
+          browser: string | null
+          city: string | null
+          country: string | null
+          created_at: string
+          device_type: string | null
+          exited_at: string | null
+          id: string
+          ip_address: string | null
+          page_path: string
+          page_title: string | null
+          referrer: string | null
+          scroll_depth: number | null
+          session_id: string
+          time_on_page: number | null
+          user_agent: string | null
+        }
+        Insert: {
+          browser?: string | null
+          city?: string | null
+          country?: string | null
+          created_at?: string
+          device_type?: string | null
+          exited_at?: string | null
+          id?: string
+          ip_address?: string | null
+          page_path: string
+          page_title?: string | null
+          referrer?: string | null
+          scroll_depth?: number | null
+          session_id: string
+          time_on_page?: number | null
+          user_agent?: string | null
+        }
+        Update: {
+          browser?: string | null
+          city?: string | null
+          country?: string | null
+          created_at?: string
+          device_type?: string | null
+          exited_at?: string | null
+          id?: string
+          ip_address?: string | null
+          page_path?: string
+          page_title?: string | null
+          referrer?: string | null
+          scroll_depth?: number | null
+          session_id?: string
+          time_on_page?: number | null
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string
@@ -185,6 +239,7 @@ export type Database = {
     }
     Functions: {
       bootstrap_admin_if_none: { Args: { _user_id: string }; Returns: boolean }
+      cleanup_old_analytics: { Args: never; Returns: undefined }
       cleanup_old_rate_limits: { Args: never; Returns: undefined }
       has_role: {
         Args: {

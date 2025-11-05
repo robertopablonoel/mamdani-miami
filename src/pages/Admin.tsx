@@ -5,10 +5,11 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
-import { Download, BarChart3 } from "lucide-react";
+import { Download, BarChart3, LineChart } from "lucide-react";
 import * as XLSX from "xlsx";
 import { LeadManagementTable } from "@/components/admin/LeadManagementTable";
 import { ContactManagementTable } from "@/components/admin/ContactManagementTable";
+import { AnalyticsDashboard } from "@/components/admin/AnalyticsDashboard";
 
 type ContactSubmission = {
   id: string;
@@ -299,7 +300,7 @@ const Admin = () => {
         </div>
 
         <Tabs defaultValue="contacts" className="space-y-6">
-          <TabsList className="grid w-full max-w-md grid-cols-2">
+          <TabsList className="grid w-full max-w-2xl grid-cols-3">
             <TabsTrigger value="contacts" className="flex items-center gap-2">
               <BarChart3 className="h-4 w-4" />
               Contacts ({contactSubmissions.length})
@@ -307,6 +308,10 @@ const Admin = () => {
             <TabsTrigger value="leads" className="flex items-center gap-2">
               <BarChart3 className="h-4 w-4" />
               Leads ({leadSubmissions.length})
+            </TabsTrigger>
+            <TabsTrigger value="analytics" className="flex items-center gap-2">
+              <LineChart className="h-4 w-4" />
+              Analytics
             </TabsTrigger>
           </TabsList>
 
@@ -344,6 +349,14 @@ const Admin = () => {
                 ) : (
                   <LeadManagementTable leads={leadSubmissions} onUpdate={fetchSubmissions} />
                 )}
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="analytics" className="space-y-4">
+            <Card>
+              <CardContent className="pt-6">
+                <AnalyticsDashboard />
               </CardContent>
             </Card>
           </TabsContent>
