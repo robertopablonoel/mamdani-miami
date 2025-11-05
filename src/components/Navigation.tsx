@@ -24,7 +24,7 @@ const Navigation = () => {
             {isHomePage ? (
               <>
                 <a href="#properties" className="text-base font-medium text-foreground hover:text-primary transition-colors">
-                  Properties
+                  Freedom Stories
                 </a>
                 <a href="#about" className="text-base font-medium text-foreground hover:text-primary transition-colors">
                   About
@@ -36,7 +36,7 @@ const Navigation = () => {
             ) : (
               <>
                 <Link to="/#properties" className="text-base font-medium text-foreground hover:text-primary transition-colors">
-                  Properties
+                  Freedom Stories
                 </Link>
                 <Link to="/#about" className="text-base font-medium text-foreground hover:text-primary transition-colors">
                   About
@@ -75,7 +75,7 @@ const Navigation = () => {
               {isHomePage ? (
                 <>
                   <a href="#properties" className="text-base font-medium text-foreground hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>
-                    Properties
+                    Freedom Stories
                   </a>
                   <a href="#about" className="text-base font-medium text-foreground hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>
                     About
@@ -87,7 +87,7 @@ const Navigation = () => {
               ) : (
                 <>
                   <Link to="/#properties" className="text-base font-medium text-foreground hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>
-                    Properties
+                    Freedom Stories
                   </Link>
                   <Link to="/#about" className="text-base font-medium text-foreground hover:text-primary transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>
                     About
