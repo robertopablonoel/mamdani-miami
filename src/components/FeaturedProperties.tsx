@@ -1,6 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
 import { memo } from "react";
 import { MapPin, Bed, Bath, Square, ArrowRight } from "lucide-react";
 import palmBeachImage from "@/assets/property-palm-beach.jpg";
@@ -58,14 +57,8 @@ const FeaturedProperties = memo(() => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto">
-          {properties.map((property, idx) => (
-            <motion.div
-              key={property.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.15 }}
-            >
+          {properties.map((property) => (
+            <div key={property.id} className="animate-fade-in">
               <Card className="overflow-hidden shadow-elegant hover:shadow-hover transition-smooth group border-0 h-full">
               <div className="relative overflow-hidden aspect-[4/3]">
                 <img 
@@ -114,7 +107,7 @@ const FeaturedProperties = memo(() => {
                 </Button>
               </CardContent>
             </Card>
-            </motion.div>
+            </div>
           ))}
         </div>
 

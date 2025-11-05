@@ -6,9 +6,15 @@ import heroImage from "@/assets/hero-miami-sunset.jpg";
 const HeroSection = memo(() => {
   return <section className="relative min-h-screen flex items-center justify-center">
       {/* Background Image */}
-      <div className="absolute inset-0 bg-cover bg-center" style={{
-      backgroundImage: `url(${heroImage})`
-    }}>
+      <div className="absolute inset-0 bg-cover bg-center">
+        <img 
+          src={heroImage} 
+          alt="Miami sunset skyline"
+          className="w-full h-full object-cover"
+          width="1920"
+          height="1080"
+          fetchPriority="high"
+        />
         <div className="absolute inset-0 bg-black/40" />
       </div>
 

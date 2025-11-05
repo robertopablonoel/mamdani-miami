@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
 import { memo } from "react";
 import { ArrowRight } from "lucide-react";
 import brokerImage from "@/assets/broker-julie-vest.png";
@@ -10,18 +9,8 @@ const BrokerSection = memo(() => {
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
             {/* Broker Image */}
-            <motion.div className="relative aspect-[3/4] rounded overflow-hidden shadow-elegant max-w-[50%] mx-auto md:max-w-[80%] md:mx-0" initial={{
-            opacity: 0,
-            x: -30
-          }} whileInView={{
-            opacity: 1,
-            x: 0
-          }} viewport={{
-            once: true
-          }} transition={{
-            duration: 0.7
-          }}>
-              <img 
+            <div className="relative aspect-[3/4] rounded overflow-hidden shadow-elegant max-w-[50%] mx-auto md:max-w-[80%] md:mx-0 animate-fade-in">
+              <img
                 src={brokerImage} 
                 alt="Professional luxury real estate broker" 
                 loading="lazy"
@@ -30,21 +19,10 @@ const BrokerSection = memo(() => {
                 height="800"
                 className="w-full h-full object-contain" 
               />
-            </motion.div>
+            </div>
 
             {/* Content */}
-            <motion.div className="space-y-4 md:space-y-6" initial={{
-            opacity: 0,
-            x: 30
-          }} whileInView={{
-            opacity: 1,
-            x: 0
-          }} viewport={{
-            once: true
-          }} transition={{
-            duration: 0.7,
-            delay: 0.2
-          }}>
+            <div className="space-y-4 md:space-y-6 animate-fade-in">
               <h2 className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-foreground px-2">Meet Julie, 
 Your Escape Facilitator.</h2>
               
@@ -63,7 +41,7 @@ Your Escape Facilitator.</h2>
                   Available for consultation · Responds within 1 hour
                 </p>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </div>

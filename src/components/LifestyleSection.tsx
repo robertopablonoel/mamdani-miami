@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { memo } from "react";
 import lifestyleMiamiImage from "@/assets/lifestyle-miami-terrace.jpg";
 import lifestylePalmBeachImage from "@/assets/lifestyle-palm-beach-pool.jpg";
@@ -15,30 +14,18 @@ const LifestyleSection = memo(() => {
   return (
     <section className="py-16 md:py-24 lg:py-32 bg-background">
       <div className="container mx-auto px-4">
-        <motion.div 
-          className="max-w-4xl mx-auto text-center mb-12 md:mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
+        <div className="max-w-4xl mx-auto text-center mb-12 md:mb-16 animate-fade-in">
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-4 md:mb-6 px-2">
             Live the Florida Lifestyle You Deserve
           </h2>
           <p className="text-base md:text-lg text-muted-foreground leading-relaxed px-4">
             More than real estate. A complete transformation of how you live, work, and enjoy life.
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
           {/* Miami Lifestyle */}
-          <motion.div
-            className="relative overflow-hidden rounded-lg shadow-elegant group"
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-          >
+          <div className="relative overflow-hidden rounded-lg shadow-elegant group animate-fade-in">
             <div className="aspect-[16/10] overflow-hidden">
               <img 
                 src={lifestyleMiamiImage}
@@ -58,16 +45,10 @@ const LifestyleSection = memo(() => {
                 </p>
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Palm Beach Lifestyle */}
-          <motion.div
-            className="relative overflow-hidden rounded-lg shadow-elegant group"
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-          >
+          <div className="relative overflow-hidden rounded-lg shadow-elegant group animate-fade-in">
             <div className="aspect-[16/10] overflow-hidden">
               <img 
                 src={lifestylePalmBeachImage}
@@ -87,29 +68,21 @@ const LifestyleSection = memo(() => {
                 </p>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
 
         {/* Benefits Grid */}
-        <motion.div 
-          className="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-6 max-w-6xl mx-auto mt-12 md:mt-16"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-6 max-w-6xl mx-auto mt-12 md:mt-16 animate-fade-in">
           {benefits.map((item, idx) => (
-            <motion.div 
+            <div 
               key={idx}
-              className="text-center p-4 md:p-6 bg-muted/30 rounded-lg"
-              whileHover={{ y: -5 }}
-              transition={{ duration: 0.2 }}
+              className="text-center p-4 md:p-6 bg-muted/30 rounded-lg hover:-translate-y-1 transition-smooth"
             >
               <div className="text-2xl md:text-4xl font-serif text-primary mb-2">{item.number}</div>
               <div className="text-xs md:text-sm text-muted-foreground uppercase tracking-wider">{item.label}</div>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
