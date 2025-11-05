@@ -12,9 +12,9 @@ const benefits = [
 
 const LifestyleSection = memo(() => {
   return (
-    <section className="py-16 md:py-24 lg:py-32 bg-background">
+    <section className="py-10 md:py-14 lg:py-18 bg-background">
       <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto text-center mb-12 md:mb-16 animate-fade-in">
+        <div className="max-w-4xl mx-auto text-center mb-8 md:mb-10 animate-fade-in">
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-4 md:mb-6 px-2">
             Live the Florida Lifestyle You Deserve
           </h2>
@@ -72,7 +72,7 @@ const LifestyleSection = memo(() => {
         </div>
 
         {/* Benefits Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-6 max-w-6xl mx-auto mt-12 md:mt-16 animate-fade-in">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-6 max-w-6xl mx-auto mt-8 md:mt-10 animate-fade-in">
           {benefits.map((item, idx) => (
             <div 
               key={idx}

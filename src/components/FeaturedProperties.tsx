@@ -44,9 +44,9 @@ const properties = [
 
 const FeaturedProperties = memo(() => {
   return (
-    <section className="py-16 md:py-24 lg:py-32 bg-background" id="properties">
+    <section className="py-10 md:py-14 lg:py-18 bg-background" id="properties">
       <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto text-center mb-12 md:mb-20">
+        <div className="max-w-4xl mx-auto text-center mb-8 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-4 md:mb-6 px-2">
             Featured Listings
           </h2>
@@ -111,7 +111,7 @@ const FeaturedProperties = memo(() => {
           ))}
         </div>
 
-        <div className="text-center mt-12 md:mt-16 px-4">
+        <div className="text-center mt-8 md:mt-10 px-4">
           <Button variant="default" size="lg" className="w-full sm:w-auto h-16 md:h-16 text-base" asChild>
             <a href="https://calendly.com/julie-nyrefugee/30min" target="_blank" rel="noopener noreferrer">
               Schedule a consultation to learn more

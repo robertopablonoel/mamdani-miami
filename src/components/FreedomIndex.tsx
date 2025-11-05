@@ -11,9 +11,9 @@ const benefits = [
 ];
 
 const FreedomIndex = memo(() => {
-  return <section className="py-8 md:py-12 bg-muted/30">
+  return <section className="py-6 md:py-8 bg-muted/30">
       <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto text-center mb-6 md:mb-8 animate-fade-in">
+        <div className="max-w-4xl mx-auto text-center mb-4 md:mb-6 animate-fade-in">
           <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-medium mb-3">
             <TrendingUp className="w-3 h-3" />
             <span>Market Intelligence</span>
@@ -39,7 +39,7 @@ const FreedomIndex = memo(() => {
           </div>
         </div>
 
-        <div className="text-center mt-6 md:mt-8 px-4">
+        <div className="text-center mt-4 md:mt-6 px-4">
           <Button size="default" variant="premium" className="h-11 px-6 w-full sm:w-auto" asChild>
             <a href="https://calendly.com/julie-nyrefugee/30min" target="_blank" rel="noopener noreferrer">
               Schedule Consultation

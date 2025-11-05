@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 import brokerImage from "@/assets/broker-julie-vest.png";
 
 const BrokerSection = memo(() => {
-  return <section id="about" className="py-16 md:py-24 lg:py-32 bg-background">
+  return <section id="about" className="py-10 md:py-14 lg:py-18 bg-background">
       <div className="container mx-auto px-4">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">

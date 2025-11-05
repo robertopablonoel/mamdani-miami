@@ -78,10 +78,10 @@ const ContactSection = () => {
       setIsSubmitting(false);
     }
   };
-  return <section className="py-16 md:py-24 lg:py-32 bg-background" id="contact">
+  return <section className="py-10 md:py-14 lg:py-18 bg-background" id="contact">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12 md:mb-16">
+          <div className="text-center mb-8 md:mb-10">
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-4 md:mb-6 px-2">
               Begin Your Journey
             </h2>
