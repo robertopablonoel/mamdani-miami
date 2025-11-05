@@ -63,8 +63,8 @@ const PoliticianMeme = () => {
     x: "0%",
     y: "0%"
   }} transition={{
-    delay: 3,
-    duration: 2.5,
+    delay: 1.5,
+    duration: 1.25,
     ease: [0.22, 0.61, 0.36, 1]
   }}>
       <div className="relative pointer-events-auto">
@@ -99,7 +99,7 @@ const PoliticianMeme = () => {
           scale: 1,
           rotate: 0
         }} transition={{
-          delay: 5.5,
+          delay: 2.75,
           duration: 0.4,
           ease: "easeOut"
         }}>
