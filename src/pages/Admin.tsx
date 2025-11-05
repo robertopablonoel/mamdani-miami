@@ -3,23 +3,17 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
-import { Download } from "lucide-react";
+import { Download, BarChart3 } from "lucide-react";
 import * as XLSX from "xlsx";
-import { Badge } from "@/components/ui/badge";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { LeadManagementTable } from "@/components/admin/LeadManagementTable";
+import { ContactManagementTable } from "@/components/admin/ContactManagementTable";
 
 type ContactSubmission = {
   id: string;
   created_at: string;
+  updated_at: string;
   name: string;
   email: string;
   phone: string | null;
@@ -27,13 +21,22 @@ type ContactSubmission = {
   investment_range: string | null;
   message: string | null;
   status: string;
+  priority: string;
+  admin_notes: string | null;
+  tags: string[] | null;
 };
 
 type LeadSubmission = {
   id: string;
   created_at: string;
+  updated_at: string;
   email: string;
   status: string;
+  priority: string;
+  admin_notes: string | null;
+  tags: string[] | null;
+  converted: boolean;
+  converted_at: string | null;
 };
 
 const Admin = () => {
@@ -164,46 +167,11 @@ const Admin = () => {
     });
   };
 
-  const updateContactStatus = async (id: string, status: string) => {
-    const { error } = await supabase
-      .from("contact_submissions")
-      .update({ status })
-      .eq("id", id);
-
-    if (error) {
-      toast({
-        title: "Error",
-        description: "Failed to update status",
-        variant: "destructive",
-      });
-    } else {
-      toast({ title: "Status updated" });
-      fetchSubmissions();
-    }
-  };
-
-  const updateLeadStatus = async (id: string, status: string) => {
-    const { error } = await supabase
-      .from("lead_submissions")
-      .update({ status })
-      .eq("id", id);
-
-    if (error) {
-      toast({
-        title: "Error",
-        description: "Failed to update status",
-        variant: "destructive",
-      });
-    } else {
-      toast({ title: "Status updated" });
-      fetchSubmissions();
-    }
-  };
-
   const exportContactsToExcel = () => {
     const worksheet = XLSX.utils.json_to_sheet(
       contactSubmissions.map((sub) => ({
         Date: formatDate(sub.created_at),
+        Updated: formatDate(sub.updated_at),
         Name: sub.name,
         Email: sub.email,
         Phone: sub.phone || "—",
@@ -211,6 +179,9 @@ const Admin = () => {
         "Investment Range": sub.investment_range || "—",
         Message: sub.message || "—",
         Status: sub.status,
+        Priority: sub.priority,
+        Tags: sub.tags?.join(', ') || "—",
+        Notes: sub.admin_notes || "—",
       }))
     );
     const workbook = XLSX.utils.book_new();
@@ -222,8 +193,13 @@ const Admin = () => {
     const worksheet = XLSX.utils.json_to_sheet(
       leadSubmissions.map((sub) => ({
         Date: formatDate(sub.created_at),
+        Updated: formatDate(sub.updated_at),
         Email: sub.email,
         Status: sub.status,
+        Priority: sub.priority,
+        Converted: sub.converted ? 'Yes' : 'No',
+        Tags: sub.tags?.join(', ') || "—",
+        Notes: sub.admin_notes || "—",
       }))
     );
     const workbook = XLSX.utils.book_new();
@@ -231,10 +207,25 @@ const Admin = () => {
     XLSX.writeFile(workbook, `leads_${new Date().toISOString().split("T")[0]}.xlsx`);
   };
 
-  const getStatusBadge = (status: string) => {
-    const variant = status === "accepted" ? "default" : status === "denied" ? "destructive" : "secondary";
-    return <Badge variant={variant}>{status}</Badge>;
+  const getStats = () => {
+    const contactStats = {
+      total: contactSubmissions.length,
+      pending: contactSubmissions.filter(c => c.status === 'pending').length,
+      converted: contactSubmissions.filter(c => c.status === 'converted').length,
+      highPriority: contactSubmissions.filter(c => c.priority === 'high' || c.priority === 'urgent').length,
+    };
+    
+    const leadStats = {
+      total: leadSubmissions.length,
+      pending: leadSubmissions.filter(l => l.status === 'pending').length,
+      converted: leadSubmissions.filter(l => l.converted).length,
+      highPriority: leadSubmissions.filter(l => l.priority === 'high' || l.priority === 'urgent').length,
+    };
+
+    return { contactStats, leadStats };
   };
+
+  const stats = getStats();
 
   // Don't render admin content until authorization is verified
   if (loading) {
@@ -251,21 +242,77 @@ const Admin = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary/5 to-secondary/5 p-4 md:p-8">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-[1600px] mx-auto">
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-serif font-bold">Admin Dashboard</h1>
+          <div>
+            <h1 className="text-3xl font-serif font-bold">Admin Dashboard</h1>
+            <p className="text-muted-foreground mt-1">Manage leads and contact submissions</p>
+          </div>
           <Button onClick={handleLogout} variant="outline">Logout</Button>
         </div>
 
-        <Tabs defaultValue="contacts" className="space-y-4">
-          <TabsList>
-            <TabsTrigger value="contacts">Contact Forms ({contactSubmissions.length})</TabsTrigger>
-            <TabsTrigger value="leads">Lead Magnets ({leadSubmissions.length})</TabsTrigger>
+        {/* Stats Overview */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          <Card>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-sm font-medium text-muted-foreground">Total Contacts</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{stats.contactStats.total}</div>
+              <p className="text-xs text-muted-foreground mt-1">
+                {stats.contactStats.pending} pending • {stats.contactStats.converted} converted
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-sm font-medium text-muted-foreground">Total Leads</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{stats.leadStats.total}</div>
+              <p className="text-xs text-muted-foreground mt-1">
+                {stats.leadStats.pending} pending • {stats.leadStats.converted} converted
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-sm font-medium text-muted-foreground">High Priority Contacts</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{stats.contactStats.highPriority}</div>
+              <p className="text-xs text-muted-foreground mt-1">Require immediate attention</p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-sm font-medium text-muted-foreground">High Priority Leads</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{stats.leadStats.highPriority}</div>
+              <p className="text-xs text-muted-foreground mt-1">Require immediate attention</p>
+            </CardContent>
+          </Card>
+        </div>
+
+        <Tabs defaultValue="contacts" className="space-y-6">
+          <TabsList className="grid w-full max-w-md grid-cols-2">
+            <TabsTrigger value="contacts" className="flex items-center gap-2">
+              <BarChart3 className="h-4 w-4" />
+              Contacts ({contactSubmissions.length})
+            </TabsTrigger>
+            <TabsTrigger value="leads" className="flex items-center gap-2">
+              <BarChart3 className="h-4 w-4" />
+              Leads ({leadSubmissions.length})
+            </TabsTrigger>
           </TabsList>
 
-          <TabsContent value="contacts">
+          <TabsContent value="contacts" className="space-y-4">
             <Card>
-              <CardHeader className="flex flex-row items-center justify-between">
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
                 <CardTitle>Contact Form Submissions</CardTitle>
                 <Button onClick={exportContactsToExcel} variant="outline" size="sm">
                   <Download className="mr-2 h-4 w-4" />
@@ -274,62 +321,17 @@ const Admin = () => {
               </CardHeader>
               <CardContent>
                 {contactSubmissions.length === 0 ? (
-                  <p className="text-muted-foreground">No submissions yet.</p>
+                  <p className="text-muted-foreground text-center py-8">No submissions yet.</p>
                 ) : (
-                  <div className="overflow-x-auto">
-                    <Table>
-                      <TableHeader>
-                        <TableRow>
-                          <TableHead>Date</TableHead>
-                          <TableHead>Name</TableHead>
-                          <TableHead>Email</TableHead>
-                          <TableHead>Phone</TableHead>
-                          <TableHead>Location</TableHead>
-                          <TableHead>Investment Range</TableHead>
-                          <TableHead>Message</TableHead>
-                          <TableHead>Status</TableHead>
-                          <TableHead>Action</TableHead>
-                        </TableRow>
-                      </TableHeader>
-                      <TableBody>
-                        {contactSubmissions.map((submission) => (
-                          <TableRow key={submission.id}>
-                            <TableCell className="whitespace-nowrap">{formatDate(submission.created_at)}</TableCell>
-                            <TableCell>{submission.name}</TableCell>
-                            <TableCell>{submission.email}</TableCell>
-                            <TableCell>{submission.phone || "—"}</TableCell>
-                            <TableCell>{submission.location || "—"}</TableCell>
-                            <TableCell>{submission.investment_range || "—"}</TableCell>
-                            <TableCell className="max-w-xs truncate">{submission.message || "—"}</TableCell>
-                            <TableCell>{getStatusBadge(submission.status)}</TableCell>
-                            <TableCell>
-                              <Select
-                                value={submission.status}
-                                onValueChange={(value) => updateContactStatus(submission.id, value)}
-                              >
-                                <SelectTrigger className="w-32">
-                                  <SelectValue />
-                                </SelectTrigger>
-                                <SelectContent>
-                                  <SelectItem value="pending">Pending</SelectItem>
-                                  <SelectItem value="accepted">Accept</SelectItem>
-                                  <SelectItem value="denied">Deny</SelectItem>
-                                </SelectContent>
-                              </Select>
-                            </TableCell>
-                          </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                  </div>
+                  <ContactManagementTable contacts={contactSubmissions} onUpdate={fetchSubmissions} />
                 )}
               </CardContent>
             </Card>
           </TabsContent>
 
-          <TabsContent value="leads">
+          <TabsContent value="leads" className="space-y-4">
             <Card>
-              <CardHeader className="flex flex-row items-center justify-between">
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
                 <CardTitle>Lead Magnet Submissions</CardTitle>
                 <Button onClick={exportLeadsToExcel} variant="outline" size="sm">
                   <Download className="mr-2 h-4 w-4" />
@@ -338,44 +340,9 @@ const Admin = () => {
               </CardHeader>
               <CardContent>
                 {leadSubmissions.length === 0 ? (
-                  <p className="text-muted-foreground">No submissions yet.</p>
+                  <p className="text-muted-foreground text-center py-8">No submissions yet.</p>
                 ) : (
-                  <div className="overflow-x-auto">
-                    <Table>
-                      <TableHeader>
-                        <TableRow>
-                          <TableHead>Date</TableHead>
-                          <TableHead>Email</TableHead>
-                          <TableHead>Status</TableHead>
-                          <TableHead>Action</TableHead>
-                        </TableRow>
-                      </TableHeader>
-                      <TableBody>
-                        {leadSubmissions.map((submission) => (
-                          <TableRow key={submission.id}>
-                            <TableCell className="whitespace-nowrap">{formatDate(submission.created_at)}</TableCell>
-                            <TableCell>{submission.email}</TableCell>
-                            <TableCell>{getStatusBadge(submission.status)}</TableCell>
-                            <TableCell>
-                              <Select
-                                value={submission.status}
-                                onValueChange={(value) => updateLeadStatus(submission.id, value)}
-                              >
-                                <SelectTrigger className="w-32">
-                                  <SelectValue />
-                                </SelectTrigger>
-                                <SelectContent>
-                                  <SelectItem value="pending">Pending</SelectItem>
-                                  <SelectItem value="accepted">Accept</SelectItem>
-                                  <SelectItem value="denied">Deny</SelectItem>
-                                </SelectContent>
-                              </Select>
-                            </TableCell>
-                          </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                  </div>
+                  <LeadManagementTable leads={leadSubmissions} onUpdate={fetchSubmissions} />
                 )}
               </CardContent>
             </Card>
