@@ -5,7 +5,7 @@ import { calculateSavings, calculateTier, formatCurrency } from '@/lib/savingsCa
 import { QUIZ_COPY } from '@/content/quiz-copy';
 import { trackEvent } from '@/lib/analytics';
 import { useState, useEffect } from 'react';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, Phone } from 'lucide-react';
 
 interface Props {
   answers: QuizAnswers;
@@ -129,6 +129,23 @@ export default function ResultsView({ answers, sessionData }: Props) {
                   </tbody>
                 </table>
               </div>
+
+              {qualifiesForCall && (
+                <div className="text-center">
+                  <Button size="lg" className="w-full md:w-auto bg-red-600 hover:bg-red-700 text-white h-14 text-lg font-bold px-8" onClick={openCalendly}>
+                    <ExternalLink className="mr-2 h-5 w-5" />
+                    Stop Funding Mamdani—Book Your Escape Call
+                  </Button>
+                  <div className="mt-4">
+                    <p className="text-gray-600 text-sm mb-2">Or call now for immediate assistance:</p>
+                    <a href="tel:+17872431212" className="inline-flex items-center gap-2 text-red-600 font-bold text-lg hover:text-red-700 transition-colors">
+                      <Phone className="h-5 w-5" />
+                      +1 (787) 243-1212
+                    </a>
+                  </div>
+                  <p className="text-xs text-gray-600 mt-3">Free strategy call • No pressure • Just a plan to keep YOUR money</p>
+                </div>
+              )}
             </div>
           </CardContent>
         </Card>
@@ -150,6 +167,13 @@ export default function ResultsView({ answers, sessionData }: Props) {
                 <ExternalLink className="mr-2 h-4 w-4 md:h-5 md:w-5 flex-shrink-0" />
                 <span className="truncate">Book My Escape Call Now</span>
               </Button>
+              <div className="mt-4 text-center">
+                <p className="text-white/80 text-sm mb-2">Or call now for immediate assistance:</p>
+                <a href="tel:+17872431212" className="inline-flex items-center gap-2 text-white font-bold text-lg hover:text-white/90 transition-colors">
+                  <Phone className="h-5 w-5" />
+                  +1 (787) 243-1212
+                </a>
+              </div>
             </CardContent>
           </Card>
         )}
@@ -159,39 +183,12 @@ export default function ResultsView({ answers, sessionData }: Props) {
           <CardContent className="p-4 md:p-8">
             <h2 className="text-xl md:text-3xl font-serif mb-4 md:mb-6 text-gray-800">What You Get When You Stop Funding Mamdani's New York</h2>
             <ul className="space-y-3 md:space-y-4">
-              {answers.benefit && (
-                Array.isArray(answers.benefit)
-                  ? answers.benefit
-                      .filter((b) => QUIZ_COPY.lifestyleUpgrades[b]) // Only render benefits that have copy
-                      .map((b, idx) => (
-                        <li key={idx} className="flex items-start gap-2 md:gap-3">
-                          <span className="text-green-600 font-bold text-lg md:text-xl flex-shrink-0">✓</span>
-                          <span className="flex-1 leading-relaxed text-sm md:text-base" dangerouslySetInnerHTML={{ __html: QUIZ_COPY.lifestyleUpgrades[b].replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
-                        </li>
-                      ))
-                  : QUIZ_COPY.lifestyleUpgrades[answers.benefit] ? (
-                      <li className="flex items-start gap-2 md:gap-3">
-                        <span className="text-green-600 font-bold text-lg md:text-xl flex-shrink-0">✓</span>
-                        <span className="flex-1 leading-relaxed text-sm md:text-base" dangerouslySetInnerHTML={{ __html: QUIZ_COPY.lifestyleUpgrades[answers.benefit].replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
-                      </li>
-                    ) : null
-              )}
-              {answers.frustration && (
-                (Array.isArray(answers.frustration) ? answers.frustration : [answers.frustration]).includes('winters') && (
-                  <li className="flex items-start gap-2 md:gap-3">
-                    <span className="text-green-600 font-bold text-lg md:text-xl flex-shrink-0">✓</span>
-                    <span className="flex-1 leading-relaxed text-sm md:text-base"><strong>Year-round warmth.</strong> Average winter temp: 68°F. No more parkas, no more slush, no more seasonal depression.</span>
-                  </li>
-                )
-              )}
-              {answers.frustration && (
-                (Array.isArray(answers.frustration) ? answers.frustration : [answers.frustration]).includes('space') && (
-                  <li className="flex items-start gap-2 md:gap-3">
-                    <span className="text-green-600 font-bold text-lg md:text-xl flex-shrink-0">✓</span>
-                    <span className="flex-1 leading-relaxed text-sm md:text-base"><strong>Room to breathe.</strong> Spacious homes with actual yards, garages, and storage. Miami offers 30–40% more space at comparable prices.</span>
-                  </li>
-                )
-              )}
+              {Object.entries(QUIZ_COPY.lifestyleUpgrades).map(([_, text], idx) => (
+                <li key={idx} className="flex items-start gap-2 md:gap-3">
+                  <span className="text-green-600 font-bold text-lg md:text-xl flex-shrink-0">✓</span>
+                  <span className="flex-1 leading-relaxed text-sm md:text-base" dangerouslySetInnerHTML={{ __html: text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
+                </li>
+              ))}
             </ul>
           </CardContent>
         </Card>
@@ -305,6 +302,13 @@ export default function ResultsView({ answers, sessionData }: Props) {
                 <ExternalLink className="mr-2 h-4 w-4 md:h-5 md:w-5 flex-shrink-0" />
                 <span className="truncate">Escape Mamdani's NY—Book Call</span>
               </Button>
+              <div className="mt-4 text-center">
+                <p className="text-white/80 text-sm mb-2">Or call now for immediate assistance:</p>
+                <a href="tel:+17872431212" className="inline-flex items-center gap-2 text-white font-bold text-lg hover:text-white/90 transition-colors">
+                  <Phone className="h-5 w-5" />
+                  +1 (787) 243-1212
+                </a>
+              </div>
             </CardContent>
           </Card>
         )}
