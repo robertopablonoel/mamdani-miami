@@ -129,23 +129,6 @@ export default function ResultsView({ answers, sessionData }: Props) {
                   </tbody>
                 </table>
               </div>
-
-              {qualifiesForCall && (
-                <div className="text-center">
-                  <Button size="lg" className="w-full md:w-auto bg-red-600 hover:bg-red-700 text-white h-14 text-lg font-bold px-8" onClick={openCalendly}>
-                    <ExternalLink className="mr-2 h-5 w-5" />
-                    Stop Funding Mamdani—Book Your Escape Call
-                  </Button>
-                  <div className="mt-4">
-                    <p className="text-gray-600 text-sm mb-2">Or call now for immediate assistance:</p>
-                    <a href="tel:+17872431212" className="inline-flex items-center gap-2 text-red-600 font-bold text-lg hover:text-red-700 transition-colors">
-                      <Phone className="h-5 w-5" />
-                      +1 (787) 243-1212
-                    </a>
-                  </div>
-                  <p className="text-xs text-gray-600 mt-3">Free strategy call • No pressure • Just a plan to keep YOUR money</p>
-                </div>
-              )}
             </div>
           </CardContent>
         </Card>
