@@ -107,101 +107,82 @@ export default function LeadCaptureForm({ answers, sessionData, onSubmit }: Prop
   const savingsMid = Math.floor((savingsLow + savingsHigh) / 2);
 
   return (
-    <div className="min-h-screen gradient-premium flex items-center justify-center py-12">
-      <div className="container mx-auto px-4 max-w-3xl">
+    <div className="min-h-screen gradient-premium flex items-center justify-center py-8 md:py-12">
+      <div className="container mx-auto px-4 max-w-2xl">
 
-        {/* TEASER RESULTS - Show First */}
-        <Card className="shadow-premium border-0 bg-white mb-8">
-          <CardContent className="p-8 md:p-12">
-            <h1 className="text-2xl md:text-3xl font-serif text-center mb-6">
-              {QUIZ_COPY.teaserResults.h1}
+        {/* SINGLE CONVERSION CARD */}
+        <Card className="shadow-premium border-0 bg-white">
+          <CardContent className="p-6 md:p-10">
+
+            {/* Header */}
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-serif text-center mb-6 text-foreground leading-tight">
+              Your Miami Escape Plan is Ready!
             </h1>
 
-            <div className="bg-green-50 border-2 border-green-200 rounded-lg p-8 mb-6 text-center">
-              <p className="text-sm text-green-700 font-medium uppercase tracking-wide mb-2">
-                {QUIZ_COPY.teaserResults.savingsRange.prefix}
+            {/* Teaser Savings - Compact */}
+            <div className="bg-gradient-to-br from-green-50 to-green-100 border-2 border-green-300 rounded-xl p-6 mb-6 text-center">
+              <p className="text-xs md:text-sm text-green-800 font-semibold uppercase tracking-wide mb-2">
+                Based on Your Answers
               </p>
-              <div className="text-4xl md:text-6xl font-serif font-bold text-green-700 mb-2">
+              <div className="text-3xl md:text-5xl font-serif font-bold text-green-700 mb-1">
                 ${savingsLow.toLocaleString()} - ${savingsHigh.toLocaleString()}
               </div>
-              <p className="text-lg text-green-700 font-medium">
-                {QUIZ_COPY.teaserResults.savingsRange.suffix}
+              <p className="text-sm md:text-base text-green-800 font-medium">
+                Estimated Annual Savings
               </p>
             </div>
 
-            <div className="space-y-4 mb-6">
-              <p className="text-lg text-center font-medium">
-                That's ${savingsMid.toLocaleString()} BACK IN YOUR POCKET every year.
+            {/* What They'll Get */}
+            <div className="mb-6">
+              <p className="text-base md:text-lg font-semibold text-center mb-4 text-foreground">
+                Enter your email to unlock your full breakdown:
               </p>
-              <p className="text-lg text-center text-muted-foreground">
-                What could you do with an extra ${savingsMid.toLocaleString()}/year?
-              </p>
-            </div>
-
-            <div className="bg-gray-50 rounded-lg p-6 space-y-2 text-base text-muted-foreground">
-              {QUIZ_COPY.teaserResults.uses.map((use, idx) => (
-                <div key={idx}>{use}</div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* NOW THE ASK - Lead Capture Form */}
-        <Card className="shadow-premium border-0 bg-white">
-          <CardContent className="p-8 md:p-12">
-            <h2 className="text-2xl md:text-3xl font-serif text-foreground mb-3 text-center">
-              {QUIZ_COPY.leadCapture.h1}
-            </h2>
-            <p className="text-base md:text-lg text-muted-foreground mb-6 text-center">
-              {QUIZ_COPY.leadCapture.subhead}
-            </p>
-
-            {/* Benefits List */}
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-6">
-              <p className="font-semibold mb-3 text-foreground">You'll get:</p>
               <div className="space-y-2">
                 {QUIZ_COPY.leadCapture.benefits.map((benefit, idx) => (
                   <div key={idx} className="flex items-start gap-3">
                     <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
-                    <span className="text-sm text-foreground">{benefit}</span>
+                    <span className="text-sm md:text-base text-foreground">{benefit}</span>
                   </div>
                 ))}
               </div>
             </div>
 
+            {/* Form */}
             <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
-              <div>
-                <Label htmlFor="first_name">First Name</Label>
-                <Input
-                  id="first_name"
-                  type="text"
-                  placeholder="First name"
-                  className="mt-1"
-                  {...form.register('first_name')}
-                  disabled={isSubmitting}
-                />
-                {form.formState.errors.first_name && (
-                  <p className="text-sm text-destructive mt-1">
-                    {form.formState.errors.first_name.message}
-                  </p>
-                )}
-              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <Label htmlFor="first_name">First Name</Label>
+                  <Input
+                    id="first_name"
+                    type="text"
+                    placeholder="First name"
+                    className="mt-1 h-12"
+                    {...form.register('first_name')}
+                    disabled={isSubmitting}
+                  />
+                  {form.formState.errors.first_name && (
+                    <p className="text-sm text-destructive mt-1">
+                      {form.formState.errors.first_name.message}
+                    </p>
+                  )}
+                </div>
 
-              <div>
-                <Label htmlFor="email">Email Address</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="your.email@example.com"
-                  className="mt-1"
-                  {...form.register('email')}
-                  disabled={isSubmitting}
-                />
-                {form.formState.errors.email && (
-                  <p className="text-sm text-destructive mt-1">
-                    {form.formState.errors.email.message}
-                  </p>
-                )}
+                <div>
+                  <Label htmlFor="email">Email Address</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="your.email@example.com"
+                    className="mt-1 h-12"
+                    {...form.register('email')}
+                    disabled={isSubmitting}
+                  />
+                  {form.formState.errors.email && (
+                    <p className="text-sm text-destructive mt-1">
+                      {form.formState.errors.email.message}
+                    </p>
+                  )}
+                </div>
               </div>
 
               <div>
@@ -210,12 +191,12 @@ export default function LeadCaptureForm({ answers, sessionData, onSubmit }: Prop
                   id="phone"
                   type="tel"
                   placeholder="(555) 123-4567"
-                  className="mt-1"
+                  className="mt-1 h-12"
                   {...form.register('phone')}
                   disabled={isSubmitting}
                 />
-                <p className="text-sm text-muted-foreground mt-1">
-                  For priority access to our Miami brokerage partner (callbacks within 24hrs)
+                <p className="text-xs text-muted-foreground mt-1">
+                  For priority consultation callbacks within 24 hours
                 </p>
                 {form.formState.errors.phone && (
                   <p className="text-sm text-destructive mt-1">
@@ -234,7 +215,7 @@ export default function LeadCaptureForm({ answers, sessionData, onSubmit }: Prop
                     }
                     disabled={isSubmitting}
                   />
-                  <Label htmlFor="sms_consent" className="text-sm leading-tight cursor-pointer">
+                  <Label htmlFor="sms_consent" className="text-xs leading-tight cursor-pointer">
                     I agree to receive text messages about Miami real estate opportunities.
                     Message & data rates may apply. Reply STOP to opt out anytime.
                   </Label>
@@ -246,25 +227,18 @@ export default function LeadCaptureForm({ answers, sessionData, onSubmit }: Prop
                 </p>
               )}
 
-              <Button type="submit" size="lg" className="w-full h-14 text-lg font-bold" disabled={isSubmitting}>
-                {isSubmitting ? 'Calculating...' : QUIZ_COPY.leadCapture.button}
+              <Button type="submit" size="lg" className="w-full h-14 text-lg font-bold mt-6" disabled={isSubmitting}>
+                {isSubmitting ? 'Generating Your Report...' : 'Get My Full Breakdown →'}
               </Button>
 
-              <p className="text-xs text-muted-foreground text-center pt-2">
+              <p className="text-xs text-muted-foreground text-center">
                 {QUIZ_COPY.leadCapture.privacyNote}
               </p>
 
-              {/* Urgency */}
+              {/* Social Proof + Urgency */}
               <div className="text-center pt-2">
-                <p className="text-sm text-orange-600 font-medium">
-                  {QUIZ_COPY.leadCapture.urgency}
-                </p>
-              </div>
-
-              {/* Takeaway Close */}
-              <div className="bg-yellow-50 border border-yellow-200 rounded p-4 mt-4">
-                <p className="text-xs text-yellow-800 leading-relaxed">
-                  {QUIZ_COPY.leadCapture.takeaway}
+                <p className="text-sm font-medium text-foreground">
+                  🔥 2,847 NYC professionals got their breakdown this month
                 </p>
               </div>
             </form>

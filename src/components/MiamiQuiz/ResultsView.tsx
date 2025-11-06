@@ -50,17 +50,43 @@ export default function ResultsView({ answers, sessionData }: Props) {
   };
 
   return (
-    <div className="min-h-screen py-16 bg-gray-50">
+    <div className="min-h-screen py-12 bg-gradient-to-b from-gray-50 to-white">
       <div className="container mx-auto px-4 max-w-4xl space-y-8">
-        {/* Hero Section */}
-        <Card className="shadow-premium border-0">
-          <CardContent className="p-8 text-center">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif mb-4">
-              {getResultsHeading()}
+
+        {/* Hero Section - Big Reveal */}
+        <Card className="shadow-premium border-0 bg-gradient-to-br from-green-50 to-green-100 border-t-4 border-t-green-600">
+          <CardContent className="p-8 md:p-12 text-center">
+            <div className="inline-block bg-green-600 text-white px-4 py-2 rounded-full text-sm font-semibold mb-6">
+              ✓ Your Personalized Miami Report
+            </div>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif mb-6 text-foreground leading-tight">
+              You Could Save<br />
+              <span className="text-green-600">{formatCurrency(savings.annual_savings)}</span><br />
+              Per Year
             </h1>
-            <p className="text-lg text-muted-foreground">
-              Based on your responses, here's what your life could look like in Miami.
+            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+              That's <strong className="text-foreground">{formatCurrency(Math.floor(savings.annual_savings / 12))}/month</strong> back in your pocket, or{' '}
+              <strong className="text-foreground">{formatCurrency(savings.annual_savings * 10)}</strong> over the next 10 years.
             </p>
+
+            {/* What you could do with it */}
+            <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+              <div className="bg-white rounded-lg p-4 shadow-sm">
+                <div className="font-bold text-foreground mb-1">In 5 Years</div>
+                <div className="text-2xl font-serif text-green-600">{formatCurrency(savings.annual_savings * 5)}</div>
+                <div className="text-xs text-muted-foreground mt-1">Could pay off student loans</div>
+              </div>
+              <div className="bg-white rounded-lg p-4 shadow-sm">
+                <div className="font-bold text-foreground mb-1">In 10 Years</div>
+                <div className="text-2xl font-serif text-green-600">{formatCurrency(savings.annual_savings * 10)}</div>
+                <div className="text-xs text-muted-foreground mt-1">Down payment on investment property</div>
+              </div>
+              <div className="bg-white rounded-lg p-4 shadow-sm">
+                <div className="font-bold text-foreground mb-1">In 30 Years</div>
+                <div className="text-2xl font-serif text-green-600">{formatCurrency(savings.annual_savings * 30)}</div>
+                <div className="text-xs text-muted-foreground mt-1">Extra retirement savings</div>
+              </div>
+            </div>
           </CardContent>
         </Card>
 
@@ -146,40 +172,112 @@ export default function ResultsView({ answers, sessionData }: Props) {
             <h2 className="text-2xl md:text-3xl font-serif mb-6">What You Gain Beyond the Savings</h2>
             <ul className="space-y-4">
               {answers.benefit && (
-                <li className="flex items-start">
-                  <span className="text-green-600 font-bold mr-3 text-xl">✓</span>
-                  <span className="flex-1 leading-relaxed" dangerouslySetInnerHTML={{ __html: QUIZ_COPY.lifestyleUpgrades[answers.benefit].replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
-                </li>
+                Array.isArray(answers.benefit)
+                  ? answers.benefit.map((b, idx) => (
+                      <li key={idx} className="flex items-start">
+                        <span className="text-green-600 font-bold mr-3 text-xl">✓</span>
+                        <span className="flex-1 leading-relaxed" dangerouslySetInnerHTML={{ __html: QUIZ_COPY.lifestyleUpgrades[b]?.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') || '' }} />
+                      </li>
+                    ))
+                  : (
+                      <li className="flex items-start">
+                        <span className="text-green-600 font-bold mr-3 text-xl">✓</span>
+                        <span className="flex-1 leading-relaxed" dangerouslySetInnerHTML={{ __html: QUIZ_COPY.lifestyleUpgrades[answers.benefit]?.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') || '' }} />
+                      </li>
+                    )
               )}
-              {answers.frustration === 'winters' && (
-                <li className="flex items-start">
-                  <span className="text-green-600 font-bold mr-3 text-xl">✓</span>
-                  <span className="flex-1 leading-relaxed"><strong>Year-round warmth.</strong> Average winter temp: 68°F. No more parkas, no more slush, no more seasonal depression.</span>
-                </li>
+              {answers.frustration && (
+                (Array.isArray(answers.frustration) ? answers.frustration : [answers.frustration]).includes('winters') && (
+                  <li className="flex items-start">
+                    <span className="text-green-600 font-bold mr-3 text-xl">✓</span>
+                    <span className="flex-1 leading-relaxed"><strong>Year-round warmth.</strong> Average winter temp: 68°F. No more parkas, no more slush, no more seasonal depression.</span>
+                  </li>
+                )
               )}
-              {answers.frustration === 'space' && (
-                <li className="flex items-start">
-                  <span className="text-green-600 font-bold mr-3 text-xl">✓</span>
-                  <span className="flex-1 leading-relaxed"><strong>Room to breathe.</strong> Spacious homes with actual yards, garages, and storage. Miami offers 30–40% more space at comparable prices.</span>
-                </li>
+              {answers.frustration && (
+                (Array.isArray(answers.frustration) ? answers.frustration : [answers.frustration]).includes('space') && (
+                  <li className="flex items-start">
+                    <span className="text-green-600 font-bold mr-3 text-xl">✓</span>
+                    <span className="flex-1 leading-relaxed"><strong>Room to breathe.</strong> Spacious homes with actual yards, garages, and storage. Miami offers 30–40% more space at comparable prices.</span>
+                  </li>
+                )
               )}
             </ul>
           </CardContent>
         </Card>
 
-        {/* Objection Rebuttal */}
-        {answers.concern && answers.concern !== 'none' && (
-          <Card className="shadow-premium border-0 bg-blue-50 border-l-4 border-l-blue-500">
-            <CardContent className="p-8">
-              <h2 className="text-2xl font-serif mb-4 text-blue-900">
-                Addressing Your Concern: {answers.concern.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
-              </h2>
-              <p className="text-base leading-relaxed text-blue-900">
-                {QUIZ_COPY.objectionRebuttals[answers.concern]}
-              </p>
-            </CardContent>
-          </Card>
-        )}
+        {/* Recommended Neighborhoods */}
+        <Card className="shadow-premium border-0">
+          <CardContent className="p-8">
+            <h2 className="text-2xl md:text-3xl font-serif mb-4">Neighborhoods We Recommend For You</h2>
+            <p className="text-muted-foreground mb-6">
+              Based on your income bracket and housing preferences, these Miami neighborhoods match your profile:
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {answers.income_bracket && parseInt(answers.income_bracket.split('_')[0].replace('k', '000')) >= 250000 ? (
+                <>
+                  <div className="border rounded-lg p-5 hover:shadow-lg transition-shadow">
+                    <h3 className="font-bold text-lg mb-2">Coral Gables</h3>
+                    <p className="text-sm text-muted-foreground mb-3">Tree-lined streets, excellent schools, Mediterranean architecture</p>
+                    <div className="text-xs space-y-1">
+                      <div>💰 Avg Home: $1.2M - $3M+</div>
+                      <div>🏫 Top-rated schools</div>
+                      <div>🌳 Family-friendly</div>
+                    </div>
+                  </div>
+                  <div className="border rounded-lg p-5 hover:shadow-lg transition-shadow">
+                    <h3 className="font-bold text-lg mb-2">Coconut Grove</h3>
+                    <p className="text-sm text-muted-foreground mb-3">Waterfront living, bohemian vibe, upscale dining</p>
+                    <div className="text-xs space-y-1">
+                      <div>💰 Avg Home: $900K - $2.5M</div>
+                      <div>🌊 Waterfront access</div>
+                      <div>🍷 Art & culture hub</div>
+                    </div>
+                  </div>
+                  <div className="border rounded-lg p-5 hover:shadow-lg transition-shadow">
+                    <h3 className="font-bold text-lg mb-2">Brickell</h3>
+                    <p className="text-sm text-muted-foreground mb-3">Urban luxury, walkable, Miami's financial district</p>
+                    <div className="text-xs space-y-1">
+                      <div>💰 Avg Condo: $600K - $2M</div>
+                      <div>🏙️ High-rise living</div>
+                      <div>🚶 Walkable nightlife</div>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="border rounded-lg p-5 hover:shadow-lg transition-shadow">
+                    <h3 className="font-bold text-lg mb-2">Pinecrest</h3>
+                    <p className="text-sm text-muted-foreground mb-3">Suburban feel, great schools, family-oriented</p>
+                    <div className="text-xs space-y-1">
+                      <div>💰 Avg Home: $600K - $1.2M</div>
+                      <div>🏫 A+ rated schools</div>
+                      <div>👨‍👩‍👧‍👦 Parks & recreation</div>
+                    </div>
+                  </div>
+                  <div className="border rounded-lg p-5 hover:shadow-lg transition-shadow">
+                    <h3 className="font-bold text-lg mb-2">Aventura</h3>
+                    <p className="text-sm text-muted-foreground mb-3">Shopping, beaches, modern condos</p>
+                    <div className="text-xs space-y-1">
+                      <div>💰 Avg Condo: $400K - $800K</div>
+                      <div>🛍️ Aventura Mall nearby</div>
+                      <div>🏖️ Beach access</div>
+                    </div>
+                  </div>
+                  <div className="border rounded-lg p-5 hover:shadow-lg transition-shadow">
+                    <h3 className="font-bold text-lg mb-2">Wynwood</h3>
+                    <p className="text-sm text-muted-foreground mb-3">Art district, trendy, young professional vibe</p>
+                    <div className="text-xs space-y-1">
+                      <div>💰 Avg Condo: $350K - $600K</div>
+                      <div>🎨 Art & culture</div>
+                      <div>🍻 Breweries & cafes</div>
+                    </div>
+                  </div>
+                </>
+              )}
+            </div>
+          </CardContent>
+        </Card>
 
         {/* Social Proof */}
         <Card className="shadow-premium border-0">
