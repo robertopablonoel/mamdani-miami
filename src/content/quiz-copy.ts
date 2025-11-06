@@ -142,7 +142,7 @@ export const QUIZ_COPY = {
       "→ Pay off your mortgage 10 years early",
       "→ Upgrade to a 3BR pool house",
       "→ Actually take those vacations you've been putting off",
-      "→ Build real wealth instead of funding Albany",
+      "→ Build real wealth instead of funding Mamdani",
     ],
   },
 

@@ -2,7 +2,7 @@ import { memo, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Calculator, ArrowRight, ExternalLink } from "lucide-react";
+import { Calculator, ArrowRight } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import { trackCTAClick, trackEvent } from "@/lib/analytics";
 import { useScrollTracking } from "@/hooks/useScrollTracking";
@@ -44,23 +44,27 @@ const LanderV2 = memo(() => {
 
             {/* WARNING BANNER */}
             <div className="inline-block bg-red-600/90 backdrop-blur-sm px-6 py-3 rounded-full text-white text-sm md:text-base font-medium border border-red-400/30 shadow-lg">
-              ⚠️ 2025 NY Budget Proposal Includes 2% Wealth Tax on Income Over $500K
+              ⚠️ ALERT: Mamdani's 2% Wealth Tax + "Invest in Our New York Act" Targeting $500K+ Earners
             </div>
 
             {/* HEADLINE - The Big Number */}
             <div>
               <div className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-serif font-bold text-yellow-400 mb-4 leading-none drop-shadow-2xl animate-fade-in">
-                $42,000
+                $42,672
+              </div>
+              <div className="text-lg sm:text-xl md:text-2xl text-yellow-400/90 mb-4 font-light italic">
+                (That's Just the Average)
               </div>
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-white leading-tight px-4">
-                The Mistake High-Earners Make Every Year<br />They Stay in New York
+                What's YOUR Number?<br />
+                How Much Are YOU Handing Mamdani Each Year?
               </h1>
             </div>
 
             {/* SUBHEADLINE */}
             <p className="text-lg sm:text-xl md:text-2xl text-white/95 max-w-3xl mx-auto leading-relaxed px-4 font-light">
-              2,847 NYC professionals just cut their tax bill to <span className="font-bold text-yellow-400">$0</span> and got MORE space by moving to Miami.<br />
-              <span className="font-semibold">Here's your personalized escape plan...</span>
+              While Mamdani pushes for <span className="font-bold text-red-400">even higher taxes</span> to fund "progressive programs," 2,847 high-earners stopped funding his socialism and moved to Miami.<br />
+              <span className="font-semibold text-yellow-400">Take the 60-second quiz to see YOUR exact savings...</span>
             </p>
 
             {/* ONE MASSIVE CTA */}
@@ -71,7 +75,7 @@ const LanderV2 = memo(() => {
                   className="gradient-gold text-xl md:text-2xl px-12 md:px-16 py-8 md:py-10 h-auto w-full sm:w-auto shadow-2xl hover:shadow-yellow-500/50 transition-all transform hover:scale-105 font-bold"
                 >
                   <Calculator className="mr-3 w-7 h-7 md:w-8 md:h-8" />
-                  Calculate My Exact Savings →
+                  What's MY Number? →
                 </Button>
               </Link>
 
@@ -83,7 +87,7 @@ const LanderV2 = memo(() => {
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="text-yellow-400">✓</span>
-                  <span>See your personalized tax savings</span>
+                  <span>Get YOUR exact number (not an average)</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="text-yellow-400">✓</span>
@@ -99,12 +103,12 @@ const LanderV2 = memo(() => {
             {/* SPECIFIC OUTCOME STATS */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 max-w-4xl mx-auto pt-8 md:pt-12 px-4">
               <div className="bg-white/10 backdrop-blur-md border border-white/20 p-6 md:p-8 rounded-lg">
-                <div className="text-3xl md:text-5xl font-serif text-yellow-400 mb-2 font-bold">$42,000/Year</div>
-                <div className="text-sm md:text-base text-white/90">Average tax savings for NYC → Miami relocators earning $250K+</div>
+                <div className="text-3xl md:text-5xl font-serif text-yellow-400 mb-2 font-bold">$42K+/Year</div>
+                <div className="text-sm md:text-base text-white/90">Average savings (yours could be higher—take the quiz to find out)</div>
               </div>
               <div className="bg-white/10 backdrop-blur-md border border-white/20 p-6 md:p-8 rounded-lg">
                 <div className="text-3xl md:text-5xl font-serif text-yellow-400 mb-2 font-bold">2,847 Families</div>
-                <div className="text-sm md:text-base text-white/90">Have made the move since 2023 (you're not alone)</div>
+                <div className="text-sm md:text-base text-white/90">Already discovered their number and made the move</div>
               </div>
               <div className="bg-white/10 backdrop-blur-md border border-white/20 p-6 md:p-8 rounded-lg">
                 <div className="text-3xl md:text-5xl font-serif text-yellow-400 mb-2 font-bold">43% More Space</div>
@@ -256,7 +260,7 @@ const LanderV2 = memo(() => {
 
                 {/* Attention-Grabbing Eyebrow */}
                 <div className="inline-block bg-red-100 text-red-700 px-4 py-2 rounded-full text-sm font-semibold mb-6">
-                  ⚠️ 2,847 NYC Professionals Have Already Done This
+                  ⚠️ Stop Funding Mamdani's Socialist Agenda—2,847 Professionals Already Escaped
                 </div>
 
                 <div className="w-20 md:w-24 h-20 md:h-24 rounded-full gradient-gold flex items-center justify-center mx-auto mb-6 md:mb-8 shadow-glow">
@@ -265,11 +269,11 @@ const LanderV2 = memo(() => {
 
                 {/* Benefit-Driven Headline */}
                 <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif text-foreground mb-4 px-2 text-center leading-tight">
-                  60-Second Quiz Reveals Your Exact Miami Savings
+                  See How Much You're Sending Mamdani vs. Keeping for Yourself
                 </h2>
 
                 <p className="text-lg md:text-xl text-muted-foreground mb-2 max-w-2xl mx-auto px-4 text-center">
-                  + The Neighborhood That Matches Your Budget & Lifestyle
+                  60-Second Quiz Reveals Your Exact Savings + Miami Neighborhood Match
                 </p>
 
                 {/* Create Desire */}
@@ -302,7 +306,7 @@ const LanderV2 = memo(() => {
                       size="lg"
                       className="gradient-gold w-full sm:w-auto h-16 md:h-16 text-lg md:text-xl font-bold px-12 touch-manipulation shadow-glow hover:shadow-lg transition-shadow"
                     >
-                      Show Me My Numbers →
+                      Calculate MY Exact Number →
                     </Button>
                   </Link>
                 </div>
@@ -311,7 +315,7 @@ const LanderV2 = memo(() => {
                 <div className="mt-8 flex flex-wrap justify-center gap-4 md:gap-6 text-sm md:text-base text-muted-foreground">
                   <div className="flex items-center gap-2">
                     <span className="text-green-600 text-lg">✓</span>
-                    <span>$0 state income tax (vs. $15K-$80K+/year in NY)</span>
+                    <span>$0 state income tax in FL (stop funding Mamdani's programs)</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="text-green-600 text-lg">✓</span>
@@ -319,14 +323,14 @@ const LanderV2 = memo(() => {
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="text-green-600 text-lg">✓</span>
-                    <span>300+ sunny days (vs. seasonal depression season)</span>
+                    <span>Keep your hard-earned money instead of sending it to Mamdani</span>
                   </div>
                 </div>
 
                 {/* Social Proof */}
                 <div className="mt-10 border-t pt-8">
                   <blockquote className="text-center italic text-base md:text-lg text-muted-foreground mb-4">
-                    "This quiz opened my eyes. I was overpaying by $42K/year and didn't even realize it."
+                    "I thought it would be $30K. My actual number was $67,000/year. This quiz changed everything."
                   </blockquote>
                   <p className="text-center text-sm text-muted-foreground">
                     — Sarah T., Brooklyn → Coral Gables, Moved Jan 2024
@@ -336,7 +340,7 @@ const LanderV2 = memo(() => {
                 {/* Urgency */}
                 <div className="mt-6 text-center">
                   <div className="inline-block bg-orange-100 text-orange-700 px-4 py-2 rounded-full text-sm font-medium">
-                    🔥 847 people took this quiz in the last 7 days
+                    🔥 847 people discovered their exact number in the last 7 days
                   </div>
                 </div>
               </CardContent>
@@ -351,15 +355,31 @@ const LanderV2 = memo(() => {
           <div className="max-w-3xl mx-auto text-center">
             <h3 className="text-2xl md:text-3xl font-serif mb-6">Why We're Offering This Free Calculator</h3>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              We've helped <span className="font-bold text-foreground">2,847 families</span> relocate from NYC to Miami.
-              We're tired of watching smart people overpay <span className="font-bold text-foreground">$40K+/year in taxes</span> when there's a better way.
+              We've helped <span className="font-bold text-foreground">2,847 families</span> escape NYC's rising socialist policies.
+              We're tired of watching successful people fund Mamdani's redistribution schemes when <span className="font-bold text-foreground">Florida charges $0 in state income tax</span>.
             </p>
             <p className="text-lg text-muted-foreground leading-relaxed mt-4">
-              Take the quiz. See your number. Then decide.
+              Your money should build <span className="font-bold text-foreground">your wealth</span>—not Mamdani's progressive agenda.
             </p>
-            <p className="text-lg text-muted-foreground leading-relaxed mt-4 italic">
-              No pressure. No BS. Just facts.
+            <p className="text-lg text-muted-foreground leading-relaxed mt-4">
+              Take the quiz. See what you're really paying. Then decide if you want to keep funding it.
             </p>
+            <p className="text-lg text-foreground leading-relaxed mt-4 italic font-semibold">
+              No pressure. No BS. Just the math.
+            </p>
+
+            {/* CTA */}
+            <div className="mt-10">
+              <Link to="/move-to-miami" onClick={() => trackCTAClick('Quiz CTA V2', 'reason_why_section')}>
+                <Button
+                  size="lg"
+                  className="gradient-gold text-xl md:text-2xl px-12 md:px-16 py-6 md:py-8 h-auto shadow-2xl hover:shadow-yellow-500/50 transition-all transform hover:scale-105 font-bold"
+                >
+                  <Calculator className="mr-3 w-6 h-6 md:w-7 md:h-7" />
+                  Calculate What I'm Really Paying →
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
