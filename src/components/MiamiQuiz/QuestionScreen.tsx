@@ -32,9 +32,10 @@ export default function QuestionScreen({ step, onAnswer }: Props) {
       1: 'frustration',
       2: 'monthly_cost',
       3: 'income_bracket',
-      4: 'housing_status',
-      5: 'benefit',
-      6: 'timeline',
+      4: 'age_bracket',
+      5: 'housing_status',
+      6: 'benefit',
+      7: 'timeline',
     };
 
     const key = keyMap[step];

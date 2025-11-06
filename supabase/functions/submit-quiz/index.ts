@@ -15,6 +15,7 @@ interface QuizSubmission {
     housing_status: string;
     monthly_cost: string;
     income_bracket: string;
+    age_bracket?: string;
     frustration: string | string[];
     benefit: string | string[];
     timeline: string;
@@ -24,6 +25,8 @@ interface QuizSubmission {
     annual_savings: number;
     tax_savings: number;
     housing_savings: number;
+    retirement_savings?: number;
+    years_until_retirement?: number;
   };
 }
 
@@ -138,6 +141,8 @@ Deno.serve(async (req) => {
       annual_savings: submission.savings_calculation.annual_savings,
       tax_savings: submission.savings_calculation.tax_savings,
       housing_savings: submission.savings_calculation.housing_savings,
+      retirement_savings: submission.savings_calculation.retirement_savings || null,
+      years_until_retirement: submission.savings_calculation.years_until_retirement || null,
       answers: submission.answers,
       status: 'new',
       priority: tier === 'tier_a_hot_lead' ? 'high' : tier === 'tier_b_nurture_warm' ? 'medium' : 'low',

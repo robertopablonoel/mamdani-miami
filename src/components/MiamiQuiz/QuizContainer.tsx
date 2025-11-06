@@ -88,7 +88,7 @@ export default function QuizContainer() {
     }
 
     // Advance to next step or show lead capture
-    if (currentStep < 6) {
+    if (currentStep < 7) {
       setCurrentStep(currentStep + 1);
     } else {
       setShowLeadCapture(true);
@@ -145,7 +145,7 @@ export default function QuizContainer() {
   return (
     <div className="min-h-screen gradient-premium py-6 md:py-12">
       <div className="container mx-auto px-4 max-w-2xl">
-        <ProgressBar currentStep={currentStep} totalSteps={6} />
+        <ProgressBar currentStep={currentStep} totalSteps={7} />
         <QuestionScreen
           step={currentStep}
           answers={answers}

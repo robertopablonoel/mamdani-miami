@@ -1,9 +1,10 @@
-import type { MonthlyCostBracket, IncomeBracket, SavingsBreakdown } from '@/types/quiz';
+import type { MonthlyCostBracket, IncomeBracket, AgeBracket, SavingsBreakdown } from '@/types/quiz';
 import calculatorConfig from '@/config/miami-calculator.json';
 
 export function calculateSavings(
   income_bracket: IncomeBracket,
   monthly_cost: MonthlyCostBracket,
+  age_bracket?: AgeBracket,
   adjustments?: {
     ny_tax_rate?: number;
     housing_multiplier?: number;
@@ -34,11 +35,36 @@ export function calculateSavings(
   // 4. Total
   const annual_savings = tax_savings + housing_savings + util_savings;
 
+  // 5. Retirement Savings (if age provided)
+  let retirement_savings = 0;
+  let years_until_retirement = 0;
+
+  if (age_bracket) {
+    const age = calculatorConfig.age_midpoints[age_bracket];
+    const retirement_age = 65;
+    years_until_retirement = Math.max(retirement_age - age, 0);
+
+    // Calculate future value of annual savings invested until retirement
+    // FV = PMT × [(1 + r)^n - 1] / r
+    // Assuming 7% annual return (conservative stock market average)
+    const annual_return = 0.07;
+
+    if (years_until_retirement > 0) {
+      retirement_savings = annual_savings *
+        ((Math.pow(1 + annual_return, years_until_retirement) - 1) / annual_return);
+    } else {
+      // Already at or past retirement age - just show annual savings
+      retirement_savings = annual_savings;
+    }
+  }
+
   return {
     tax_savings: Math.round(tax_savings),
     housing_savings: Math.round(housing_savings),
     util_savings: Math.round(util_savings),
     annual_savings: Math.round(annual_savings),
+    retirement_savings: Math.round(retirement_savings),
+    years_until_retirement,
     ny_tax: Math.round(income * ny_tax_rate),
     housing_ny: Math.round(housing_ny),
     housing_mia: Math.round(housing_mia),

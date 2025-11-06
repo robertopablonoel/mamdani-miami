@@ -28,7 +28,8 @@ export default function LeadCaptureForm({ answers, sessionData, onSubmit }: Prop
   // Calculate savings for teaser
   const savings = calculateSavings(
     answers.income_bracket!,
-    answers.monthly_cost!
+    answers.monthly_cost!,
+    answers.age_bracket
   );
 
   const form = useForm<LeadCaptureData>({
@@ -57,6 +58,8 @@ export default function LeadCaptureForm({ answers, sessionData, onSubmit }: Prop
           annual_savings: savings.annual_savings,
           tax_savings: savings.tax_savings,
           housing_savings: savings.housing_savings,
+          retirement_savings: savings.retirement_savings,
+          years_until_retirement: savings.years_until_retirement,
         },
       };
 
@@ -109,51 +112,136 @@ export default function LeadCaptureForm({ answers, sessionData, onSubmit }: Prop
 
   const watchPhone = form.watch('phone');
 
-  // Calculate savings range (conservative estimate ±15%)
-  const savingsLow = Math.floor(savings.annual_savings * 0.85);
-  const savingsHigh = Math.ceil(savings.annual_savings * 1.15);
-  const savingsMid = Math.floor((savingsLow + savingsHigh) / 2);
+  // Determine if we should show "+" for top income bracket
+  const isTopBracket = answers.income_bracket === 'over_2m';
+
+  // Use retirement savings as the main number (more impactful)
+  const mainSavingsNumber = savings.retirement_savings > 0
+    ? savings.retirement_savings
+    : savings.annual_savings;
 
   return (
-    <div className="min-h-screen gradient-premium flex items-center justify-center py-8 md:py-12">
-      <div className="container mx-auto px-4 max-w-2xl">
+    <div className="min-h-screen gradient-premium py-8 md:py-12">
+      <div className="container mx-auto px-4 max-w-4xl">
 
-        {/* SINGLE CONVERSION CARD */}
-        <Card className="shadow-premium border-0 bg-white">
-          <CardContent className="p-6 md:p-10">
+        {/* BLURRED REPORT PREVIEW WITH FORM OVERLAY */}
+        <div className="relative">
 
-            {/* Header */}
-            <h1 className="text-2xl md:text-3xl lg:text-4xl font-serif text-center mb-6 text-foreground leading-tight">
-              Your Miami Escape Plan is Ready!
-            </h1>
-
-            {/* Teaser Savings - Compact */}
-            <div className="bg-gradient-to-br from-green-50 to-green-100 border-2 border-green-300 rounded-xl p-6 mb-6 text-center">
-              <p className="text-xs md:text-sm text-green-800 font-semibold uppercase tracking-wide mb-2">
-                Based on Your Answers
-              </p>
-              <div className="text-3xl md:text-5xl font-serif font-bold text-green-700 mb-1">
-                ${savingsLow.toLocaleString()} - ${savingsHigh.toLocaleString()}
-              </div>
-              <p className="text-sm md:text-base text-green-800 font-medium">
-                Estimated Annual Savings
-              </p>
-            </div>
-
-            {/* What They'll Get */}
-            <div className="mb-6">
-              <p className="text-base md:text-lg font-semibold text-center mb-4 text-foreground">
-                Enter your email to unlock your full breakdown:
-              </p>
-              <div className="space-y-2">
-                {QUIZ_COPY.leadCapture.benefits.map((benefit, idx) => (
-                  <div key={idx} className="flex items-start gap-3">
-                    <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
-                    <span className="text-sm md:text-base text-foreground">{benefit}</span>
+          {/* Blurred Report Preview in Background */}
+          <div className="absolute inset-0 pointer-events-none">
+            <Card className="shadow-premium border-0 bg-white overflow-hidden">
+              <CardContent className="p-6 md:p-8">
+                {/* Fake Report Header */}
+                <div className="text-center mb-6">
+                  <div className="inline-block bg-green-600 text-white px-4 py-2 rounded-full text-sm font-semibold mb-4">
+                    ✓ Your Personalized Miami Report
                   </div>
-                ))}
-              </div>
-            </div>
+                  <h1 className="text-3xl md:text-4xl font-serif mb-2 blur-sm">
+                    {savings.retirement_savings > 0 ? (
+                      <>
+                        Total Wealth Increase by Retirement<br />
+                        <span className="text-green-600 text-5xl">
+                          ${Math.floor(mainSavingsNumber).toLocaleString()}{isTopBracket ? '+' : ''}
+                        </span>
+                      </>
+                    ) : (
+                      <>
+                        You Could Save<br />
+                        <span className="text-green-600 text-5xl">
+                          ${Math.floor(mainSavingsNumber).toLocaleString()}{isTopBracket ? '+' : ''}
+                        </span><br />
+                        Per Year
+                      </>
+                    )}
+                  </h1>
+                </div>
+
+                {/* Fake Savings Cards */}
+                <div className="grid grid-cols-3 gap-3 mb-6 blur-sm">
+                  <div className="bg-white rounded-lg p-3 shadow-sm border">
+                    <div className="text-xs text-muted-foreground mb-1">Annual</div>
+                    <div className="text-lg font-serif text-green-600">
+                      ${Math.floor(savings.annual_savings).toLocaleString()}{isTopBracket ? '+' : ''}
+                    </div>
+                  </div>
+                  <div className="bg-white rounded-lg p-3 shadow-sm border">
+                    <div className="text-xs text-muted-foreground mb-1">In 10 Years</div>
+                    <div className="text-lg font-serif text-green-600">
+                      ${Math.floor(savings.annual_savings * 10).toLocaleString()}{isTopBracket ? '+' : ''}
+                    </div>
+                  </div>
+                  <div className="bg-white rounded-lg p-3 shadow-sm border">
+                    <div className="text-xs text-muted-foreground mb-1">
+                      {savings.years_until_retirement > 0 ? `At Retirement (${savings.years_until_retirement}y)` : 'In 30 Years'}
+                    </div>
+                    <div className="text-lg font-serif text-green-600">
+                      ${Math.floor(savings.retirement_savings > 0 ? savings.retirement_savings : savings.annual_savings * 30).toLocaleString()}{isTopBracket ? '+' : ''}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Fake Breakdown Table */}
+                <div className="blur-md">
+                  <h2 className="text-xl font-serif mb-4">Savings Breakdown</h2>
+                  <div className="space-y-2">
+                    <div className="flex justify-between p-3 bg-gray-50 rounded">
+                      <span>State Income Tax</span>
+                      <span className="text-green-600 font-bold">
+                        +${Math.floor(savings.tax_savings).toLocaleString()}{isTopBracket ? '+' : ''}
+                      </span>
+                    </div>
+                    <div className="flex justify-between p-3 bg-gray-50 rounded">
+                      <span>Housing (Annual)</span>
+                      <span className="text-green-600 font-bold">
+                        +${Math.floor(savings.housing_savings).toLocaleString()}{isTopBracket ? '+' : ''}
+                      </span>
+                    </div>
+                    {savings.retirement_savings > 0 && (
+                      <div className="flex justify-between p-3 bg-gray-50 rounded">
+                        <span>Invested Until Retirement</span>
+                        <span className="text-green-600 font-bold">
+                          ${Math.floor(savings.retirement_savings).toLocaleString()}{isTopBracket ? '+' : ''}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Fake Neighborhoods Section */}
+                <div className="mt-6 blur-lg">
+                  <h2 className="text-xl font-serif mb-3">Your Recommended Neighborhoods</h2>
+                  <div className="grid grid-cols-3 gap-2">
+                    <div className="border rounded p-3">
+                      <div className="font-bold mb-1">Coral Gables</div>
+                      <div className="text-xs">$1.2M - $3M+</div>
+                    </div>
+                    <div className="border rounded p-3">
+                      <div className="font-bold mb-1">Brickell</div>
+                      <div className="text-xs">$600K - $2M</div>
+                    </div>
+                    <div className="border rounded p-3">
+                      <div className="font-bold mb-1">Coconut Grove</div>
+                      <div className="text-xs">$900K - $2.5M</div>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Form Overlay - Positioned over bottom half */}
+          <div className="relative pt-64 md:pt-80">
+            <Card className="shadow-2xl border-0 bg-white">
+              <CardContent className="p-6 md:p-8">
+
+                <div className="text-center mb-6">
+                  <div className="inline-block bg-gradient-to-r from-primary to-secondary text-white px-6 py-3 rounded-full mb-4">
+                    <span className="text-lg font-bold">🔒 Enter Your Info to Unlock Full Report</span>
+                  </div>
+                  <p className="text-sm text-muted-foreground">
+                    Get your exact savings breakdown + neighborhood recommendations
+                  </p>
+                </div>
 
             {/* Form */}
             <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
@@ -253,6 +341,8 @@ export default function LeadCaptureForm({ answers, sessionData, onSubmit }: Prop
           </CardContent>
         </Card>
       </div>
+    </div>
+  </div>
     </div>
   );
 }
