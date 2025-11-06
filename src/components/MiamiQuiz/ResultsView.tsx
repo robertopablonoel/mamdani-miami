@@ -85,41 +85,50 @@ export default function ResultsView({ answers, sessionData }: Props) {
               )}
             </div>
 
-            {/* Projection Cards */}
-            <div className="p-6 md:p-8 bg-gray-50">
-              <h2 className="text-xl md:text-2xl font-serif text-center mb-4 text-gray-800">
-                What You Could Do With YOUR Money Instead of Giving It to Mamdani:
+            {/* Comparison Table */}
+            <div className="p-6 md:p-8 bg-gradient-to-br from-red-50 to-orange-50 border-t-4 border-red-600">
+              <h2 className="text-xl md:text-2xl font-bold text-center mb-6 text-gray-900">
+                Your Money: <span className="text-red-600">Funding Mamdani</span> vs. <span className="text-green-600">Building YOUR Wealth</span>
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="bg-white rounded-xl p-6 shadow-lg border-l-4 border-green-600">
-                  <div className="text-sm font-semibold text-gray-500 mb-2">Stop Paying Mamdani</div>
-                  <div className="text-3xl font-bold text-green-600 mb-2">
-                    {formatCurrency(savings.annual_savings)}{isTopBracket ? '+' : ''}
-                  </div>
-                  <div className="text-xs text-gray-600">
-                    ${Math.floor(savings.annual_savings / 12).toLocaleString()}{isTopBracket ? '+' : ''}/mo for YOUR family, not his programs
-                  </div>
-                </div>
 
-                <div className="bg-white rounded-xl p-6 shadow-lg border-l-4 border-blue-600">
-                  <div className="text-sm font-semibold text-gray-500 mb-2">10-Year Escape Value</div>
-                  <div className="text-3xl font-bold text-blue-600 mb-2">
-                    {formatCurrency(savings.annual_savings * 10)}{isTopBracket ? '+' : ''}
-                  </div>
-                  <div className="text-xs text-gray-600">Investment property vs. funding Mamdani</div>
-                </div>
-
-                <div className="bg-white rounded-xl p-6 shadow-lg border-l-4 border-purple-600">
-                  <div className="text-sm font-semibold text-gray-500 mb-2">
-                    {savings.retirement_savings > 0 ? `Retirement Wealth (${savings.years_until_retirement}y)` : 'In 30 Years'}
-                  </div>
-                  <div className="text-3xl font-bold text-purple-600 mb-2">
-                    {formatCurrency(savings.retirement_savings > 0 ? savings.retirement_savings : savings.annual_savings * 30)}{isTopBracket ? '+' : ''}
-                  </div>
-                  <div className="text-xs text-gray-600">
-                    {savings.retirement_savings > 0 ? 'YOUR generational wealth—not Mamdani\'s redistribution' : 'Compounded for YOU, not Mamdani'}
-                  </div>
-                </div>
+              <div className="overflow-x-auto mb-6">
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b-2 border-gray-300">
+                      <th className="py-3 px-2 text-left text-sm md:text-base font-bold text-gray-600">Timeline</th>
+                      <th className="py-3 px-2 text-center text-sm md:text-base font-bold text-red-600">Stay in NY<br/>(Pay Mamdani)</th>
+                      <th className="py-3 px-2 text-center text-sm md:text-base font-bold text-green-600">Move to FL<br/>(Keep It)</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-200">
+                    <tr className="hover:bg-white/50 transition-colors">
+                      <td className="py-4 px-2 font-semibold text-gray-800">Year 1</td>
+                      <td className="py-4 px-2 text-center text-red-600 font-mono text-lg md:text-xl font-bold">-{formatCurrency(savings.annual_savings)}{isTopBracket ? '+' : ''}</td>
+                      <td className="py-4 px-2 text-center text-green-600 font-mono text-lg md:text-xl font-bold">$0</td>
+                    </tr>
+                    <tr className="hover:bg-white/50 transition-colors">
+                      <td className="py-4 px-2 font-semibold text-gray-800">10 Years</td>
+                      <td className="py-4 px-2 text-center text-red-600 font-mono text-lg md:text-xl font-bold">-{formatCurrency(savings.annual_savings * 10)}{isTopBracket ? '+' : ''}</td>
+                      <td className="py-4 px-2 text-center text-green-600 font-mono text-lg md:text-xl font-bold">$0</td>
+                    </tr>
+                    {savings.retirement_savings > 0 && (
+                      <tr className="bg-gradient-to-r from-green-50 to-green-100 hover:from-green-100 hover:to-green-200 transition-colors">
+                        <td className="py-5 px-2 font-bold text-gray-900 text-sm md:text-base">
+                          Retirement<br/>
+                          <span className="text-xs font-normal text-gray-600">({savings.years_until_retirement}y @ 7%)</span>
+                        </td>
+                        <td className="py-5 px-2 text-center">
+                          <div className="text-red-600 font-mono font-bold text-base md:text-xl">-{formatCurrency(savings.retirement_savings)}{isTopBracket ? '+' : ''}</div>
+                          <div className="text-xs text-gray-600 mt-1">Gone to Mamdani</div>
+                        </td>
+                        <td className="py-5 px-2 text-center">
+                          <div className="text-green-600 font-mono font-bold text-base md:text-xl">{formatCurrency(savings.retirement_savings)}{isTopBracket ? '+' : ''}</div>
+                          <div className="text-xs text-gray-600 mt-1">YOUR wealth</div>
+                        </td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
               </div>
             </div>
           </CardContent>
@@ -127,20 +136,20 @@ export default function ResultsView({ answers, sessionData }: Props) {
 
         {/* CTA #1 - Above the Fold */}
         {qualifiesForCall && (
-          <Card className="shadow-2xl border-0 bg-gradient-to-r from-green-600 to-green-700 text-white overflow-hidden">
+          <Card className="shadow-2xl border-0 bg-gradient-to-r from-red-600 to-red-700 text-white overflow-hidden">
             <CardContent className="p-4 md:p-8">
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-10 h-10 md:w-12 md:h-12 bg-white rounded-full flex items-center justify-center flex-shrink-0">
-                  <span className="text-xl md:text-2xl">📞</span>
+                  <span className="text-xl md:text-2xl">🚀</span>
                 </div>
-                <h3 className="text-lg md:text-2xl font-serif">Book Your Free Exit Strategy Call</h3>
+                <h3 className="text-lg md:text-2xl font-serif">Ready to Stop Funding Mamdani?</h3>
               </div>
-              <p className="text-green-50 mb-4 md:mb-6 text-sm md:text-base leading-relaxed">
-                Speak with our Chief Strategist about your personalized Miami relocation plan. No pressure, just expert guidance.
+              <p className="text-red-50 mb-4 md:mb-6 text-sm md:text-base leading-relaxed">
+                Book a free call with our Chief Strategist. We'll show you exactly how to keep YOUR money instead of sending it to Mamdani for "progressive programs."
               </p>
-              <Button size="lg" className="w-full bg-white text-green-700 hover:bg-green-50 h-12 md:h-14 text-sm md:text-base font-bold" onClick={openCalendly}>
+              <Button size="lg" className="w-full bg-white text-red-700 hover:bg-red-50 h-12 md:h-14 text-sm md:text-base font-bold" onClick={openCalendly}>
                 <ExternalLink className="mr-2 h-4 w-4 md:h-5 md:w-5 flex-shrink-0" />
-                <span className="truncate">Schedule Free Strategy Call</span>
+                <span className="truncate">Book My Escape Call Now</span>
               </Button>
             </CardContent>
           </Card>
@@ -317,20 +326,20 @@ export default function ResultsView({ answers, sessionData }: Props) {
 
         {/* CTA #2 - Mid-page */}
         {qualifiesForCall && (
-          <Card className="shadow-2xl border-0 bg-gradient-to-r from-blue-600 to-blue-700 text-white overflow-hidden">
+          <Card className="shadow-2xl border-0 bg-gradient-to-r from-orange-600 to-red-600 text-white overflow-hidden">
             <CardContent className="p-4 md:p-8">
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-10 h-10 md:w-12 md:h-12 bg-white rounded-full flex items-center justify-center flex-shrink-0">
-                  <span className="text-xl md:text-2xl">🎯</span>
+                  <span className="text-xl md:text-2xl">💰</span>
                 </div>
-                <h3 className="text-lg md:text-2xl font-serif">Ready to Plan Your Exit?</h3>
+                <h3 className="text-lg md:text-2xl font-serif">Tired of Writing Checks to Mamdani?</h3>
               </div>
-              <p className="text-blue-50 mb-4 md:mb-6 text-sm md:text-base leading-relaxed">
-                Schedule a free exit strategy call with our Chief Strategist. We'll map out your personalized relocation timeline.
+              <p className="text-orange-50 mb-4 md:mb-6 text-sm md:text-base leading-relaxed">
+                Every month you wait is more money funding Mamdani's socialist agenda. Let's get you out—fast. Free strategy call to map your timeline.
               </p>
-              <Button size="lg" className="w-full bg-white text-blue-700 hover:bg-blue-50 h-12 md:h-14 text-sm md:text-base font-bold" onClick={openCalendly}>
+              <Button size="lg" className="w-full bg-white text-orange-700 hover:bg-orange-50 h-12 md:h-14 text-sm md:text-base font-bold" onClick={openCalendly}>
                 <ExternalLink className="mr-2 h-4 w-4 md:h-5 md:w-5 flex-shrink-0" />
-                <span className="truncate">Book Strategy Call Now</span>
+                <span className="truncate">Stop Paying Mamdani—Book Now</span>
               </Button>
             </CardContent>
           </Card>
@@ -339,7 +348,7 @@ export default function ResultsView({ answers, sessionData }: Props) {
         {/* Lifestyle Upgrades Section */}
         <Card className="shadow-2xl border-0 bg-white">
           <CardContent className="p-4 md:p-8">
-            <h2 className="text-xl md:text-3xl font-serif mb-4 md:mb-6 text-gray-800">What You Gain Beyond the Savings</h2>
+            <h2 className="text-xl md:text-3xl font-serif mb-4 md:mb-6 text-gray-800">What You Get When You Stop Funding Mamdani's New York</h2>
             <ul className="space-y-3 md:space-y-4">
               {answers.benefit && (
                 Array.isArray(answers.benefit)
@@ -472,20 +481,20 @@ export default function ResultsView({ answers, sessionData }: Props) {
 
         {/* CTA #3 - After Testimonials */}
         {qualifiesForCall && (
-          <Card className="shadow-2xl border-0 bg-gradient-to-r from-purple-600 to-purple-700 text-white overflow-hidden">
+          <Card className="shadow-2xl border-0 bg-gradient-to-r from-red-700 to-red-900 text-white overflow-hidden">
             <CardContent className="p-4 md:p-8">
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-10 h-10 md:w-12 md:h-12 bg-white rounded-full flex items-center justify-center flex-shrink-0">
-                  <span className="text-xl md:text-2xl">💡</span>
+                  <span className="text-xl md:text-2xl">🛡️</span>
                 </div>
-                <h3 className="text-lg md:text-2xl font-serif">Let's Map Out Your Miami Move</h3>
+                <h3 className="text-lg md:text-2xl font-serif">Protect Your Wealth From Mamdani's Tax Grab</h3>
               </div>
-              <p className="text-purple-50 mb-4 md:mb-6 text-sm md:text-base leading-relaxed">
-                Join hundreds of NYC professionals who've successfully relocated. Book your free exit strategy call with our Chief Strategist today.
+              <p className="text-red-50 mb-4 md:mb-6 text-sm md:text-base leading-relaxed">
+                Join the exodus—hundreds of high earners have already escaped to South Florida. Book your free call and start reclaiming what's YOURS.
               </p>
-              <Button size="lg" className="w-full bg-white text-purple-700 hover:bg-purple-50 h-12 md:h-14 text-sm md:text-base font-bold" onClick={openCalendly}>
+              <Button size="lg" className="w-full bg-white text-red-700 hover:bg-red-50 h-12 md:h-14 text-sm md:text-base font-bold" onClick={openCalendly}>
                 <ExternalLink className="mr-2 h-4 w-4 md:h-5 md:w-5 flex-shrink-0" />
-                <span className="truncate">Schedule Your Strategy Call</span>
+                <span className="truncate">Escape Mamdani's NY—Book Call</span>
               </Button>
             </CardContent>
           </Card>
@@ -493,8 +502,11 @@ export default function ResultsView({ answers, sessionData }: Props) {
 
         {/* Footer CTA */}
         <div className="text-center py-8">
+          <p className="text-lg font-semibold text-gray-700 mb-2">
+            Every day you wait is another day paying Mamdani.
+          </p>
           <p className="text-muted-foreground mb-4">
-            Questions? Ready to make the move?
+            Ready to stop funding Mamdani's socialist agenda?
           </p>
           <Button variant="link" onClick={() => window.location.href = '/'}>
             Return to Homepage
