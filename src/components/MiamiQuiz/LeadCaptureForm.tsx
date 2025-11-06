@@ -46,28 +46,36 @@ export default function LeadCaptureForm({ answers, sessionData, onSubmit }: Prop
 
     try {
       // Submit to Edge Function
-      const { data: result, error } = await supabase.functions.invoke('submit-quiz', {
-        body: {
-          session_id: sessionData.session_id,
-          first_name: data.first_name,
-          email: data.email,
-          phone: data.phone || null,
-          sms_consent: data.sms_consent,
-          answers: answers,
-          savings_calculation: {
-            annual_savings: savings.annual_savings,
-            tax_savings: savings.tax_savings,
-            housing_savings: savings.housing_savings,
-          },
+      const payload = {
+        session_id: sessionData.session_id,
+        first_name: data.first_name,
+        email: data.email,
+        phone: data.phone || null,
+        sms_consent: data.sms_consent,
+        answers: answers,
+        savings_calculation: {
+          annual_savings: savings.annual_savings,
+          tax_savings: savings.tax_savings,
+          housing_savings: savings.housing_savings,
         },
+      };
+
+      console.log('Submitting quiz with payload:', payload);
+
+      const { data: result, error } = await supabase.functions.invoke('submit-quiz', {
+        body: payload,
       });
 
-      if (error) throw error;
+      if (error) {
+        console.error('Supabase function invocation error:', error);
+        throw error;
+      }
 
       if (result?.error) {
+        console.error('Function returned error:', result);
         toast({
           title: 'Submission Error',
-          description: result.error,
+          description: result.error + (result.details ? `\n\n${result.details}` : ''),
           variant: 'destructive',
         });
         return;

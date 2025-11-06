@@ -51,9 +51,27 @@ Deno.serve(async (req) => {
     const supabaseAdmin = createClient(supabaseUrl, supabaseKey);
 
     const submission: QuizSubmission = await req.json();
-    console.log('Parsed submission:', { email: submission.email });
+    console.log('Parsed submission:', {
+      email: submission.email,
+      frustration: submission.answers.frustration,
+      benefit: submission.answers.benefit,
+      fullAnswers: JSON.stringify(submission.answers)
+    });
 
-    const clientIP = req.headers.get('x-forwarded-for') || 'unknown';
+    // Validate required fields
+    if (!submission.answers.timeline) {
+      throw new Error('Missing required field: timeline');
+    }
+    if (!submission.answers.income_bracket) {
+      throw new Error('Missing required field: income_bracket');
+    }
+    if (!submission.answers.monthly_cost) {
+      throw new Error('Missing required field: monthly_cost');
+    }
+
+    // Get client IP (x-forwarded-for can be comma-separated, take first one)
+    const forwardedFor = req.headers.get('x-forwarded-for');
+    const clientIP = forwardedFor ? forwardedFor.split(',')[0].trim() : null;
 
     console.log('Quiz submission received:', {
       session_id: submission.session_id,
@@ -107,37 +125,44 @@ Deno.serve(async (req) => {
     );
 
     // 4. Insert quiz lead
+    const insertData = {
+      session_id: sessionData.id,
+      first_name: submission.first_name,
+      email: submission.email,
+      phone: submission.phone || null,
+      sms_consent: submission.sms_consent,
+      consent_ip: clientIP,
+      consent_timestamp: new Date().toISOString(),
+      tier: tier,
+      timeline: submission.answers.timeline,
+      annual_savings: submission.savings_calculation.annual_savings,
+      tax_savings: submission.savings_calculation.tax_savings,
+      housing_savings: submission.savings_calculation.housing_savings,
+      answers: submission.answers,
+      status: 'new',
+      priority: tier === 'tier_a_hot_lead' ? 'high' : tier === 'tier_b_nurture_warm' ? 'medium' : 'low',
+      tags: [
+        ...(Array.isArray(submission.answers.frustration)
+          ? submission.answers.frustration.map(f => `frustration_${f}`)
+          : submission.answers.frustration ? [`frustration_${submission.answers.frustration}`] : []),
+        ...(Array.isArray(submission.answers.benefit)
+          ? submission.answers.benefit.map(b => `benefit_${b}`)
+          : submission.answers.benefit ? [`benefit_${submission.answers.benefit}`] : []),
+      ].filter(Boolean),
+    };
+
+    console.log('Inserting quiz lead with data:', JSON.stringify(insertData, null, 2));
+
     const { error: insertError } = await supabaseAdmin
       .from('quiz_leads')
-      .insert([
-        {
-          session_id: sessionData.id,
-          first_name: submission.first_name,
-          email: submission.email,
-          phone: submission.phone || null,
-          sms_consent: submission.sms_consent,
-          consent_ip: clientIP,
-          consent_timestamp: new Date().toISOString(),
-          tier: tier,
-          timeline: submission.answers.timeline,
-          annual_savings: submission.savings_calculation.annual_savings,
-          tax_savings: submission.savings_calculation.tax_savings,
-          housing_savings: submission.savings_calculation.housing_savings,
-          answers: submission.answers,
-          status: 'new',
-          priority: tier === 'tier_a_hot_lead' ? 'high' : tier === 'tier_b_nurture_warm' ? 'medium' : 'low',
-          tags: [
-            ...(Array.isArray(submission.answers.frustration)
-              ? submission.answers.frustration.map(f => `frustration_${f}`)
-              : [`frustration_${submission.answers.frustration}`]),
-            ...(Array.isArray(submission.answers.benefit)
-              ? submission.answers.benefit.map(b => `benefit_${b}`)
-              : [`benefit_${submission.answers.benefit}`]),
-          ].filter(Boolean),
-        },
-      ]);
+      .insert([insertData]);
 
     if (insertError) {
+      console.error('Lead insertion error:', insertError);
+      console.error('Error code:', insertError.code);
+      console.error('Error message:', insertError.message);
+      console.error('Error details:', JSON.stringify(insertError, null, 2));
+
       // Handle duplicate email gracefully
       if (insertError.code === '23505') {
         console.log('Duplicate email submission:', submission.email);
@@ -151,8 +176,8 @@ Deno.serve(async (req) => {
           }
         );
       }
-      console.error('Lead insertion error:', insertError);
-      throw insertError;
+
+      throw new Error(`Database insert failed: ${insertError.message} (code: ${insertError.code})`);
     }
 
     // 5. Log rate limit
@@ -190,9 +215,15 @@ Deno.serve(async (req) => {
     );
   } catch (error) {
     console.error('Error processing quiz submission:', error);
+    console.error('Error details:', JSON.stringify(error, null, 2));
     const errorMessage = error instanceof Error ? error.message : 'An error occurred';
+    const errorStack = error instanceof Error ? error.stack : '';
+    console.error('Stack trace:', errorStack);
     return new Response(
-      JSON.stringify({ error: errorMessage }),
+      JSON.stringify({
+        error: errorMessage,
+        details: error instanceof Error ? error.stack : String(error)
+      }),
       {
         status: 500,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
