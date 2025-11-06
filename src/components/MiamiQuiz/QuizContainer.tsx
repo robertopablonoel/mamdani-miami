@@ -53,7 +53,7 @@ export default function QuizContainer() {
     }
   };
 
-  const handleAnswer = async (key: string, value: string) => {
+  const handleAnswer = async (key: string, value: string | string[]) => {
     const updatedAnswers = { ...answers, [key]: value };
     setAnswers(updatedAnswers);
 
@@ -68,12 +68,15 @@ export default function QuizContainer() {
           .single();
 
         if (sessionRecord) {
+          // Convert array to comma-separated string for storage
+          const answerValue = Array.isArray(value) ? value.join(',') : value;
+
           await supabase.from('quiz_answers').insert([
             {
               session_id: sessionRecord.id,
               step: currentStep,
               question_key: key,
-              answer_value: value,
+              answer_value: answerValue,
             },
           ]);
         }
@@ -85,7 +88,7 @@ export default function QuizContainer() {
     }
 
     // Advance to next step or show lead capture
-    if (currentStep < 7) {
+    if (currentStep < 6) {
       setCurrentStep(currentStep + 1);
     } else {
       setShowLeadCapture(true);
@@ -142,7 +145,7 @@ export default function QuizContainer() {
   return (
     <div className="min-h-screen gradient-premium py-12">
       <div className="container mx-auto px-4 max-w-2xl">
-        <ProgressBar currentStep={currentStep} totalSteps={7} />
+        <ProgressBar currentStep={currentStep} totalSteps={6} />
         <QuestionScreen
           step={currentStep}
           answers={answers}

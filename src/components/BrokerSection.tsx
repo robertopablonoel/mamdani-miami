@@ -30,7 +30,7 @@ Your Escape Facilitator.</h2>
 
               <div className="space-y-5 md:space-y-6 mt-5 md:mt-6">
                 <Button size="lg" variant="secondary" className="h-14 md:h-14 px-8 md:px-10 w-full sm:w-auto text-base md:text-base" asChild>
-                  <a href="https://calendly.com/julie-nyrefugee/30min" target="_blank" rel="noopener noreferrer">
+                  <a href={import.meta.env.VITE_CALENDLY_URL} target="_blank" rel="noopener noreferrer">
                     Book an Exit Strategy Call
                     <ArrowRight className="ml-2 w-5 md:w-5 h-5 md:h-5" />
                   </a>

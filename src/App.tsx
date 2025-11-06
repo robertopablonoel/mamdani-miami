@@ -8,6 +8,7 @@ import { usePageAnalytics } from "@/hooks/usePageAnalytics";
 
 // Lazy load pages for better performance
 const Index = lazy(() => import("./pages/Index"));
+const LanderV2 = lazy(() => import("./pages/LanderV2"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const Auth = lazy(() => import("./pages/Auth"));
 const Admin = lazy(() => import("./pages/Admin"));
@@ -40,6 +41,7 @@ const App = () => (
           <Suspense fallback={<PageLoader />}>
             <Routes>
               <Route path="/" element={<Index />} />
+              <Route path="/lander-v2" element={<LanderV2 />} />
               <Route path="/auth" element={<Auth />} />
               <Route path="/admin" element={<Admin />} />
               <Route path="/privacy" element={<Privacy />} />

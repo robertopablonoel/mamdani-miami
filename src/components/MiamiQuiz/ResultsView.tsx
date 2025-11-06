@@ -30,8 +30,7 @@ export default function ResultsView({ answers, sessionData }: Props) {
 
   const openCalendly = () => {
     trackEvent('cta_click_book', { session_id: sessionData.session_id });
-    // TODO: Replace with actual Calendly URL
-    window.open('https://calendly.com/your-miami-broker', '_blank');
+    window.open(import.meta.env.VITE_CALENDLY_URL, '_blank');
   };
 
   const downloadGuide = () => {

@@ -15,8 +15,8 @@ export interface QuizAnswers {
   housing_status?: HousingStatus;
   monthly_cost?: MonthlyCostBracket;
   income_bracket?: IncomeBracket;
-  frustration?: Frustration;
-  benefit?: Benefit;
+  frustration?: Frustration | Frustration[];
+  benefit?: Benefit | Benefit[];
   timeline?: Timeline;
   concern?: Concern;
 }

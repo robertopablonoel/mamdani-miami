@@ -56,7 +56,7 @@ const HeroSection = memo(() => {
               </Link>
             </Button>
             <Button size="lg" variant="outline" className="text-base sm:text-base px-8 sm:px-10 py-6 sm:py-6 h-auto sm:h-14 w-full sm:w-auto bg-white/10 backdrop-blur-md border-white/30 text-white hover:bg-white/20" asChild>
-              <a href="https://calendly.com/julie-nyrefugee/30min" target="_blank" rel="noopener noreferrer" onClick={() => trackCTAClick('Schedule Consultation', 'hero_secondary')}>
+              <a href={import.meta.env.VITE_CALENDLY_URL} target="_blank" rel="noopener noreferrer" onClick={() => trackCTAClick('Schedule Consultation', 'hero_secondary')}>
                 Schedule Consultation
                 <ArrowRight className="ml-2 w-5 sm:w-5 h-5 sm:h-5" />
               </a>

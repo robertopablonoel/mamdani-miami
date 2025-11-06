@@ -153,44 +153,72 @@ All colors MUST be HSL.
   .gradient-hero {
     background: var(--gradient-hero);
   }
-  
+
   .gradient-subtle {
     background: var(--gradient-subtle);
   }
-  
+
   .gradient-premium {
     background: var(--gradient-premium);
   }
-  
+
   .gradient-gold {
     background: var(--gradient-gold);
   }
-  
+
   .shadow-elegant {
     box-shadow: var(--shadow-elegant);
   }
-  
+
   .shadow-hover {
     box-shadow: var(--shadow-hover);
   }
-  
+
   .shadow-premium {
     box-shadow: var(--shadow-premium);
   }
-  
+
   .shadow-glow {
     box-shadow: var(--shadow-glow);
   }
-  
+
   .transition-smooth {
     transition: var(--transition-smooth);
   }
-  
+
   .transition-spring {
     transition: var(--transition-spring);
   }
-  
+
   .text-balance {
     text-wrap: balance;
+  }
+
+  /* Scrolling animation for social proof */
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-scroll {
+    animation: scroll 60s linear infinite;
+  }
+
+  /* Slower on mobile to prevent glitching */
+  @media (max-width: 768px) {
+    .animate-scroll {
+      animation: scroll 80s linear infinite;
+    }
+  }
+
+  /* Pause animation on hover (desktop only) */
+  @media (min-width: 769px) {
+    .animate-scroll:hover {
+      animation-play-state: paused;
+    }
   }
 }

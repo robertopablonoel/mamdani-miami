@@ -10,9 +10,10 @@ import type { QuizAnswers, QuizSession } from '@/types/quiz';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { useState } from 'react';
-import { calculateSavings } from '@/lib/savingsCalculator';
+import { calculateSavings, formatCurrency } from '@/lib/savingsCalculator';
 import { trackEvent } from '@/lib/analytics';
 import { QUIZ_COPY } from '@/content/quiz-copy';
+import { CheckCircle } from 'lucide-react';
 
 interface Props {
   answers: QuizAnswers;
@@ -23,6 +24,12 @@ interface Props {
 export default function LeadCaptureForm({ answers, sessionData, onSubmit }: Props) {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Calculate savings for teaser
+  const savings = calculateSavings(
+    answers.income_bracket!,
+    answers.monthly_cost!
+  );
 
   const form = useForm<LeadCaptureData>({
     resolver: zodResolver(leadCaptureSchema),
@@ -38,12 +45,6 @@ export default function LeadCaptureForm({ answers, sessionData, onSubmit }: Prop
     setIsSubmitting(true);
 
     try {
-      // Calculate savings
-      const savings = calculateSavings(
-        answers.income_bracket!,
-        answers.monthly_cost!
-      );
-
       // Submit to Edge Function
       const { data: result, error } = await supabase.functions.invoke('submit-quiz', {
         body: {
@@ -100,17 +101,73 @@ export default function LeadCaptureForm({ answers, sessionData, onSubmit }: Prop
 
   const watchPhone = form.watch('phone');
 
+  // Calculate savings range (conservative estimate ±15%)
+  const savingsLow = Math.floor(savings.annual_savings * 0.85);
+  const savingsHigh = Math.ceil(savings.annual_savings * 1.15);
+  const savingsMid = Math.floor((savingsLow + savingsHigh) / 2);
+
   return (
     <div className="min-h-screen gradient-premium flex items-center justify-center py-12">
-      <div className="container mx-auto px-4 max-w-xl">
+      <div className="container mx-auto px-4 max-w-3xl">
+
+        {/* TEASER RESULTS - Show First */}
+        <Card className="shadow-premium border-0 bg-white mb-8">
+          <CardContent className="p-8 md:p-12">
+            <h1 className="text-2xl md:text-3xl font-serif text-center mb-6">
+              {QUIZ_COPY.teaserResults.h1}
+            </h1>
+
+            <div className="bg-green-50 border-2 border-green-200 rounded-lg p-8 mb-6 text-center">
+              <p className="text-sm text-green-700 font-medium uppercase tracking-wide mb-2">
+                {QUIZ_COPY.teaserResults.savingsRange.prefix}
+              </p>
+              <div className="text-4xl md:text-6xl font-serif font-bold text-green-700 mb-2">
+                ${savingsLow.toLocaleString()} - ${savingsHigh.toLocaleString()}
+              </div>
+              <p className="text-lg text-green-700 font-medium">
+                {QUIZ_COPY.teaserResults.savingsRange.suffix}
+              </p>
+            </div>
+
+            <div className="space-y-4 mb-6">
+              <p className="text-lg text-center font-medium">
+                That's ${savingsMid.toLocaleString()} BACK IN YOUR POCKET every year.
+              </p>
+              <p className="text-lg text-center text-muted-foreground">
+                What could you do with an extra ${savingsMid.toLocaleString()}/year?
+              </p>
+            </div>
+
+            <div className="bg-gray-50 rounded-lg p-6 space-y-2 text-base text-muted-foreground">
+              {QUIZ_COPY.teaserResults.uses.map((use, idx) => (
+                <div key={idx}>{use}</div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* NOW THE ASK - Lead Capture Form */}
         <Card className="shadow-premium border-0 bg-white">
           <CardContent className="p-8 md:p-12">
-            <h1 className="text-2xl md:text-3xl font-serif text-foreground mb-3">
+            <h2 className="text-2xl md:text-3xl font-serif text-foreground mb-3 text-center">
               {QUIZ_COPY.leadCapture.h1}
-            </h1>
-            <p className="text-base md:text-lg text-muted-foreground mb-6">
+            </h2>
+            <p className="text-base md:text-lg text-muted-foreground mb-6 text-center">
               {QUIZ_COPY.leadCapture.subhead}
             </p>
+
+            {/* Benefits List */}
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-6">
+              <p className="font-semibold mb-3 text-foreground">You'll get:</p>
+              <div className="space-y-2">
+                {QUIZ_COPY.leadCapture.benefits.map((benefit, idx) => (
+                  <div key={idx} className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                    <span className="text-sm text-foreground">{benefit}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
 
             <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
               <div>
@@ -135,7 +192,7 @@ export default function LeadCaptureForm({ answers, sessionData, onSubmit }: Prop
                 <Input
                   id="email"
                   type="email"
-                  placeholder="Email address"
+                  placeholder="your.email@example.com"
                   className="mt-1"
                   {...form.register('email')}
                   disabled={isSubmitting}
@@ -158,7 +215,7 @@ export default function LeadCaptureForm({ answers, sessionData, onSubmit }: Prop
                   disabled={isSubmitting}
                 />
                 <p className="text-sm text-muted-foreground mt-1">
-                  For faster callback from our Miami team
+                  For priority access to our Miami brokerage partner (callbacks within 24hrs)
                 </p>
                 {form.formState.errors.phone && (
                   <p className="text-sm text-destructive mt-1">
@@ -189,17 +246,27 @@ export default function LeadCaptureForm({ answers, sessionData, onSubmit }: Prop
                 </p>
               )}
 
-              <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
+              <Button type="submit" size="lg" className="w-full h-14 text-lg font-bold" disabled={isSubmitting}>
                 {isSubmitting ? 'Calculating...' : QUIZ_COPY.leadCapture.button}
               </Button>
 
               <p className="text-xs text-muted-foreground text-center pt-2">
-                {QUIZ_COPY.leadCapture.privacyNote} See our{' '}
-                <a href="/privacy" className="underline">
-                  Privacy Policy
-                </a>
-                .
+                {QUIZ_COPY.leadCapture.privacyNote}
               </p>
+
+              {/* Urgency */}
+              <div className="text-center pt-2">
+                <p className="text-sm text-orange-600 font-medium">
+                  {QUIZ_COPY.leadCapture.urgency}
+                </p>
+              </div>
+
+              {/* Takeaway Close */}
+              <div className="bg-yellow-50 border border-yellow-200 rounded p-4 mt-4">
+                <p className="text-xs text-yellow-800 leading-relaxed">
+                  {QUIZ_COPY.leadCapture.takeaway}
+                </p>
+              </div>
             </form>
           </CardContent>
         </Card>
