@@ -373,10 +373,10 @@ const LanderV2 = memo(() => {
               <Link to="/move-to-miami" onClick={() => trackCTAClick('Quiz CTA V2', 'reason_why_section')}>
                 <Button
                   size="lg"
-                  className="gradient-gold text-xl md:text-2xl px-12 md:px-16 py-6 md:py-8 h-auto shadow-2xl hover:shadow-yellow-500/50 transition-all transform hover:scale-105 font-bold"
+                  className="gradient-gold text-xl md:text-2xl px-12 md:px-16 py-8 md:py-10 h-auto w-full sm:w-auto shadow-2xl hover:shadow-yellow-500/50 transition-all transform hover:scale-105 font-bold"
                 >
-                  <Calculator className="mr-3 w-6 h-6 md:w-7 md:h-7" />
-                  Calculate What I'm Really Paying →
+                  <Calculator className="mr-3 w-7 h-7 md:w-8 md:h-8" />
+                  What's MY Number? →
                 </Button>
               </Link>
             </div>
