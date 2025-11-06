@@ -53,22 +53,22 @@ export default function QuestionScreen({ step, onAnswer }: Props) {
 
   return (
     <Card className="shadow-premium border-0 mt-4 bg-white">
-      <CardContent className="p-8 md:p-12">
-        <h1 className="text-2xl md:text-3xl font-serif text-foreground mb-3">
+      <CardContent className="p-6 md:p-8">
+        <h1 className="text-2xl md:text-3xl font-serif text-foreground mb-2">
           {screenData.h1}
         </h1>
-        <p className="text-base md:text-lg text-muted-foreground mb-6">
+        <p className="text-base text-muted-foreground mb-4">
           {screenData.subhead}
         </p>
 
-        <p className="text-lg font-medium mb-4">{screenData.question}</p>
+        <p className="text-lg font-medium mb-3">{screenData.question}</p>
 
         {isMultiSelect ? (
-          <div className="space-y-3">
+          <div className="space-y-2">
             {screenData.options.map((option) => (
               <div
                 key={option.value}
-                className={`flex items-center space-x-3 p-4 rounded-lg border-2 cursor-pointer transition-colors ${
+                className={`flex items-center space-x-3 p-3 rounded-lg border-2 cursor-pointer transition-colors ${
                   selectedValues.includes(option.value)
                     ? 'border-primary bg-accent'
                     : 'border-gray-200 hover:border-primary hover:bg-accent'
@@ -80,7 +80,7 @@ export default function QuestionScreen({ step, onAnswer }: Props) {
                   onCheckedChange={() => toggleCheckbox(option.value)}
                   id={option.value}
                 />
-                <Label htmlFor={option.value} className="cursor-pointer flex-1 text-base">
+                <Label htmlFor={option.value} className="cursor-pointer flex-1 text-base leading-snug">
                   {option.label}
                 </Label>
               </div>
@@ -88,15 +88,15 @@ export default function QuestionScreen({ step, onAnswer }: Props) {
           </div>
         ) : (
           <RadioGroup value={selectedValue} onValueChange={setSelectedValue}>
-            <div className="space-y-3">
+            <div className="space-y-2">
               {screenData.options.map((option) => (
                 <div
                   key={option.value}
-                  className="flex items-center space-x-3 p-4 rounded-lg border-2 hover:border-primary hover:bg-accent cursor-pointer transition-colors"
+                  className="flex items-center space-x-3 p-3 rounded-lg border-2 hover:border-primary hover:bg-accent cursor-pointer transition-colors"
                   onClick={() => setSelectedValue(option.value)}
                 >
                   <RadioGroupItem value={option.value} id={option.value} />
-                  <Label htmlFor={option.value} className="cursor-pointer flex-1 text-base">
+                  <Label htmlFor={option.value} className="cursor-pointer flex-1 text-base leading-snug">
                     {option.label}
                   </Label>
                 </div>
@@ -105,12 +105,12 @@ export default function QuestionScreen({ step, onAnswer }: Props) {
           </RadioGroup>
         )}
 
-        <div className="mt-8">
+        <div className="mt-6">
           <Button
             size="lg"
             onClick={handleSubmit}
             disabled={isMultiSelect ? selectedValues.length === 0 : !selectedValue}
-            className="w-full"
+            className="w-full h-12"
           >
             {screenData.button}
           </Button>

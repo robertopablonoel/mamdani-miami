@@ -7,8 +7,8 @@ export default function ProgressBar({ currentStep, totalSteps }: Props) {
   const percentage = (currentStep / totalSteps) * 100;
 
   return (
-    <div className="w-full mb-8">
-      <div className="flex justify-between text-sm text-muted-foreground mb-2">
+    <div className="w-full mb-4 md:mb-6">
+      <div className="flex justify-between text-xs md:text-sm text-muted-foreground mb-2">
         <span>Question {currentStep} of {totalSteps}</span>
         <span>{Math.round(percentage)}% complete</span>
       </div>

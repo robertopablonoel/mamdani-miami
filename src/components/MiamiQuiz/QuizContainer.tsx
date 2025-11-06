@@ -143,7 +143,7 @@ export default function QuizContainer() {
   }
 
   return (
-    <div className="min-h-screen gradient-premium py-12">
+    <div className="min-h-screen gradient-premium py-6 md:py-12">
       <div className="container mx-auto px-4 max-w-2xl">
         <ProgressBar currentStep={currentStep} totalSteps={6} />
         <QuestionScreen
