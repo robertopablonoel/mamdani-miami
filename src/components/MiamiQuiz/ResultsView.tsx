@@ -142,7 +142,7 @@ export default function ResultsView({ answers, sessionData }: Props) {
                 <div className="w-10 h-10 md:w-12 md:h-12 bg-white rounded-full flex items-center justify-center flex-shrink-0">
                   <span className="text-xl md:text-2xl">🚀</span>
                 </div>
-                <h3 className="text-lg md:text-2xl font-serif">Ready to Stop Funding Mamdani?</h3>
+                <h3 className="text-lg md:text-2xl font-serif">Want to see what moving to South Florida could look like?</h3>
               </div>
               <p className="text-red-50 mb-4 md:mb-6 text-sm md:text-base leading-relaxed">
                 Book a free call with our Chief Strategist. We'll show you exactly how to keep YOUR money instead of sending it to Mamdani for "progressive programs."
@@ -506,7 +506,7 @@ export default function ResultsView({ answers, sessionData }: Props) {
             Every day you wait is another day paying Mamdani.
           </p>
           <p className="text-muted-foreground mb-4">
-            Ready to stop funding Mamdani's socialist agenda?
+            Ready to explore your options?
           </p>
           <Button variant="link" onClick={() => window.location.href = '/'}>
             Return to Homepage
