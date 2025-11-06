@@ -101,18 +101,18 @@ const LanderV2 = memo(() => {
             </div>
 
             {/* SPECIFIC OUTCOME STATS */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 max-w-4xl mx-auto pt-8 md:pt-12 px-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 max-w-5xl mx-auto pt-8 md:pt-12 px-4">
               <div className="bg-white/10 backdrop-blur-md border border-white/20 p-6 md:p-8 rounded-lg">
-                <div className="text-3xl md:text-5xl font-serif text-yellow-400 mb-2 font-bold">$42K+/Year</div>
-                <div className="text-sm md:text-base text-white/90">Average savings (yours could be higher—take the quiz to find out)</div>
+                <div className="text-3xl md:text-4xl lg:text-5xl font-serif text-yellow-400 mb-2 font-bold break-words">$42K+/Year</div>
+                <div className="text-xs md:text-sm text-white/90 leading-tight">Average savings (yours could be higher)</div>
               </div>
               <div className="bg-white/10 backdrop-blur-md border border-white/20 p-6 md:p-8 rounded-lg">
-                <div className="text-3xl md:text-5xl font-serif text-yellow-400 mb-2 font-bold">2,847 Families</div>
-                <div className="text-sm md:text-base text-white/90">Already discovered their number and made the move</div>
+                <div className="text-3xl md:text-4xl lg:text-5xl font-serif text-yellow-400 mb-2 font-bold break-words">2,847 Families</div>
+                <div className="text-xs md:text-sm text-white/90 leading-tight">Already discovered their number</div>
               </div>
               <div className="bg-white/10 backdrop-blur-md border border-white/20 p-6 md:p-8 rounded-lg">
-                <div className="text-3xl md:text-5xl font-serif text-yellow-400 mb-2 font-bold">43% More Space</div>
-                <div className="text-sm md:text-base text-white/90">For the same price—actual median comparison</div>
+                <div className="text-3xl md:text-4xl lg:text-5xl font-serif text-yellow-400 mb-2 font-bold break-words">43% More Space</div>
+                <div className="text-xs md:text-sm text-white/90 leading-tight">Same price—actual comparison</div>
               </div>
             </div>
           </div>
