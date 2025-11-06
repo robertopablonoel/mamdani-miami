@@ -19,12 +19,10 @@ export default function ResultsView({ answers, sessionData }: Props) {
   );
 
   const tier = calculateTier(answers.timeline!, savings.annual_savings);
-  const isTopBracket = answers.income_bracket === 'over_2m';
+  const isTopBracket = answers.income_bracket === 'over_750k';
 
-  // Only show booking CTAs for high-income, urgent movers
-  const qualifiesForCall =
-    ['150k_250k', '250k_400k', '400k_750k', '750k_1m', '1m_1.5m', '1.5m_2m', 'over_2m'].includes(answers.income_bracket!) &&
-    answers.timeline === '0-6mo';
+  // Show booking CTAs to everyone
+  const qualifiesForCall = true;
 
   useEffect(() => {
     trackEvent('result_view', {
@@ -385,7 +383,7 @@ export default function ResultsView({ answers, sessionData }: Props) {
               Based on your income bracket and housing preferences, these Miami neighborhoods match your profile:
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
-              {answers.income_bracket && parseInt(answers.income_bracket.split('_')[0].replace('k', '000')) >= 250000 ? (
+              {answers.income_bracket && ['250k_400k', '400k_750k', 'over_750k'].includes(answers.income_bracket) ? (
                 <>
                   <div className="border rounded-lg p-4 md:p-5 hover:shadow-lg transition-shadow">
                     <h3 className="font-bold text-base md:text-lg mb-1 md:mb-2">Coral Gables</h3>

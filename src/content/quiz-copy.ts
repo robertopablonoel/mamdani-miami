@@ -48,10 +48,7 @@ export const QUIZ_COPY = {
         { value: "150k_250k", label: "$150,000 – $250,000" },
         { value: "250k_400k", label: "$250,000 – $400,000" },
         { value: "400k_750k", label: "$400,000 – $750,000" },
-        { value: "750k_1m", label: "$750,000 – $1,000,000" },
-        { value: "1m_1.5m", label: "$1,000,000 – $1,500,000" },
-        { value: "1.5m_2m", label: "$1,500,000 – $2,000,000" },
-        { value: "over_2m", label: "Over $2,000,000" },
+        { value: "over_750k", label: "$750,000+" },
         { value: "prefer_not_say", label: "Prefer not to say" },
       ],
       button: "Next",
@@ -75,7 +72,7 @@ export const QUIZ_COPY = {
       step: 5,
       goal: "Identify housing situation",
       h1: "Quick one: What's your current housing situation?",
-      subhead: "This helps us compare apples to apples with Miami options.",
+      subhead: "This helps us compare apples to apples with South Florida options.",
       question: "Are you renting or owning in the New York area?",
       options: [
         { value: "rent", label: "🏢 Renting an apartment" },
@@ -90,7 +87,7 @@ export const QUIZ_COPY = {
       goal: "Identify aspirational motivation",
       h1: "What does your dream life look like?",
       subhead: "Select what excites you (all that apply)",
-      question: "Your ideal Miami scenario:",
+      question: "Your ideal South Florida scenario:",
       multiSelect: true,
       options: [
         { value: "no_tax", label: "☀️ $40K+/year back from zero state tax" },
@@ -151,9 +148,9 @@ export const QUIZ_COPY = {
     subhead: "Enter your email to get your full personalized report.",
     benefits: [
       "Your dollar-for-dollar savings breakdown",
-      "Miami neighborhoods that match your budget & lifestyle",
+      "South Florida neighborhoods that match your budget & lifestyle",
       "Your #1 concern (addressed with data & case studies)",
-      'BONUS: "The Miami Insider Guide" (PDF, $97 value)',
+      'BONUS: "The South Florida Insider Guide" (PDF, $97 value)',
     ],
     privacyNote: "🔒 Zero spam. We respect your inbox. Unsubscribe anytime.",
     urgency:
@@ -169,27 +166,27 @@ export const QUIZ_COPY = {
     outdoor_lifestyle:
       "☀️ **248 sunny days/year** (vs. NYC's 224). Beach, parks, and outdoor dining 12 months a year.",
     more_space:
-      "🏡 **Get 40% more space.** Median Miami 2BR: 1,200 sq ft vs. NYC 2BR: 850 sq ft at similar price points.",
+      "🏡 **Get 40% more space.** Median South Florida 2BR: 1,200 sq ft vs. NYC 2BR: 850 sq ft at similar price points.",
     pro_business:
       "💼 **Business-friendly environment.** No corporate income tax, lower regulatory burden, and a governor who prioritizes economic growth.",
     work_life_balance:
       "🏖️ **Work from paradise.** Remote-first culture, rooftop coworking spaces, and networking events on yachts (yes, really).",
     networking:
-      "🤝 **Join 15,000+ finance & tech professionals** who've relocated to Miami since 2020. Thriving startup scene (Founders Fund, Atomic, SoftBank offices).",
+      "🤝 **Join 15,000+ finance & tech professionals** who've relocated to South Florida since 2020. Thriving startup scene (Founders Fund, Atomic, SoftBank offices).",
   } as Record<Benefit, string>,
 
   objectionRebuttals: {
     hurricanes:
-      "Yes, hurricanes happen—but so do NYC blizzards and floods (remember Ida?). Modern Miami buildings are engineered to hurricane standards, insurance is manageable with proper coverage, and you'll never shovel snow again. Plus, homestead exemptions offset property taxes.",
-    heat: "Summers are hot (85–90°F)—but every building has AC, and you're near the beach year-round. Trade 4 months of brutal winters for 4 months of indoor summers. Most relocators say they'd take Miami heat over NYC cold any day.",
+      "Yes, hurricanes happen—but so do NYC blizzards and floods (remember Ida?). Modern South Florida buildings are engineered to hurricane standards, insurance is manageable with proper coverage, and you'll never shovel snow again. Plus, homestead exemptions offset property taxes.",
+    heat: "Summers are hot (85–90°F)—but every building has AC, and you're near the beach year-round. Trade 4 months of brutal winters for 4 months of indoor summers. Most relocators say they'd take South Florida heat over NYC cold any day.",
     transit:
-      "Miami is car-dependent—true. But you'll have a garage (or parking!), traffic is lighter than NYC, and Uber/Lyft are cheaper. Plus, walkable neighborhoods like Brickell and Coral Gables rival Manhattan for pedestrian life.",
+      "South Florida is car-dependent—true. But you'll have a garage (or parking!), traffic is lighter than NYC, and Uber/Lyft are cheaper. Plus, walkable neighborhoods like Brickell and Coral Gables rival Manhattan for pedestrian life.",
     career_network:
-      "Finance, tech, and media hubs are expanding to Miami fast. Citadel, Blackstone, Goldman Sachs, and dozens of startups now have Miami offices. Plus, flights to NYC are 3 hours—keep your network, gain your freedom.",
+      "Finance, tech, and media hubs are expanding to South Florida fast. Citadel, Blackstone, Goldman Sachs, and dozens of startups now have offices here. Plus, flights to NYC are 3 hours—keep your network, gain your freedom.",
     industry_remote:
-      "Remote work is the new normal. If your job allows it now, you're already halfway there. And Miami's coworking + networking scene (eMerge Americas, Miami Tech Week) rivals SF and NYC.",
+      "Remote work is the new normal. If your job allows it now, you're already halfway there. And South Florida's coworking + networking scene (eMerge Americas, Miami Tech Week) rivals SF and NYC.",
     schools:
-      "Miami has excellent private schools (Ransom Everglades, Gulliver, Palmer Trinity) and strong public districts (Coral Gables, Pinecrest). Family-friendly neighborhoods abound, with parks, beaches, and no snow days.",
+      "South Florida has excellent private schools (Ransom Everglades, Gulliver, Palmer Trinity) and strong public districts (Coral Gables, Pinecrest). Family-friendly neighborhoods abound, with parks, beaches, and no snow days.",
   } as Record<Concern, string>,
 
   testimonials: [

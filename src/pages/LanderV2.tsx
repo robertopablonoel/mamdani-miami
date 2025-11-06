@@ -29,7 +29,7 @@ const LanderV2 = memo(() => {
         <div className="absolute inset-0 bg-cover bg-center">
           <img
             src={heroImage}
-            alt="Miami luxury waterfront - escape NYC taxes"
+            alt="South Florida luxury waterfront - escape NYC taxes"
             className="w-full h-full object-cover"
             width="1920"
             height="1080"
@@ -63,7 +63,7 @@ const LanderV2 = memo(() => {
 
             {/* SUBHEADLINE */}
             <p className="text-lg sm:text-xl md:text-2xl text-white/95 max-w-3xl mx-auto leading-relaxed px-4 font-light">
-              While Mamdani pushes for <span className="font-bold text-red-400">even higher taxes</span> to fund "progressive programs," 2,847 high-earners stopped funding his socialism and moved to Miami.<br />
+              While Mamdani pushes for <span className="font-bold text-red-400">even higher taxes</span> to fund "progressive programs," 2,847 high-earners stopped funding his socialism and moved to South Florida.<br />
               <span className="font-semibold text-yellow-400">Take the 60-second quiz to see YOUR exact savings...</span>
             </p>
 
@@ -148,7 +148,7 @@ const LanderV2 = memo(() => {
                       </div>
                     </div>
                     <div className="border-t pt-4">
-                      <div className="text-xs text-muted-foreground uppercase tracking-wide mb-1">After (Miami)</div>
+                      <div className="text-xs text-muted-foreground uppercase tracking-wide mb-1">After (South Florida)</div>
                       <div className="text-sm">
                         • Same income, remote<br />
                         • $5,800/mo (4BR pool house, Brickell)<br />
@@ -185,7 +185,7 @@ const LanderV2 = memo(() => {
                       </div>
                     </div>
                     <div className="border-t pt-4">
-                      <div className="text-xs text-muted-foreground uppercase tracking-wide mb-1">After (Miami)</div>
+                      <div className="text-xs text-muted-foreground uppercase tracking-wide mb-1">After (South Florida)</div>
                       <div className="text-sm">
                         • Same jobs, remote<br />
                         • $4,200/mo (4BR, yard, Coral Gables)<br />
@@ -222,7 +222,7 @@ const LanderV2 = memo(() => {
                       </div>
                     </div>
                     <div className="border-t pt-4">
-                      <div className="text-xs text-muted-foreground uppercase tracking-wide mb-1">After (Miami)</div>
+                      <div className="text-xs text-muted-foreground uppercase tracking-wide mb-1">After (South Florida)</div>
                       <div className="text-sm">
                         • $310K (grew business!)<br />
                         • $3,200/mo (2BR waterfront, Edgewater)<br />
@@ -237,7 +237,7 @@ const LanderV2 = memo(() => {
                   </div>
 
                   <blockquote className="text-sm italic text-muted-foreground border-l-2 border-primary pl-3">
-                    "Miami's entrepreneur scene is insane. I've closed 3 deals from rooftop happy hours."
+                    "South Florida's entrepreneur scene is insane. I've closed 3 deals from rooftop happy hours."
                   </blockquote>
                 </CardContent>
               </Card>
@@ -273,7 +273,7 @@ const LanderV2 = memo(() => {
                 </h2>
 
                 <p className="text-lg md:text-xl text-muted-foreground mb-2 max-w-2xl mx-auto px-4 text-center">
-                  60-Second Quiz Reveals Your Exact Savings + Miami Neighborhood Match
+                  60-Second Quiz Reveals Your Exact Savings + South Florida Neighborhood Match
                 </p>
 
                 {/* Create Desire */}
@@ -290,7 +290,7 @@ const LanderV2 = memo(() => {
                     </div>
                     <div className="flex items-start gap-3">
                       <ArrowRight className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
-                      <span>Which Miami neighborhood fits your vibe (and schools, if you have kids)</span>
+                      <span>Which South Florida neighborhood fits your vibe (and schools, if you have kids)</span>
                     </div>
                     <div className="flex items-start gap-3">
                       <ArrowRight className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
@@ -319,7 +319,7 @@ const LanderV2 = memo(() => {
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="text-green-600 text-lg">✓</span>
-                    <span>3BR pool house in Miami = 2BR walkup in Brooklyn (price-wise)</span>
+                    <span>3BR pool house in South Florida = 2BR walkup in Brooklyn (price-wise)</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="text-green-600 text-lg">✓</span>

@@ -113,7 +113,7 @@ export default function LeadCaptureForm({ answers, sessionData, onSubmit }: Prop
   const watchPhone = form.watch('phone');
 
   // Determine if we should show "+" for top income bracket
-  const isTopBracket = answers.income_bracket === 'over_2m';
+  const isTopBracket = answers.income_bracket === 'over_750k';
 
   // Use retirement savings as the main number (more impactful)
   const mainSavingsNumber = savings.retirement_savings > 0
