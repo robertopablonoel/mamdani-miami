@@ -91,11 +91,6 @@ export default function LeadCaptureForm({ answers, sessionData, onSubmit }: Prop
         annual_savings: savings.annual_savings,
       });
 
-      toast({
-        title: 'Success!',
-        description: 'Calculating your personalized results...',
-      });
-
       // Show results
       onSubmit();
     } catch (error) {
