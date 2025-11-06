@@ -40,8 +40,8 @@ const App = () => (
         <AnalyticsWrapper>
           <Suspense fallback={<PageLoader />}>
             <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/lander-v2" element={<LanderV2 />} />
+              <Route path="/" element={<LanderV2 />} />
+              <Route path="/lander-v1" element={<Index />} />
               <Route path="/auth" element={<Auth />} />
               <Route path="/admin" element={<Admin />} />
               <Route path="/privacy" element={<Privacy />} />
