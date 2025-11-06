@@ -6,7 +6,7 @@ import { calculateSavings, calculateTier, formatCurrency } from '@/lib/savingsCa
 import { QUIZ_COPY } from '@/content/quiz-copy';
 import { trackEvent } from '@/lib/analytics';
 import { useState, useEffect } from 'react';
-import { ExternalLink, Download } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 
 interface Props {
   answers: QuizAnswers;
@@ -21,6 +21,11 @@ export default function ResultsView({ answers, sessionData }: Props) {
   const tier = calculateTier(answers.timeline!, savings.annual_savings);
   const isTopBracket = answers.income_bracket === 'over_2m';
 
+  // Only show booking CTAs for high-income, urgent movers
+  const qualifiesForCall =
+    ['150k_250k', '250k_400k', '400k_750k', '750k_1m', '1m_1.5m', '1.5m_2m', 'over_2m'].includes(answers.income_bracket!) &&
+    answers.timeline === '0-6mo';
+
   useEffect(() => {
     trackEvent('result_view', {
       session_id: sessionData.session_id,
@@ -33,12 +38,6 @@ export default function ResultsView({ answers, sessionData }: Props) {
   const openCalendly = () => {
     trackEvent('cta_click_book', { session_id: sessionData.session_id });
     window.open(import.meta.env.VITE_CALENDLY_URL, '_blank');
-  };
-
-  const downloadGuide = () => {
-    trackEvent('cta_click_guide', { session_id: sessionData.session_id });
-    // TODO: Implement PDF download
-    alert('PDF download coming soon! Check your email for the guide.');
   };
 
   return (
@@ -124,6 +123,27 @@ export default function ResultsView({ answers, sessionData }: Props) {
             </div>
           </CardContent>
         </Card>
+
+        {/* CTA #1 - Above the Fold */}
+        {qualifiesForCall && (
+          <Card className="shadow-2xl border-0 bg-gradient-to-r from-green-600 to-green-700 text-white overflow-hidden">
+            <CardContent className="p-4 md:p-8">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 md:w-12 md:h-12 bg-white rounded-full flex items-center justify-center flex-shrink-0">
+                  <span className="text-xl md:text-2xl">📞</span>
+                </div>
+                <h3 className="text-lg md:text-2xl font-serif">Book Your Free Exit Strategy Call</h3>
+              </div>
+              <p className="text-green-50 mb-4 md:mb-6 text-sm md:text-base leading-relaxed">
+                Speak with our Chief Strategist about your personalized Miami relocation plan. No pressure, just expert guidance.
+              </p>
+              <Button size="lg" className="w-full bg-white text-green-700 hover:bg-green-50 h-12 md:h-14 text-sm md:text-base font-bold" onClick={openCalendly}>
+                <ExternalLink className="mr-2 h-4 w-4 md:h-5 md:w-5 flex-shrink-0" />
+                <span className="truncate">Schedule Free Strategy Call</span>
+              </Button>
+            </CardContent>
+          </Card>
+        )}
 
         {/* Savings Breakdown Table */}
         <Card className="shadow-2xl border-0 bg-white">
@@ -294,6 +314,27 @@ export default function ResultsView({ answers, sessionData }: Props) {
           </CardContent>
         </Card>
 
+        {/* CTA #2 - Mid-page */}
+        {qualifiesForCall && (
+          <Card className="shadow-2xl border-0 bg-gradient-to-r from-blue-600 to-blue-700 text-white overflow-hidden">
+            <CardContent className="p-4 md:p-8">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 md:w-12 md:h-12 bg-white rounded-full flex items-center justify-center flex-shrink-0">
+                  <span className="text-xl md:text-2xl">🎯</span>
+                </div>
+                <h3 className="text-lg md:text-2xl font-serif">Ready to Plan Your Exit?</h3>
+              </div>
+              <p className="text-blue-50 mb-4 md:mb-6 text-sm md:text-base leading-relaxed">
+                Schedule a free exit strategy call with our Chief Strategist. We'll map out your personalized relocation timeline.
+              </p>
+              <Button size="lg" className="w-full bg-white text-blue-700 hover:bg-blue-50 h-12 md:h-14 text-sm md:text-base font-bold" onClick={openCalendly}>
+                <ExternalLink className="mr-2 h-4 w-4 md:h-5 md:w-5 flex-shrink-0" />
+                <span className="truncate">Book Strategy Call Now</span>
+              </Button>
+            </CardContent>
+          </Card>
+        )}
+
         {/* Lifestyle Upgrades Section */}
         <Card className="shadow-2xl border-0 bg-white">
           <CardContent className="p-4 md:p-8">
@@ -428,69 +469,26 @@ export default function ResultsView({ answers, sessionData }: Props) {
           </CardContent>
         </Card>
 
-        {/* CTAs */}
-        <div className="space-y-4 md:space-y-6">
-          {(tier === 'tier_a_hot_lead' || tier === 'tier_b_nurture_warm') && (
-            <Card className="shadow-2xl border-0 bg-gradient-to-r from-green-600 to-green-700 text-white overflow-hidden">
-              <CardContent className="p-4 md:p-8">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-10 h-10 md:w-12 md:h-12 bg-white rounded-full flex items-center justify-center flex-shrink-0">
-                    <span className="text-xl md:text-2xl">🎯</span>
-                  </div>
-                  <h3 className="text-lg md:text-2xl font-serif">Ready to Explore Miami?</h3>
-                </div>
-                <p className="text-green-50 mb-4 md:mb-6 text-sm md:text-lg">
-                  Book a free consultation with our Miami brokerage partner. No pressure, just answers.
-                </p>
-                <Button size="lg" className="w-full bg-white text-green-700 hover:bg-green-50 h-12 md:h-14 text-sm md:text-lg font-bold" onClick={openCalendly}>
-                  <ExternalLink className="mr-2 h-4 w-4 md:h-5 md:w-5 flex-shrink-0" />
-                  <span className="truncate">Book Free Consultation</span>
-                </Button>
-              </CardContent>
-            </Card>
-          )}
-
-          <Card className="shadow-2xl border-0 bg-white">
+        {/* CTA #3 - After Testimonials */}
+        {qualifiesForCall && (
+          <Card className="shadow-2xl border-0 bg-gradient-to-r from-purple-600 to-purple-700 text-white overflow-hidden">
             <CardContent className="p-4 md:p-8">
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 md:w-12 md:h-12 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
-                  <Download className="h-5 w-5 md:h-6 md:w-6 text-blue-600" />
+                <div className="w-10 h-10 md:w-12 md:h-12 bg-white rounded-full flex items-center justify-center flex-shrink-0">
+                  <span className="text-xl md:text-2xl">💡</span>
                 </div>
-                <h3 className="text-lg md:text-2xl font-serif text-gray-800">Get the Miami Insider Guide</h3>
+                <h3 className="text-lg md:text-2xl font-serif">Let's Map Out Your Miami Move</h3>
               </div>
-              <p className="text-gray-600 mb-4 md:mb-6 text-sm md:text-lg">
-                Neighborhood breakdowns, school ratings, and tax strategies—delivered to your inbox.
+              <p className="text-purple-50 mb-4 md:mb-6 text-sm md:text-base leading-relaxed">
+                Join hundreds of NYC professionals who've successfully relocated. Book your free exit strategy call with our Chief Strategist today.
               </p>
-              <Button size="lg" variant="outline" className="w-full border-2 border-blue-600 text-blue-600 hover:bg-blue-50 h-12 md:h-14 text-sm md:text-lg font-bold" onClick={downloadGuide}>
-                <Download className="mr-2 h-4 w-4 md:h-5 md:w-5 flex-shrink-0" />
-                <span className="truncate">Download Miami Guide (PDF)</span>
+              <Button size="lg" className="w-full bg-white text-purple-700 hover:bg-purple-50 h-12 md:h-14 text-sm md:text-base font-bold" onClick={openCalendly}>
+                <ExternalLink className="mr-2 h-4 w-4 md:h-5 md:w-5 flex-shrink-0" />
+                <span className="truncate">Schedule Your Strategy Call</span>
               </Button>
             </CardContent>
           </Card>
-        </div>
-
-        {/* Neighborhood Exploration */}
-        <Card className="shadow-premium border-0">
-          <CardContent className="p-8">
-            <h3 className="text-xl font-serif mb-4 text-center">Explore Miami Neighborhoods</h3>
-            <div className="flex flex-wrap justify-center gap-3">
-              {QUIZ_COPY.neighborhoods.map((neighborhood) => (
-                <Button
-                  key={neighborhood.slug}
-                  variant="outline"
-                  size="sm"
-                  onClick={() => {
-                    trackEvent('neighborhood_click', { neighborhood: neighborhood.slug });
-                    // TODO: Link to neighborhood pages when built
-                    alert(`${neighborhood.label} details coming soon!`);
-                  }}
-                >
-                  {neighborhood.label}
-                </Button>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+        )}
 
         {/* Footer CTA */}
         <div className="text-center py-8">
