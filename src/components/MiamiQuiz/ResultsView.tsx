@@ -46,10 +46,10 @@ export default function ResultsView({ answers, sessionData }: Props) {
         <Card className="shadow-2xl border-0 bg-white overflow-hidden">
           <CardContent className="p-0">
             {/* Header Badge */}
-            <div className="bg-gradient-to-r from-green-600 to-green-700 text-white py-3 px-6 text-center">
+            <div className="bg-gradient-to-r from-red-600 to-red-700 text-white py-3 px-6 text-center">
               <div className="flex items-center justify-center gap-2">
-                <span className="text-2xl">✓</span>
-                <span className="font-bold text-lg">Your Personalized Miami Report</span>
+                <span className="text-2xl">🚨</span>
+                <span className="font-bold text-lg">STOP Funding Mamdani's Agenda—Here's Your Escape Plan</span>
               </div>
             </div>
 
@@ -57,29 +57,29 @@ export default function ResultsView({ answers, sessionData }: Props) {
             <div className="bg-gradient-to-br from-green-50 via-white to-green-50 p-6 md:p-12 text-center border-b-4 border-green-600">
               {savings.retirement_savings > 0 ? (
                 <>
-                  <h1 className="text-xl md:text-3xl font-serif mb-3 text-gray-700">
-                    Total Wealth Increase by Retirement
+                  <h1 className="text-xl md:text-3xl font-serif mb-3 text-red-700">
+                    How Much You're SENDING to Mamdani Instead of Building Your Wealth
                   </h1>
                   <div className="text-4xl md:text-8xl font-bold text-green-600 mb-3 tracking-tight break-words">
                     {formatCurrency(savings.retirement_savings)}{isTopBracket ? '+' : ''}
                   </div>
                   <p className="text-sm md:text-xl text-gray-600 max-w-2xl mx-auto mb-4 px-2">
-                    That's <strong className="text-gray-800">{formatCurrency(savings.annual_savings)}{isTopBracket ? '+' : ''}/year</strong> in savings, compounded at 7% annually over the next <strong className="text-gray-800">{savings.years_until_retirement} years</strong>
+                    That's <strong className="text-red-700">{formatCurrency(savings.annual_savings)}{isTopBracket ? '+' : ''}/year</strong> you're handing to Mamdani for "progressive programs"—or you could compound it at 7% for <strong className="text-gray-800">{savings.years_until_retirement} years</strong> and keep it for YOUR family
                   </p>
                 </>
               ) : (
                 <>
-                  <h1 className="text-xl md:text-3xl font-serif mb-3 text-gray-700">
-                    You Could Save
+                  <h1 className="text-xl md:text-3xl font-serif mb-3 text-red-700">
+                    How Much You're SENDING to Mamdani Every Year
                   </h1>
                   <div className="text-4xl md:text-8xl font-bold text-green-600 mb-3 tracking-tight break-words">
                     {formatCurrency(savings.annual_savings)}{isTopBracket ? '+' : ''}
                   </div>
-                  <p className="text-lg md:text-2xl text-gray-700 font-medium mb-2">
-                    Per Year
+                  <p className="text-lg md:text-2xl text-red-700 font-medium mb-2">
+                    Going Straight to Mamdani
                   </p>
                   <p className="text-sm md:text-lg text-gray-600 max-w-2xl mx-auto px-2">
-                    That's <strong className="text-gray-800">{formatCurrency(Math.floor(savings.annual_savings / 12))}{isTopBracket ? '+' : ''}/month</strong> back in your pocket
+                    That's <strong className="text-red-700">{formatCurrency(Math.floor(savings.annual_savings / 12))}{isTopBracket ? '+' : ''}/month</strong> funding socialism instead of building YOUR wealth
                   </p>
                 </>
               )}
@@ -87,34 +87,37 @@ export default function ResultsView({ answers, sessionData }: Props) {
 
             {/* Projection Cards */}
             <div className="p-6 md:p-8 bg-gray-50">
+              <h2 className="text-xl md:text-2xl font-serif text-center mb-4 text-gray-800">
+                What You Could Do With YOUR Money Instead of Giving It to Mamdani:
+              </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="bg-white rounded-xl p-6 shadow-lg border-l-4 border-green-600">
-                  <div className="text-sm font-semibold text-gray-500 mb-2">Annual Savings</div>
+                  <div className="text-sm font-semibold text-gray-500 mb-2">Stop Paying Mamdani</div>
                   <div className="text-3xl font-bold text-green-600 mb-2">
                     {formatCurrency(savings.annual_savings)}{isTopBracket ? '+' : ''}
                   </div>
                   <div className="text-xs text-gray-600">
-                    ${Math.floor(savings.annual_savings / 12).toLocaleString()}{isTopBracket ? '+' : ''}/month back in your pocket
+                    ${Math.floor(savings.annual_savings / 12).toLocaleString()}{isTopBracket ? '+' : ''}/mo for YOUR family, not his programs
                   </div>
                 </div>
 
                 <div className="bg-white rounded-xl p-6 shadow-lg border-l-4 border-blue-600">
-                  <div className="text-sm font-semibold text-gray-500 mb-2">In 10 Years</div>
+                  <div className="text-sm font-semibold text-gray-500 mb-2">10-Year Escape Value</div>
                   <div className="text-3xl font-bold text-blue-600 mb-2">
                     {formatCurrency(savings.annual_savings * 10)}{isTopBracket ? '+' : ''}
                   </div>
-                  <div className="text-xs text-gray-600">Down payment on investment property</div>
+                  <div className="text-xs text-gray-600">Investment property vs. funding Mamdani</div>
                 </div>
 
                 <div className="bg-white rounded-xl p-6 shadow-lg border-l-4 border-purple-600">
                   <div className="text-sm font-semibold text-gray-500 mb-2">
-                    {savings.retirement_savings > 0 ? `At Retirement (${savings.years_until_retirement}y)` : 'In 30 Years'}
+                    {savings.retirement_savings > 0 ? `Retirement Wealth (${savings.years_until_retirement}y)` : 'In 30 Years'}
                   </div>
                   <div className="text-3xl font-bold text-purple-600 mb-2">
                     {formatCurrency(savings.retirement_savings > 0 ? savings.retirement_savings : savings.annual_savings * 30)}{isTopBracket ? '+' : ''}
                   </div>
                   <div className="text-xs text-gray-600">
-                    {savings.retirement_savings > 0 ? 'Total wealth increase from moving to Miami' : 'Extra retirement savings'}
+                    {savings.retirement_savings > 0 ? 'YOUR generational wealth—not Mamdani\'s redistribution' : 'Compounded for YOU, not Mamdani'}
                   </div>
                 </div>
               </div>
