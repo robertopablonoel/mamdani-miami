@@ -11,6 +11,10 @@ const benefits = [
 ];
 
 const FreedomIndex = memo(() => {
+  const scrollToCalendly = () => {
+    document.getElementById('consultation')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
   return <section className="py-6 md:py-8 bg-muted/30">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center mb-4 md:mb-6 animate-fade-in">
@@ -40,10 +44,8 @@ const FreedomIndex = memo(() => {
         </div>
 
         <div className="text-center mt-4 md:mt-6 px-4">
-          <Button size="default" variant="secondary" className="h-11 px-6 w-full sm:w-auto" asChild>
-            <a href="#inquiry-form">
-              Explore Your Options
-            </a>
+          <Button size="default" variant="secondary" className="h-11 px-6 w-full sm:w-auto" onClick={scrollToCalendly}>
+            Explore Your Options
           </Button>
           <p className="text-xs text-muted-foreground mt-2">Successful relocations are our thing.</p>
         </div>

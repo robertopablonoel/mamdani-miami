@@ -7,6 +7,7 @@ import { useScrollTracking } from "@/hooks/useScrollTracking";
 
 // Lazy load all below-the-fold components for faster initial load
 const FreedomIndex = lazy(() => import("@/components/FreedomIndex"));
+const CalendlySection = lazy(() => import("@/components/CalendlySection"));
 const ContactSection = lazy(() => import("@/components/ContactSection"));
 const LifestyleSection = lazy(() => import("@/components/LifestyleSection"));
 const BrokerSection = lazy(() => import("@/components/BrokerSection"));
@@ -34,6 +35,9 @@ const Index = memo(() => {
       <EmbeddedCalculator />
       <Suspense fallback={<ComponentLoader />}>
         <FreedomIndex />
+      </Suspense>
+      <Suspense fallback={<ComponentLoader />}>
+        <CalendlySection />
       </Suspense>
       <Suspense fallback={<ComponentLoader />}>
         <ContactSection />

@@ -4,6 +4,10 @@ import { ArrowRight } from "lucide-react";
 import brokerImage from "@/assets/broker-julie-vest.png";
 
 const BrokerSection = memo(() => {
+  const scrollToCalendly = () => {
+    document.getElementById('consultation')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
   return <section id="about" className="py-10 md:py-14 lg:py-18 bg-background">
       <div className="container mx-auto px-4">
         <div className="max-w-5xl mx-auto">
@@ -29,11 +33,9 @@ Your Escape Facilitator.</h2>
               <p className="text-base md:text-lg text-muted-foreground leading-relaxed px-2">She’s guided countless New Yorkers through the Great Resettlement, finding them refuge in South Florida's luxury market. Whether you want a Brickell penthouse, Boca golf villa, or Palm Beach mansion, she'll make your move painless and profitable.</p>
 
               <div className="space-y-5 md:space-y-6 mt-5 md:mt-6">
-                <Button size="lg" variant="secondary" className="h-14 md:h-14 px-8 md:px-10 w-full sm:w-auto text-base md:text-base" asChild>
-                  <a href="https://calendly.com/julie-nyrefugee/30min" target="_blank" rel="noopener noreferrer">
-                    Book an Exit Strategy Call
-                    <ArrowRight className="ml-2 w-5 md:w-5 h-5 md:h-5" />
-                  </a>
+                <Button size="lg" variant="secondary" className="h-14 md:h-14 px-8 md:px-10 w-full sm:w-auto text-base md:text-base" onClick={scrollToCalendly}>
+                  Book an Exit Strategy Call
+                  <ArrowRight className="ml-2 w-5 md:w-5 h-5 md:h-5" />
                 </Button>
                 
                 <p className="text-sm md:text-sm text-muted-foreground flex items-center gap-2 px-2">

@@ -17,6 +17,15 @@ const Navigation = memo(() => {
     setMobileMenuOpen(false);
   }, []);
 
+  const scrollToCalendly = (source: 'nav_desktop' | 'nav_mobile') => {
+    trackCTAClick('Schedule Consultation', source);
+    closeMobileMenu();
+    // Small delay to allow menu to close on mobile
+    setTimeout(() => {
+      document.getElementById('consultation')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, source === 'nav_mobile' ? 300 : 0);
+  };
+
   return <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16 md:h-20">
@@ -67,10 +76,8 @@ const Navigation = memo(() => {
                 Call Now
               </a>
             </Button>
-            <Button variant="default" size="default" asChild>
-              <a href="https://calendly.com/julie-nyrefugee/30min" target="_blank" rel="noopener noreferrer" onClick={() => trackCTAClick('Schedule Consultation', 'nav_desktop')}>
-                Schedule Consultation
-              </a>
+            <Button variant="default" size="default" onClick={() => scrollToCalendly('nav_desktop')}>
+              Schedule Consultation
             </Button>
           </div>
 
@@ -114,10 +121,8 @@ const Navigation = memo(() => {
                   Call Now
                 </a>
               </Button>
-              <Button variant="default" size="lg" className="w-full" asChild>
-                <a href="https://calendly.com/julie-nyrefugee/30min" target="_blank" rel="noopener noreferrer" onClick={() => trackCTAClick('Schedule Consultation', 'nav_mobile')}>
-                  Schedule Consultation
-                </a>
+              <Button variant="default" size="lg" className="w-full" onClick={() => scrollToCalendly('nav_mobile')}>
+                Schedule Consultation
               </Button>
             </div>
           </div>}

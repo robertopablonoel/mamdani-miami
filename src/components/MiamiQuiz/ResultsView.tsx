@@ -6,6 +6,7 @@ import { QUIZ_COPY } from '@/content/quiz-copy';
 import { trackEvent } from '@/lib/analytics';
 import { useState, useEffect } from 'react';
 import { ExternalLink, Phone } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
   answers: QuizAnswers;
@@ -13,6 +14,7 @@ interface Props {
 }
 
 export default function ResultsView({ answers, sessionData }: Props) {
+  const navigate = useNavigate();
   const [savings, setSavings] = useState(() =>
     calculateSavings(answers.income_bracket!, answers.monthly_cost!, answers.age_bracket)
   );
@@ -34,7 +36,11 @@ export default function ResultsView({ answers, sessionData }: Props) {
 
   const openCalendly = () => {
     trackEvent('cta_click_book', { session_id: sessionData.session_id });
-    window.open(import.meta.env.VITE_CALENDLY_URL, '_blank');
+    // Navigate to homepage and scroll to consultation
+    navigate('/');
+    setTimeout(() => {
+      document.getElementById('consultation')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
   };
 
   return (

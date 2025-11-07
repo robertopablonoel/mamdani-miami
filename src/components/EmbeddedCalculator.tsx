@@ -263,7 +263,7 @@ const EmbeddedCalculator = () => {
   const isTopBracket = income === 'over_750k';
 
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-br from-gray-50 to-white">
+    <section id="calculator" className="py-16 md:py-24 bg-gradient-to-br from-gray-50 to-white">
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="text-center mb-8">
           <h2 className="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-4">
