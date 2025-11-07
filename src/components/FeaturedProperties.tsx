@@ -113,7 +113,7 @@ const FeaturedProperties = memo(() => {
 
         <div className="text-center mt-8 md:mt-10 px-4">
           <Button variant="default" size="lg" className="w-full sm:w-auto h-16 md:h-16 text-base" asChild>
-            <a href={import.meta.env.VITE_CALENDLY_URL} target="_blank" rel="noopener noreferrer">
+            <a href="https://calendly.com/julie-nyrefugee/30min" target="_blank" rel="noopener noreferrer">
               Schedule a consultation to learn more
             </a>
           </Button>

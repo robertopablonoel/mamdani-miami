@@ -68,7 +68,7 @@ const Navigation = memo(() => {
               </a>
             </Button>
             <Button variant="default" size="default" asChild>
-              <a href={import.meta.env.VITE_CALENDLY_URL} target="_blank" rel="noopener noreferrer" onClick={() => trackCTAClick('Schedule Consultation', 'nav_desktop')}>
+              <a href="https://calendly.com/julie-nyrefugee/30min" target="_blank" rel="noopener noreferrer" onClick={() => trackCTAClick('Schedule Consultation', 'nav_desktop')}>
                 Schedule Consultation
               </a>
             </Button>
@@ -115,7 +115,7 @@ const Navigation = memo(() => {
                 </a>
               </Button>
               <Button variant="default" size="lg" className="w-full" asChild>
-                <a href={import.meta.env.VITE_CALENDLY_URL} target="_blank" rel="noopener noreferrer" onClick={() => trackCTAClick('Schedule Consultation', 'nav_mobile')}>
+                <a href="https://calendly.com/julie-nyrefugee/30min" target="_blank" rel="noopener noreferrer" onClick={() => trackCTAClick('Schedule Consultation', 'nav_mobile')}>
                   Schedule Consultation
                 </a>
               </Button>
