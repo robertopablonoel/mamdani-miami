@@ -60,7 +60,48 @@ const EmbeddedCalculator = () => {
       const sessionId = uuidv4();
       const savings = calculateSavings(income as IncomeBracket, housing as MonthlyCostBracket, age as AgeBracket);
 
-      // Submit to Supabase
+      // Extract UTM params from URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const utm_source = urlParams.get('utm_source') || undefined;
+      const utm_medium = urlParams.get('utm_medium') || undefined;
+      const utm_campaign = urlParams.get('utm_campaign') || undefined;
+      const utm_content = urlParams.get('utm_content') || undefined;
+
+      // Helper functions
+      const getDeviceType = (): string => {
+        const ua = navigator.userAgent;
+        if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) return 'tablet';
+        if (/Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(ua)) return 'mobile';
+        return 'desktop';
+      };
+
+      const getBrowser = (): string => {
+        const ua = navigator.userAgent;
+        if (ua.includes('Chrome')) return 'Chrome';
+        if (ua.includes('Safari')) return 'Safari';
+        if (ua.includes('Firefox')) return 'Firefox';
+        if (ua.includes('Edge')) return 'Edge';
+        return 'Other';
+      };
+
+      // 1. Create session in quiz_sessions table
+      const { error: sessionError } = await supabase.from('quiz_sessions' as any).insert([{
+        session_id: sessionId,
+        utm_source,
+        utm_medium,
+        utm_campaign,
+        utm_content,
+        referrer: document.referrer || undefined,
+        device_type: getDeviceType(),
+        browser: getBrowser(),
+      }]);
+
+      if (sessionError) {
+        console.error('Session creation error:', sessionError);
+        throw sessionError;
+      }
+
+      // 2. Submit quiz data
       const { error } = await supabase.functions.invoke('submit-quiz', {
         body: {
           session_id: sessionId,
@@ -74,6 +115,8 @@ const EmbeddedCalculator = () => {
             age_bracket: age,
             housing_status: 'rent', // Default
             timeline: '6-12mo', // Default
+            frustration: 'taxes', // Default for embedded calculator
+            benefit: 'lifestyle', // Default for embedded calculator
           },
           savings_calculation: {
             annual_savings: savings.annual_savings,
@@ -87,6 +130,7 @@ const EmbeddedCalculator = () => {
 
       if (error) {
         console.error('Submission error:', error);
+        throw error;
       }
 
       trackEvent('embedded_calculator_submit', {
