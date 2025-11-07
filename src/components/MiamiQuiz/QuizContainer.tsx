@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { useLocation } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import type { QuizAnswers, QuizSession } from '@/types/quiz';
 import QuestionScreen from './QuestionScreen';
@@ -9,6 +10,7 @@ import ResultsView from './ResultsView';
 import { trackEvent } from '@/lib/analytics';
 
 export default function QuizContainer() {
+  const location = useLocation();
   const [currentStep, setCurrentStep] = useState(1);
   const [answers, setAnswers] = useState<QuizAnswers>({});
   const [sessionData, setSessionData] = useState<QuizSession | null>(null);
@@ -17,7 +19,14 @@ export default function QuizContainer() {
 
   // Initialize session on mount
   useEffect(() => {
-    initializeSession();
+    // Check if coming from embedded calculator
+    if (location.state && location.state.fromEmbedded) {
+      setAnswers(location.state.answers);
+      setSessionData(location.state.sessionData);
+      setShowResults(true);
+    } else {
+      initializeSession();
+    }
   }, []);
 
   const initializeSession = async () => {
