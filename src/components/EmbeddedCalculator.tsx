@@ -22,8 +22,9 @@ const EmbeddedCalculator = () => {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [sessionData, setSessionData] = useState<{ session_id: string } | null>(null);
 
-  const handleCalculate = () => {
+  const handleCalculate = async () => {
     if (!income || !housing || !age) {
       toast({
         title: 'Missing Information',
@@ -31,6 +32,88 @@ const EmbeddedCalculator = () => {
         variant: 'destructive',
       });
       return;
+    }
+
+    // Save partial submission (before email capture)
+    try {
+      const sessionId = uuidv4();
+
+      // Extract UTM params
+      const urlParams = new URLSearchParams(window.location.search);
+      const utm_source = urlParams.get('utm_source') || undefined;
+      const utm_medium = urlParams.get('utm_medium') || undefined;
+      const utm_campaign = urlParams.get('utm_campaign') || undefined;
+      const utm_content = urlParams.get('utm_content') || undefined;
+
+      const getDeviceType = (): string => {
+        const ua = navigator.userAgent;
+        if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) return 'tablet';
+        if (/Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(ua)) return 'mobile';
+        return 'desktop';
+      };
+
+      const getBrowser = (): string => {
+        const ua = navigator.userAgent;
+        if (ua.includes('Chrome')) return 'Chrome';
+        if (ua.includes('Safari')) return 'Safari';
+        if (ua.includes('Firefox')) return 'Firefox';
+        if (ua.includes('Edge')) return 'Edge';
+        return 'Other';
+      };
+
+      // Create session and get the ID back
+      const { data: sessionRecord, error: sessionError } = await supabase.from('quiz_sessions' as any).insert([{
+        session_id: sessionId,
+        utm_source,
+        utm_medium,
+        utm_campaign,
+        utm_content,
+        referrer: document.referrer || undefined,
+        device_type: getDeviceType(),
+        browser: getBrowser(),
+      }]).select('id').single();
+
+      if (sessionError) {
+        console.error('Partial session creation error:', sessionError);
+      } else if (sessionRecord?.id) {
+        console.log('Session created successfully:', sessionId, 'UUID:', sessionRecord.id);
+
+        // Save partial answers
+        const { error: answersError } = await supabase.from('quiz_answers' as any).insert([
+          {
+            session_id: sessionRecord.id,
+            step: 1,
+            question_key: 'income_bracket',
+            answer_value: income,
+          },
+          {
+            session_id: sessionRecord.id,
+            step: 2,
+            question_key: 'monthly_cost',
+            answer_value: housing,
+          },
+          {
+            session_id: sessionRecord.id,
+            step: 3,
+            question_key: 'age_bracket',
+            answer_value: age,
+          },
+        ]);
+
+        if (answersError) {
+          console.error('Error saving partial answers:', answersError);
+        } else {
+          console.log('Partial answers saved successfully');
+        }
+
+        // Store session ID for later use when they submit email
+        setSessionData({ session_id: sessionId });
+      } else {
+        console.error('No session record returned from insert');
+      }
+    } catch (error) {
+      console.error('Error saving partial:', error);
+      // Don't block the user if this fails
     }
 
     trackEvent('calculator_calculate', {
@@ -57,48 +140,52 @@ const EmbeddedCalculator = () => {
     setIsSubmitting(true);
 
     try {
-      const sessionId = uuidv4();
+      // Use existing session if available, otherwise create new one
+      const sessionId = sessionData?.session_id || uuidv4();
       const savings = calculateSavings(income as IncomeBracket, housing as MonthlyCostBracket, age as AgeBracket);
 
-      // Extract UTM params from URL
-      const urlParams = new URLSearchParams(window.location.search);
-      const utm_source = urlParams.get('utm_source') || undefined;
-      const utm_medium = urlParams.get('utm_medium') || undefined;
-      const utm_campaign = urlParams.get('utm_campaign') || undefined;
-      const utm_content = urlParams.get('utm_content') || undefined;
+      // Only create session if it doesn't exist
+      if (!sessionData?.session_id) {
+        // Extract UTM params from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const utm_source = urlParams.get('utm_source') || undefined;
+        const utm_medium = urlParams.get('utm_medium') || undefined;
+        const utm_campaign = urlParams.get('utm_campaign') || undefined;
+        const utm_content = urlParams.get('utm_content') || undefined;
 
-      // Helper functions
-      const getDeviceType = (): string => {
-        const ua = navigator.userAgent;
-        if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) return 'tablet';
-        if (/Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(ua)) return 'mobile';
-        return 'desktop';
-      };
+        // Helper functions
+        const getDeviceType = (): string => {
+          const ua = navigator.userAgent;
+          if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) return 'tablet';
+          if (/Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(ua)) return 'mobile';
+          return 'desktop';
+        };
 
-      const getBrowser = (): string => {
-        const ua = navigator.userAgent;
-        if (ua.includes('Chrome')) return 'Chrome';
-        if (ua.includes('Safari')) return 'Safari';
-        if (ua.includes('Firefox')) return 'Firefox';
-        if (ua.includes('Edge')) return 'Edge';
-        return 'Other';
-      };
+        const getBrowser = (): string => {
+          const ua = navigator.userAgent;
+          if (ua.includes('Chrome')) return 'Chrome';
+          if (ua.includes('Safari')) return 'Safari';
+          if (ua.includes('Firefox')) return 'Firefox';
+          if (ua.includes('Edge')) return 'Edge';
+          return 'Other';
+        };
 
-      // 1. Create session in quiz_sessions table
-      const { error: sessionError } = await supabase.from('quiz_sessions' as any).insert([{
-        session_id: sessionId,
-        utm_source,
-        utm_medium,
-        utm_campaign,
-        utm_content,
-        referrer: document.referrer || undefined,
-        device_type: getDeviceType(),
-        browser: getBrowser(),
-      }]);
+        // 1. Create session in quiz_sessions table
+        const { error: sessionError } = await supabase.from('quiz_sessions' as any).insert([{
+          session_id: sessionId,
+          utm_source,
+          utm_medium,
+          utm_campaign,
+          utm_content,
+          referrer: document.referrer || undefined,
+          device_type: getDeviceType(),
+          browser: getBrowser(),
+        }]);
 
-      if (sessionError) {
-        console.error('Session creation error:', sessionError);
-        throw sessionError;
+        if (sessionError) {
+          console.error('Session creation error:', sessionError);
+          throw sessionError;
+        }
       }
 
       // 2. Submit quiz data
@@ -113,10 +200,10 @@ const EmbeddedCalculator = () => {
             income_bracket: income,
             monthly_cost: housing,
             age_bracket: age,
-            housing_status: 'rent', // Default
+            housing_status: 'N/A', // Default
             timeline: '6-12mo', // Default
-            frustration: 'taxes', // Default for embedded calculator
-            benefit: 'lifestyle', // Default for embedded calculator
+            frustration: 'N/A', // Default for embedded calculator
+            benefit: 'N/A', // Default for embedded calculator
           },
           savings_calculation: {
             annual_savings: savings.annual_savings,
@@ -154,6 +241,9 @@ const EmbeddedCalculator = () => {
           fromEmbedded: true,
         },
       });
+
+      // Scroll to top after navigation
+      window.scrollTo(0, 0);
     } catch (error) {
       console.error('Error:', error);
       toast({

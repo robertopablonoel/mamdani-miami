@@ -24,6 +24,8 @@ export default function QuizContainer() {
       setAnswers(location.state.answers);
       setSessionData(location.state.sessionData);
       setShowResults(true);
+      // Scroll to top when coming from embedded calculator
+      window.scrollTo(0, 0);
     } else {
       initializeSession();
     }

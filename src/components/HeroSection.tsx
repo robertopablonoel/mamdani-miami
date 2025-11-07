@@ -8,13 +8,13 @@ const HeroSection = memo(() => {
   return <section className="relative min-h-screen flex items-center justify-center">
       {/* Background Image */}
       <div className="absolute inset-0 bg-cover bg-center">
-        <img 
-          src={heroImage} 
+        <img
+          src={heroImage}
           alt="Move to Florida from New York - Miami luxury real estate sunset skyline with waterfront properties"
           className="w-full h-full object-cover"
           width="1920"
           height="1080"
-          fetchPriority="high"
+          fetchpriority="high"
         />
         <div className="absolute inset-0 bg-black/40" />
       </div>
